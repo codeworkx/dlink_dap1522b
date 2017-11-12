@@ -1,0 +1,3 @@
+# wapi version control
+#
+psubdir-$(PROGS_PRIV_WAPI_SECURITY_VERSION)    += wapid

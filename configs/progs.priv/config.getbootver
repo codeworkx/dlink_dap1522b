@@ -1,0 +1,9 @@
+#
+# get bootcode version program
+#
+
+config ELBOX_PROGS_PRIV_GETBOOTVER
+	bool "getbootver"
+	default n
+	help
+		Get bootcode version by reading bootcode mtdblock.

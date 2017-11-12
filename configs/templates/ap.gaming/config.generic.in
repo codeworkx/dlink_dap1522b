@@ -1,0 +1,33 @@
+#
+# generic
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_AP_GAMING
+	depends ELBOX_BRAND_AP_GAMING_GENERIC
+	default ELBOX_MODEL_AP11G
+
+	config ELBOX_MODEL_APG11G
+		bool "APG11G"
+	config ELBOX_MODEL_APG11N
+		bool "APG11N"
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_GAMING
+	depends ELBOX_BRAND_AP_GAMING_GENERIC
+	depends ELBOX_MODEL_APG11G
+	string
+	default "apg11g"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_GAMING
+	depends ELBOX_BRAND_AP_GAMING_GENERIC
+	depends ELBOX_MODEL_APG11N
+	string
+	default "apg11n"
+

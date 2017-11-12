@@ -1,0 +1,5 @@
+# logd
+
+psubdir-$(ELBOX_PROGS_PRIV_LOGD)	+= logd
+psubdir-$(ELBOX_PROGS_PRIV_LOGD_AP)	+= logd.ap
+

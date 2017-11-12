@@ -1,0 +1,146 @@
+menu "Ralink Module"
+
+###########
+# Debuging
+###########
+source "drivers/net/rt_rdm/Kconfig"
+
+#############
+# Wire
+#############
+#source "drivers/net/raeth/Kconfig"
+
+if RALINK_RT3052 || RALINK_RT3352 || RALINK_RT5350
+source "drivers/net/raeth_sdk3510/Kconfig"
+endif
+
+if RALINK_RT3883
+source "drivers/net/raeth/Kconfig"
+endif
+
+if RALINK_RT6855A
+source "drivers/net/raeth_sdk4010/Kconfig"
+endif
+
+source "ralink/Kconfig_raether_common"
+
+#############
+# Wireless
+#############
+
+config  RT2860V2_2850
+        bool "Dual Band"
+        depends on RALINK_RT2880
+
+choice
+        prompt "RF Type"
+        depends on RALINK_RT5350 
+        default RALINK_RT5350_1T1R
+
+        config  RALINK_RT5350_1T1R
+        bool "1T1R"
+endchoice
+
+choice
+        prompt "RF Type"
+        depends on RALINK_RT3052
+        default RALINK_RT3052_2T2R
+
+        config  RALINK_RT3050_1T1R
+        bool "1T1R"
+
+        config  RALINK_RT3051_1T2R
+        bool "1T2R"
+
+        config  RALINK_RT3052_2T2R
+        bool "2T2R"
+endchoice
+
+choice
+        prompt "RF Type"
+        depends on  RALINK_RT3352 
+
+        config  RALINK_RT3352_2T2R
+        bool "2T2R"
+endchoice
+
+choice
+	prompt "RF Type"
+	depends on RALINK_RT3883
+
+	config  RALINK_RT3662_2T2R
+	bool "2T3R (RT3662)"
+
+	config  RALINK_RT3883_3T3R
+	bool "3T3R (RT3883)"
+endchoice
+
+#source "drivers/net/wireless/rt2860v2_ap/Kconfig"
+#source "drivers/net/wireless/rt2860v2_sta/Kconfig"
+#source "drivers/net/wireless/rt2860v2_apsta/Kconfig"
+#source "drivers/net/wireless/RT3090_ap/Kconfig"
+#source "drivers/net/wireless/RT3090_sta/Kconfig"
+#source "drivers/net/wireless/iNIC/Kconfig"
+#source "drivers/net/wireless/iNIC_RT305x/Kconfig"
+
+#config INIC_USB
+#bool
+#default y if RT305x_INIC_USB
+
+#config INIC_MII
+#bool
+#default y if RT2880v2_INIC_MII || RT305x_INIC_MII
+
+#config INIC_PCI
+#bool
+#default y if RT2880v2_INIC_PCI
+
+config RTDEV_PCI
+bool
+default y if RT3090_AP
+
+#######
+# USB
+#######
+
+config RT3XXX_EHCI_OHCI
+	bool "Ralink USB EHCI/OHCI controller support"
+	select USB_ARCH_HAS_OHCI
+	select USB_ARCH_HAS_EHCI
+
+#######
+# NAT
+#######
+choice
+prompt "Ralink NAT Type"
+depends on RALINK_RT3052 || RALINK_RT3352 || RALINK_RT3883 || RALINK_RT6855A
+	
+config  RA_NAT_NONE
+bool "None"
+
+config  RA_NAT_HW
+bool "Hardware"
+depends on !RALINK_RT5350
+
+endchoice
+
+source "net/nat/hw_nat/Kconfig"
+
+######################
+# Netowrk BottomHalves
+#######################
+
+#choice
+#	prompt "Ralink Network BottomHalves"	
+#	default RA_NETWORK_TASKLET_BH
+
+#config RA_NETWORK_TASKLET_BH
+#bool "Tasklet"
+
+#config RA_NETWORK_WORKQUEUE_BH
+#bool "Work Queue"
+
+#endchoice
+
+endmenu
+

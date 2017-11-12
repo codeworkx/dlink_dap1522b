@@ -1,0 +1,38 @@
+###########################################################
+#
+# D-Link DIR series
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_TENDER
+	depends ELBOX_BRAND_TENDER_DLWBR
+	default ELBOX_MODEL_TENDER_DIR605
+
+	config ELBOX_MODEL_TENDER_DIR320
+		bool "DIR-320Tender"
+	config ELBOX_MODEL_TENDER_DIR605
+		bool "DIR-605Tender"
+
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+###########################################################
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_TENDER
+	depends ELBOX_BRAND_TENDER_DLWBR
+	depends ELBOX_MODEL_TENDER_DIR320
+	string
+	default "dir320Tender"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_TENDER
+	depends ELBOX_BRAND_TENDER_DLWBR
+	depends ELBOX_MODEL_TENDER_DIR605
+	string
+	default "dir605Tender"

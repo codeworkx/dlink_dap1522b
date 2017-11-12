@@ -1,0 +1,78 @@
+#
+# corega
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+	default ELBOX_MODEL_CGWLBARGS
+
+	config ELBOX_MODEL_CGWLBARGL
+		depends ELBOX_BRAND_COREGA
+		bool "CG-WLBARGL"
+	config ELBOX_MODEL_CGWLBARGS
+		depends ELBOX_BRAND_COREGA || ELBOX_BRAND_COREGA_TW
+		bool "CG-WLBARGS"
+	config ELBOX_MODEL_CGWLBARGE
+		depends ELBOX_BRAND_COREGA
+		bool "CG-WLBARGE"
+    config ELBOX_MODEL_CGWLBARGNL
+        depends ELBOX_BRAND_COREGA
+        bool "CG-WLBARGNL"
+    config ELBOX_MODEL_CGWLBARGNL_HT40
+        depends ELBOX_BRAND_COREGA
+        bool "CG-WLBARGNL_HT40"
+    config ELBOX_MODEL_CGWLBARAGND
+        depends ELBOX_BRAND_COREGA
+        bool "CG-WLBARAGND"
+endchoice
+
+config ELBOX_MODEL_CGWLBARGS_CJ
+	depends ELBOX_MODEL_CGWLBARGS
+	default n
+	bool "Generate configuration file for CG-WLBARGS-JS"
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+	depends ELBOX_BRAND_COREGA
+	depends ELBOX_MODEL_CGWLBARGL
+	string
+	default "cgwlbargl"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+	depends ELBOX_BRAND_COREGA || ELBOX_BRAND_COREGA_TW
+	depends ELBOX_MODEL_CGWLBARGS
+	string
+	default "cgwlbargs"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+	depends ELBOX_BRAND_COREGA
+	depends ELBOX_MODEL_CGWLBARGE
+	string
+	default "cgwlbarge"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+    depends ELBOX_BRAND_COREGA
+    depends ELBOX_MODEL_CGWLBARGNL
+    string
+    default "cgwlbargnl"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+    depends ELBOX_BRAND_COREGA
+    depends ELBOX_MODEL_CGWLBARGNL_HT40
+    string
+    default "cgwlbargnl_ht40"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+    depends ELBOX_BRAND_COREGA
+    depends ELBOX_MODEL_CGWLBARAGND
+    string
+    default "cgwlbaragnd"

@@ -1,0 +1,9 @@
+#
+# plc
+#
+
+config ELBOX_PROGS_PRIV_PLC
+	bool "plc"
+	default n
+	help
+		PLC related utilities and files(FW/PIB)

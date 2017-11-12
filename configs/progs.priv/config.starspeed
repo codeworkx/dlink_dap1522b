@@ -1,0 +1,57 @@
+#
+# Star speed
+#
+
+config ELBOX_PROGS_PRIV_STARSPEED
+	bool "Star Speed (Mainland,CHINA)"
+	default n
+	help
+		This tool is for Star Speed PPPoE support.
+
+choice
+	prompt "Select implementation"
+	default CONFIG_STARSPEED_MANUAL
+	depends ELBOX_PROGS_PRIV_STARSPEED
+	help
+		Star Speed implementation method
+
+	config CONFIG_STARSPEED_ROUNDROBIN
+		bool "Round-Robin"
+		help 
+			Round-Robin all crack method
+	
+	config CONFIG_STARSPEED_MANUAL
+		bool "User select"
+		help
+			User select crack method manually
+	
+endchoice
+
+menu "Star Speed configuration"
+	depends ELBOX_PROGS_PRIV_STARSPEED
+
+	config CONFIG_STARSPEED_HUBEI
+		bool "Hubei"
+		default y
+		help
+			For Hubei starspeed. 
+
+	config CONFIG_STARSPEED_XIAN
+		bool "XiAn"
+		default y
+		help
+			For XiAn starspeed.
+
+	config CONFIG_STARSPEED_HENAN
+		bool "Henan"
+		default y
+		help
+			For Henan starspeed.
+
+	config CONFIG_STARSPEED_NANCHANG_CAMPUS
+		bool "Nanchang Campus Edition"
+		default y
+		help
+			For Nanchang, Jiangxi Campus Edition.
+
+endmenu

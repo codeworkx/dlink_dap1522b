@@ -1,0 +1,3 @@
+# zip
+
+gsubdir-$(ELBOX_PROGS_GPL_ZIP)	+= zip30

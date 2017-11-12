@@ -1,0 +1,24 @@
+#
+# Generic model
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_TFNET
+	default ELBOX_MODEL_ARIES_G6-W1
+
+	config ELBOX_MODEL_ARIES_G6-W1
+		bool "G6-W1"
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_TFNET
+	depends ELBOX_MODEL_ARIES_G6-W1
+	string
+	default "G6-W1"
+

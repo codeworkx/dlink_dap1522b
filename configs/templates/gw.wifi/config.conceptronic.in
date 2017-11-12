@@ -1,0 +1,84 @@
+###########################################################
+#
+# conceptronic
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	default ELBOX_MODEL_C54BRS4A
+
+	config ELBOX_MODEL_C54BRS4A
+		bool "c54brs4a"
+	config ELBOX_MODEL_C300BRS4
+		bool "c300brs4"
+	config ELBOX_MODEL_C300BRS4_V2
+		bool "c300brs4_v2"
+	config ELBOX_MODEL_C300BRS4A
+		bool "c300brs4a"
+	config ELBOX_MODEL_C300BRS4_V4
+		bool "c300brs4_v4"
+	config ELBOX_MODEL_C300BRS4N
+		bool "c300brs4n"
+	config ELBOX_MODEL_C300BGIGA
+		bool "c300bgiga"
+	config ELBOX_MODEL_C300GBRS4
+		bool "c300gbrs4"
+
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+###########################################################
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	depends ELBOX_MODEL_C54BRS4A
+	string
+	default "c54brs4a"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	depends ELBOX_MODEL_C300BRS4
+	string
+	default "c300brs4"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	depends ELBOX_MODEL_C300BRS4_V2
+	string
+	default "c300brs4_v2"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	depends ELBOX_MODEL_C300BRS4A
+	string
+	default "c300brs4a"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	depends ELBOX_MODEL_C300BRS4_V4
+	string
+	default "c300brs4_v4"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	depends ELBOX_MODEL_C300BRS4N
+	string
+	default "c300brs4n"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	depends ELBOX_MODEL_C300BGIGA
+	string
+	default "c300bgiga"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	depends ELBOX_MODEL_C300GBRS4
+	string
+	default "c300gbrs4"

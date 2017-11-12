@@ -1,0 +1,43 @@
+#
+# UPDATESITESURVEY
+#
+
+config ELBOX_UPDATESITESURVEY
+	bool "Update site survey AP list"
+	default n
+	help
+		In Project Seattle, we use it to instead of wlxmlpatchv2.
+		The executable file updates the runtime info and site survey list of APs.
+
+choice
+	prompt "Select vendor"
+	depends ELBOX_UPDATESITESURVEY
+	help
+		Select the vendor of wireless.
+
+	#
+	# Ralink
+	#
+	config ELBOX_PROGS_PRIV_UPDATESITESURVEY_RALINK
+		bool "Ralink"
+
+	#
+	# Atheros
+	#
+	config ELBOX_PROGS_PRIV_UPDATESITESURVEY_ATHEROS
+		bool "Atheros"
+
+	#
+	# Broadcom
+	#
+	config ELBOX_PROGS_PRIV_UPDATESITESURVEY_BROADCOM
+		bool "Broadcom"
+
+	#
+	# others
+	#
+
+endchoice
+
+# broadcom model
+

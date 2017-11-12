@@ -1,0 +1,21 @@
+# sfdisk
+
+config ELBOX_PROGS_GPL_SFDISK
+	bool "sfdisk"
+	default n
+	help
+		sfdisk - Partition table manipulator for Linux.
+
+choice
+	prompt "Selection Version"
+	depends ELBOX_PROGS_GPL_SFDISK
+	default ELBOX_PROGS_GPL_SFDISK_2_18
+	help
+		Select the version for the implementation
+
+	config ELBOX_PROGS_GPL_SFDISK_2_18
+		bool "util-linux-ng v2.18"
+		help
+			sfdisk is one package belong to util-linux-ng v2.18
+
+endchoice

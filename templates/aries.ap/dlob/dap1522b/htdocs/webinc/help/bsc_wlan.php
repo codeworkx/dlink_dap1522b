@@ -1,0 +1,29 @@
+<strong><?echo i18n("Helpful Hints");?>...</strong>
+<br/><br/>
+<!--
+<p>&nbsp;&#149;&nbsp;&nbsp;<?
+	echo i18n("Wi-Fi Protected Setup provides a more intuitive way of setting up wireless security between the router and the wireless client. Make sure the wireless card supports this feature or uses a certified Windows Vista driver in order to take advantage of this feature.");
+?></p>
+-->
+<? if(query("/runtime/device/switchmode") =="APCLI")	{echo "<!--";} ?>
+<p>&nbsp;&#149;&nbsp;&nbsp;<?
+	echo i18n("Changing your Wireless Network Name is the first step in securing your wireless network.	We recommend that you change it to a familiar name that does not contain any personal information.");
+?></p>
+<p>&nbsp;&#149;&nbsp;&nbsp;<?
+	echo i18n("Enable Auto Channel Scan let the AP can select the best possible channel for your wireless network to operate on.");
+?></p>
+<p>&nbsp;&#149;&nbsp;&nbsp;<?
+	echo i18n("Visibility Status is another way to secure your network. With this option visible, no wireless clients will be able to see your wireless network when they perform a scan to see what's available. In order for your wireless devices to connect to your AP, you will need to manually enter the Wireless Network Name on each device.");
+?></p>
+<p>&nbsp;&#149;&nbsp;&nbsp;<?
+	echo i18n("If you have enabled Wireless Security, make sure you write down the WEP Key or Passphrase that you have configured. You will need to enter this information on any wireless device that you connect to your wireless network.");
+?></p>
+<? if(query("/runtime/device/switchmode") =="APCLI")	{echo "-->";} ?>
+<? if(query("/runtime/device/switchmode") !="APCLI")	{echo "<!--";} ?>
+<p>&nbsp;&#149;&nbsp;&nbsp;<?
+	echo i18n("Select the SSID which you want your bridge to connect to.");
+?></p>
+<p>&nbsp;&#149;&nbsp;&nbsp;<?
+	echo i18n("If you have enabled Wireless Security, make sure you write down the WEP Key or Passphrase that you have configured. You will need to enter this information on every wireless device that you connect to your wireless network.");
+?></p>
+<? if(query("/runtime/device/switchmode") !="APCLI")	{echo "-->";} ?>

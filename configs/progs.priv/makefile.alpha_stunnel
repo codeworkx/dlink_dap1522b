@@ -1,0 +1,4 @@
+# alpha_stunnel
+
+psubdir-$(ELBOX_PROGS_PRIV_ALPHA_STUNNEL)+= alpha_stunnel
+

@@ -1,0 +1,9 @@
+NTC:001>PPP: Connection terminated.
+NTC:002>PPP: Traffice limit reached. Limit: $0 Used: $1, maxoctets, used.
+NTC:003>PPP: Terminating connection due to lack of activity.
+NTC:004>PPP: Connect time expired.
+NTC:005>IPCP: local IP address $0.
+NTC:006>IPCP: remote IP address $0.
+NTC:007>IPCP: primary DNS address $0.
+NTC:008>IPCP: secondary DNS address $0.
+NTC:009>PPP: No response to $0 LCP echo requests.

@@ -1,0 +1,41 @@
+#
+# seattle
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_SEATTLE
+	default ELBOX_MODEL_WRG11G
+
+	config ELBOX_MODEL_WRG11G
+		bool "802.11g Router"
+	config ELBOX_MODEL_WRG11GS
+		bool "802.11g Super G Router"
+	config ELBOX_MODEL_WRG11N
+		bool "802.11n Router"
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_SEATTLE
+	depends ELBOX_MODEL_WRG11G
+	string
+	default "wrg11g"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_SEATTLE
+	depends ELBOX_MODEL_WRG11GS
+	string
+	default "wrg11gs"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_SEATTLE
+	depends ELBOX_MODEL_WRG11N
+	string
+	default "wrg11n"

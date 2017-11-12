@@ -1,0 +1,35 @@
+<?
+$l = "abcdefghijklmnopqrstuvwxyz";
+$u = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+$n = "0123456789";
+if (isalnum($l.$u.$n)=="1")			echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."!")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."@")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."#")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."$")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."%")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."^")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."&")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."*")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."(")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n.")")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."_")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."+")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."|")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."-")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."=")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."\\")=="0")	echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."~")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."`")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n.";")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n.":")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."\"")=="0")	echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."'")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."<")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n.">")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n.",")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n.".")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."?")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n."/")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+if (isalnum($l.$u.$n." ")=="0")		echo "PASS!\n"; else echo "FAIL!\n";
+?>

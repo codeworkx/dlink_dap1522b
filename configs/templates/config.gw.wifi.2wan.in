@@ -1,0 +1,57 @@
+###########################################################
+#
+# gw.wifi.2wan
+#
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+	string
+	default "gw.wifi.2wan"
+
+choice
+	prompt "Brand Selection"
+	depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+	default ELBOX_BRAND_COREGA
+	help
+		Select the GUI for this product
+
+	#######################################################
+	# Corega
+	config ELBOX_BRAND_COREGA
+		bool "corega"
+		help
+			Corega.
+
+	#######################################################
+	# Corega(TW)
+	config ELBOX_BRAND_COREGA_TW
+		bool "corega_tw"
+		help
+			Corega(TW).
+
+endchoice
+
+###########################################################
+#
+# ELBOX_BRAND_NAME definition
+#
+###########################################################
+config ELBOX_BRAND_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+	depends ELBOX_BRAND_COREGA
+	string
+	default "corega"
+
+config ELBOX_BRAND_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI_2WAN
+	depends ELBOX_BRAND_COREGA_TW
+	string
+	default "corega_tw"
+
+###########################################################
+#
+# Model configuration
+#
+###########################################################
+source configs/templates/gw.wifi.2wan/config.corega.in

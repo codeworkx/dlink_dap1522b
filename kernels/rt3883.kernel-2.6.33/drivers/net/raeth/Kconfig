@@ -1,0 +1,97 @@
+config RAETH
+        tristate "Ralink GMAC"
+        ---help---
+          This driver supports Ralink gigabit ethernet family of
+          adapters.
+
+config RTL_TAG_SUPPORT
+        bool "Realtek switch proprietary tag support"
+        depends on RAETH && !(RALINK_RT3052 || RALINK_RT3352)
+		default n
+		---help---
+		  This option enable ethernet driver to inspect Realtek's switch(RTL8367R)'s proprietary tag.
+	  
+config RAETH_JUMBOFRAME
+        bool "Jumbo Frame up to 4K bytes"
+        depends on RAETH && !(RALINK_RT3052 || RALINK_RT3352)
+
+config RAETH_CHECKSUM_OFFLOAD
+        bool "TCP/UDP/IP checksum offload"
+	default y
+        depends on RAETH && !RALINK_RT2880
+
+config RAETH_QOS
+        bool "QoS Feature"
+        depends on RAETH && !RALINK_RT2880
+
+choice
+        prompt "QoS Type"
+        depends on RAETH_QOS && RAETH
+        default RAETH_QOS_DSCP_BASED
+
+config  RAETH_QOS_DSCP_BASED
+        bool "DSCP-based"
+        depends on RAETH_QOS && RAETH
+
+config  RAETH_QOS_PORT_BASED
+        bool "Port-based"
+        depends on RAETH_QOS && RAETH
+
+endchoice
+
+
+config LAN_WAN_SUPPORT
+        bool "LAN/WAN Partition"
+        depends on RAETH_ROUTER || RT_3052_ESW
+
+choice
+        prompt "Board Layout Type"
+        depends on LAN_WAN_SUPPORT
+	default WAN_AT_P0
+
+	config  WAN_AT_P4
+	        bool "LLLL/W"
+		
+	config  WAN_AT_P0
+	        bool "W/LLLL"
+endchoice
+
+config	ESW_DOUBLE_VLAN_TAG
+	bool
+	default y if RT_3052_ESW
+
+
+config RAETH_GMAC2
+        bool "GMAC2 Support"
+        depends on RAETH && RALINK_RT3883
+
+choice
+        prompt "GMAC2 is connected to"
+        depends on RAETH_GMAC2
+        default MARVELL
+
+config  GIGAPHY2
+        bool "MARVELL"
+        depends on RAETH_GMAC2
+config  100M_PHY2
+        bool "10/100M PHY (MII mode)"
+        depends on RAETH_GMAC2
+endchoice
+
+config  MAC_TO_GIGAPHY_MODE_ADDR2
+        hex "Phy Address"
+	default 0x1E
+        depends on GIGAPHY2
+
+config  SET_ETH_NAME
+        bool "enable set eth number"
+		default n
+config  ETH_NAME
+        string "interface number start"
+	default eth2
+		depends on SET_ETH_NAME
+
+config	RAETH_IGMPSNOOP
+		bool "enable igmp snooping"
+		default n 
+

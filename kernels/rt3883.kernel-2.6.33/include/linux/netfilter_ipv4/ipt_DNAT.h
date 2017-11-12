@@ -1,0 +1,12 @@
+
+#ifndef	__IP_DNAT_H
+#define	__IP_DNAT_H
+
+
+#define	IPT_DNAT_TO_RANDOM	0x20000000
+#define	IPT_DNAT_TO_DEST	0x40000000
+#define	IPT_DNAT_TO_SHIFT	0x80000000
+
+
+
+#endif

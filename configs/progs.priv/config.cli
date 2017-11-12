@@ -1,0 +1,157 @@
+config ELBOX_PROGS_PRIV_CLI
+	bool "Command-line interface with AP3X style"
+	default n
+	help
+		A get/set command-line interface for telnet and ssh.
+
+menu "cli advanced configuration"
+
+depends ELBOX_PROGS_PRIV_CLI
+
+config ELBOX_PROGS_PRIV_CLI_VER2
+	bool "Use second version of CLI(start from 2690)"
+	default n
+	help
+		Use second version of CLI
+
+config ELBOX_PROGS_PRIV_CLI_VER3
+	bool "use third version of cli(cli code divided into pieces)"
+	default n
+	help
+		use divided code of cli version 3
+
+config ELBOX_PROGS_PRIV_CONSOLE_LOGIN
+	bool "User need login even connect with console"
+	default n
+	help
+		User need login even connect with console.
+
+config ELBOX_PROGS_PRIV_CONSOLE_AP3X_CMDLINE
+	bool "Use AP3X command line style in console port"
+	default n
+	help
+		change the default command line to AP3X style in console port.
+
+config ELBOX_PROGS_PRIV_CLI_PROMPT
+	string "CLI prompt"
+	default "WAP-> "
+	help
+		Customize CLI prompt.
+
+config ELBOX_PROGS_PRIV_CLI_SUPER
+	bool "Super user mode to upgrade firmware"
+	default n
+	help
+		Upgrade firmware without checking.
+
+
+config ELBOX_PROGS_PRIV_CLI_TAB_COMPLETION
+	bool "Tab completion"
+	default n
+	help
+		Tab completion functionality.
+
+config ELBOX_PROGS_PRIV_CLI_HISTORY
+	bool "Command history"
+	default n
+	help
+		Command history functionality.
+
+config ELBOX_PROGS_PRIV_CLI_MAX_HISTORY
+	string "Maximum entries of command history"
+	default 5
+	depends on ELBOX_PROGS_PRIV_CLI && ELBOX_PROGS_PRIV_CLI_HISTORY
+	help
+
+config ELBOX_PROGS_PRIV_CLI_MFC_COMMAND
+	bool "cli provide mfc command"
+	default n
+	help
+	   cli provide mfc command
+	   
+config ELBOX_PROGS_PRIV_CLI_WANMAC_COMMAND
+	bool "cli provide wanmac command"
+	default n
+	help 
+
+config ELBOX_PROGS_PRIV_CLI_OUTDOOR_COMMAND
+	bool "cli outdoor AP command "
+	default n
+	help 
+
+
+config ELBOX_PROGS_PRIV_CLI_DEBUG
+	bool "Debug Mode"
+	default n
+	help
+
+config CONFIG_CLI_8021X_WEP
+	bool "8021x wep"
+	default n
+	help
+
+config CONFIG_CLI_RADIUS_SERVER
+	bool "radius server"
+	default n
+	help
+	
+config CONFIG_CLI_BACKUP_RADIUS_SERVER
+	bool "backup radius server"
+	default n
+	help
+	
+config CONFIG_CLI_ACCOUNTING_SERVER
+	bool "accounting server"
+	default n
+	help
+	
+config CONFIG_CLI_BACKUP_ACCOUNTING_SERVER
+	bool "back up accounting server"
+	default n
+	help
+
+config ELBOX_PROGS_PRIV_CLI_EXTENSION_FOR_BID_CLOUD_SEA
+        bool "cli command extension for case of bid(cloud-sea company,ShenZhen,China)"
+        default n
+        help
+
+endmenu	
+
+
+config ELBOX_FIRMWARE_HEADER_VERSION_CONTROL
+	bool "Firmware header version control"
+	default n
+
+config ELBOX_FIRMWARE_HEADER_VERSION
+	depends on ELBOX_FIRMWARE_HEADER_VERSION_CONTROL
+	int "Image Header version"
+	default 2
+
+menu "firmware header advance option when header version=3"
+
+depends ELBOX_FIRMWARE_HEADER_VERSION = 3
+
+config ELBOX_FIRMWARE_CONTROL_FLAG1
+	int "Control Flag 1 in v3 Image Header (0~(2^32)-1)"
+	default 0
+
+config ELBOX_FIRMWARE_CONTROL_FLAG2
+	int "Control Flag 2 in v3 Image Header (0~(2^32)-1)"
+	default 0
+
+config ELBOX_FIRMWARE_RESERVED_FLAG1
+	int "Reserved Flag 1 in v3 Image Header (0~(2^32)-1)"
+	default 0
+
+config ELBOX_FIRMWARE_RESERVED_FLAG2
+	int "Reserved Flag 2 in v3 Image Header (0~(2^32)-1)"
+	default 0
+
+config ELBOX_FIRMWARE_FLASH_SP_MX
+	bool "Flash support for Spansion/MXIC"
+	default n
+	help
+		Describe flash support using bit 0 of flag[0].
+		ELBOX_FIRMWARE_CONTROL_FLAG1 should be (ELBOX_FIRMWARE_CONTROL_FLAG1+0x00000001) if this option is enabled.
+
+endmenu

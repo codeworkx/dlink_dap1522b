@@ -1,0 +1,22 @@
+#
+# generic
+#
+
+choice
+	prompt "Model Selection"
+	depends on ELBOX_TEMPLATE_AP_WIFI_WAN && ELBOX_BRAND_AP_GENERIC_WAN
+	default ELBOX_MODEL_AP_ROUTER
+
+	config ELBOX_MODEL_AP_ROUTER
+		bool "APROUTER"
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends on ELBOX_TEMPLATE_AP_WIFI_WAN && ELBOX_BRAND_AP_GENERIC_WAN
+	depends ELBOX_MODEL_AP_ROUTER
+	string
+	default "aprouter"
+

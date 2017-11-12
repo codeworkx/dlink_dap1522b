@@ -1,0 +1,11 @@
+#
+# udev
+#
+
+config ELBOX_PROGS_GPL_IMAGE_TOOLS
+	bool "image-tools for thumbnail"
+	default n
+	help
+		tools to generate thumbnails. include libjpeg, libpng
+		
+		

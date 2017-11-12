@@ -1,0 +1,3 @@
+# usbmount
+
+psubdir-$(ELBOX_PROGS_PRIV_USBMOUNT)	+= usbmount

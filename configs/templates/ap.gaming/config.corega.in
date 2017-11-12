@@ -1,0 +1,28 @@
+###########################################################
+#
+# cgwlgap
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_AP_GAMING
+	depends ELBOX_BRAND_AP_GAMING_COREGA
+	default ELBOX_MODEL_CGWLGAP
+
+	config ELBOX_MODEL_CGWLGAP
+		bool "CGWLGAP"
+
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+###########################################################
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_GAMING
+	depends ELBOX_BRAND_AP_GAMING_COREGA
+	depends ELBOX_MODEL_CGWLGAP
+	string
+	default "cgwlgap"

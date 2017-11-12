@@ -1,0 +1,3 @@
+# cloud manage updatefw
+
+gsubdir-$(ELBOX_PROGS_GPL_CLOUD_MANAGE_UPDATEFW)	+= cloud_manage_updatefw

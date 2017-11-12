@@ -1,0 +1,18 @@
+#
+# ralink driver
+#
+
+config ELBOX_PROGS_PRIV_RALINK_APP
+	bool "Ralink Application"
+	default n
+
+menu "Select Application"
+	depends ELBOX_PROGS_PRIV_RALINK_APP
+
+	config ELBOX_PROGS_PRIV_RALINK_HW_NAT
+		bool "HW NAT app"
+		help
+			Ralink hw nat program to show/set hw nat stuff.
+
+endmenu
+

@@ -1,0 +1,50 @@
+###########################################################
+#
+# dlwbr
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK
+	default ELBOX_MODEL_DAP1353
+
+	config ELBOX_MODEL_DAP1353
+		bool "DAP-1353"
+
+	config ELBOX_MODEL_DAP1522
+		bool "DAP-1522"		
+    
+    config ELBOX_MODEL_DAP1525
+	    bool "DAP-1525"
+
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+###########################################################
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK
+	depends ELBOX_MODEL_DAP1353
+	string
+	default "dap1353"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK
+	depends ELBOX_MODEL_DAP1522
+	string
+	default "dap1522"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK
+	depends ELBOX_MODEL_DAP1525
+	string
+	default "dap1525"
+
+

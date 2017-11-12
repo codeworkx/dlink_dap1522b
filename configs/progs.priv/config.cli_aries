@@ -1,0 +1,40 @@
+config ELBOX_PROGS_PRIV_CLI_SEATTLE
+	bool "Command-line interface with seattle"
+	default n
+	help
+		A get/set command-line interface for telnet and ssh.
+
+menu "cli seattle advance options" 
+
+depends ELBOX_PROGS_PRIV_CLI_SEATTLE
+
+config ELBOX_PROGS_PRIV_CLI_PROMPT
+	string "CLI prompt"
+	default "WAP-> "
+	help
+		Customize CLI prompt.
+
+config ELBOX_PROGS_PRIV_CLI_TAB_COMPLETION
+	bool "Tab completion"
+	default n
+	help
+		Tab completion functionality.
+
+config ELBOX_PROGS_PRIV_CLI_HISTORY
+	bool "Command history"
+	default n
+	help
+		Command history functionality.
+
+config ELBOX_PROGS_PRIV_CLI_MAX_HISTORY
+	string "Maximum entries of command history"
+	default 5
+	depends on ELBOX_PROGS_PRIV_CLI_SEATTLE && ELBOX_PROGS_PRIV_CLI_HISTORY
+	help
+
+config ELBOX_PROGS_PRIV_CLI_DEBUG
+	bool "Debug Mode"
+	default n
+	help
+
+endmenu

@@ -1,0 +1,26 @@
+#
+# tunnel broker with TSP client
+#
+
+config ELBOX_TSPC
+	bool "IPv6 tunnel broker with TSP client"
+	default n
+	help
+		Client to configure an IPv6 tunnel to Hexago's migration broker.
+
+choice
+	prompt "Selection Version"
+	depends ELBOX_USE_IPV6 && ELBOX_TSPC
+	default ELBOX_PROGS_GPL_TSPC_2_1_1
+	help
+		Select the tspc version for the platform
+
+config ELBOX_PROGS_GPL_TSPC_2_1_1
+	bool "tspc 2.1.1"
+	help
+		Tunnel Server Protocol Client (tspc), is a daemon to automate the setup and maintenance 
+		of an IPv6 tunnel. This client will connect to any migration broker which uses Hexago's 
+		implementation.
+
+endchoice
+

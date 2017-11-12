@@ -1,0 +1,21 @@
+# e2fsprogs
+
+config ELBOX_PROGS_GPL_E2FSPROGS
+	bool "e2fsprogs"
+	default n
+	help
+		The filesystem utilities for use with the ext2 filesystem.
+
+choice
+	prompt "Selection Version"
+	depends ELBOX_PROGS_GPL_E2FSPROGS
+	default ELBOX_PROGS_GPL_E2FSPROGS_1_41_12
+	help
+		Select the version for the implementation
+
+	config ELBOX_PROGS_GPL_E2FSPROGS_1_41_12
+		bool "e2fsprogs v1.41.12"
+		help
+			e2fsprogs version 1.41.12
+
+endchoice

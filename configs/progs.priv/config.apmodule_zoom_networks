@@ -1,0 +1,95 @@
+#
+# 
+#
+
+config ELBOX_PROGS_PRIV_APMODULE_FOR_ZOOM_NETWORKS
+	bool "Apmodule communicate with AC of ZOOM Networks"
+	default n
+	help
+		Apmodule communicate with AC of ZOOM Networks(Wuxi,Jiangsu,China)
+
+menu "zoom advanced configuration"
+
+depends  ELBOX_PROGS_PRIV_APMODULE_FOR_ZOOM_NETWORKS		
+
+config ELBOX_PROGS_PRIV_APMODULE_V1
+        bool "Apmodule communicate with 6000 series AC"
+        default n
+        help
+		Apmodule communicate with 6000 series AC
+
+config ELBOX_PROGS_PRIV_APMODULE_V2
+        bool "Apmodule communicate with 7000 series AC"
+        default n
+        help
+                Apmodule communicate with 7000 series AC
+
+
+config ELBOX_PROGS_PRIV_APMODULE_CMCC_CAPWAP
+	bool "Apmodule communicate with AC of ZOOM Networks CMCC capwap version"
+        default n
+        help
+		apmodule communicate with AC of ZOOM Networks CMCC capwap version
+
+config ELBOX_PROGS_PRIV_APCOMM_VERSION
+        string "The version of ap comm"
+        default ""
+        help
+            The version of ap comm
+
+config ELBOX_PROGS_PRIV_APPARSE_VERSION
+        string "The version of ap parse"
+        default ""
+        help
+	    The version of ap parse
+
+config ELBOX__PROGS_PRIV_APMODULE_SYSMODEL_NAME_FOR_AC
+        string "The AP's Sysmodel Name Showing on AC"
+        default ""
+        help
+            The AP's Sysmodel Name showing on ac, it should be like DAP-1360\DAP-1353\DAP-8500 etc.
+
+config ELBOX__PROGS_PRIV_APMODULE_SYSMODEL_NAME_FOR_WEB
+        string "The AP's Sysmodel Name Showing on WEB"
+        default ""
+        help
+            The AP's Sysmodel Name showing on web ui, it should be like DAP-1360\DAP-1353\DAP-8500 etc.
+
+config ELBOX_PROGS_PRIV_WLAN_ASSOC_5G_PREFERRED
+		bool "STA assoc 5G band preferred"
+		default n
+		help
+			This feature can limit sta associate 5G band preferred.
+			
+config ELBOX_PROGS_PRIV_WLAN_ZOOM_STA_ACL_BY_AC
+		bool "sta online must inform ac for pass through"		
+		default n
+		help 
+	        sta join ap ,must inform ac to get pass
+
+config ELBOX_PROGS_PRIV_WLAN_ZOOM_DOS_ATTACK
+		bool "dos attack prevention in wlan"		
+		default n
+		help 
+	        prevent wlan from dos attack
+
+config ELBOX_PROGS_PRIV_WLAN_ZOOM_ROAM
+                bool "fast roaming when using wpa2-eap"
+                default n
+                help
+                fast roaming when using wpa2-eap
+
+config ELBOX_PROGS_PRIV_WLAN_ZOOM_TUNNEL
+        bool "tunnel between ap and ac"
+        default n
+        help
+            "use to read code"
+			
+endmenu
+
+config ELBOX_PROGS_PRIV_APMODULE_FOR_WINHAP
+	bool "Apmodule communicate with for Winhap bid case(it could not work with ELBOX_PROGS_PRIV_APMODULE_FOR_ZOOM_NETWORKS)"
+	default n
+	help
+		Apmodule communicate with for Winhap bid case
+		

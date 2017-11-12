@@ -1,0 +1,3 @@
+config ELBOX_PROGS_GPL_BDB
+	bool "Berkerly Database"
+	default n

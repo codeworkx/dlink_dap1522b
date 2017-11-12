@@ -1,0 +1,145 @@
+#
+# snmp
+#
+
+config ELBOX_PROGS_GPL_NET_SNMP
+	bool "net-snmp"
+	default n
+
+choice
+	prompt "version selection"
+	depends ELBOX_PROGS_GPL_NET_SNMP
+	default ELBOX_PROGS_GPL_NET_SNMP_5_4_1
+	help
+		Select the net-snmp version for the platform
+
+	config ELBOX_PROGS_GPL_NET_SNMP_5_4_1
+		bool "net-snmp-5.4.1"
+		help
+			net-snmp-5.4.1
+        
+        config ELBOX_PROGS_GPL_NET_SNMP_5_5
+		bool "net-snmp-5.5"
+		help
+			net-snmp-5.5 for seattle
+endchoice
+
+config ELBOX_PROGS_GPL_SNMP_IPV6_SUPPORT
+	bool "Enable snmp ipv6 support"
+	depends on ELBOX_PROGS_GPL_NET_SNMP
+	default n
+	help
+		Enable snmp ipv6
+
+config ELBOX_PROGS_GPL_SNMP_PRIVATE_MIB
+        bool "Enable snmp private mib for dview/apmii"
+        depends on ELBOX_PROGS_GPL_NET_SNMP
+        default n
+        help
+                Enable private mib
+
+config ELBOX_PROGS_GPL_SNMP_IEEE802DOT11_MIB
+        bool "Enable snmp ieee802dot11 mib support"
+        depends on ELBOX_PROGS_GPL_NET_SNMP
+        default n
+        help
+                Enable ieee802dot11 mib
+
+config ELBOX_PROGS_GPL_SNMP_DOT1DBRIDGE_MIB
+        bool "Enable snmp dot1dBridge mib support(rfc1493)"
+        depends on ELBOX_PROGS_GPL_NET_SNMP
+        default n
+        help
+                Enable dot1dBridge mib	
+
+config ELBOX_PROGS_GPL_SNMP_TELECOM_MIB
+	bool "Enable snmp for china telecom or mobile mib etc"
+	depends on ELBOX_PROGS_GPL_NET_SNMP
+	default n
+	help
+		Enable snmp for china telecom etc				
+				
+config ELBOX_PROGS_GPL_SNMP_TRAP_V110
+	bool "Enable Specific trap V1.10"
+	depends on ELBOX_PROGS_GPL_NET_SNMP
+	default n
+	help
+		Enable Specific trap V1.10
+		
+config ELBOX_PROGS_GPL_SNMP_TRAP_TELECOM
+	bool "Enable trap for china telecom or mobile etc"
+	depends on ELBOX_PROGS_GPL_NET_SNMP
+	default n
+	help
+		Enable trap for china telecom etc		
+		
+
+config ELBOX_PROGS_GPL_SNMP_TRAP_WARM_RESTART
+        bool "Enable Traps for Warm Restart"
+        depends on ELBOX_PROGS_GPL_NET_SNMP
+        default n
+        help
+                Enable trap for warm restart
+
+config ELBOX_PROGS_GPL_SNMP_BROADCAST_DISCOVERY_SUPPORT
+	bool "Enable d-view5.1 broadcast discovery support"
+	depends on ELBOX_PROGS_GPL_NET_SNMP
+	default n
+	help
+		Enable d-view5.1 broadcast discovery
+
+config ELBOX_PROGS_GPL_SNMP_CLIENTINFO_RSSI
+        bool "Enable SNMP clientinfo convert rssi to dbm"
+        depends on ELBOX_PROGS_GPL_NET_SNMP
+        default n
+        help
+                Enable snmp clientinfo covert rssi to dbm
+
+
+config ELBOX_AP_WLAN_TELECOM_STATISTIC
+	bool "ap statistic control for telecom or mobile etc"
+	default n
+
+	config ELBOX_AP_WLAN_TELECOM_STATISTIC_ASSOCIATION_COUNTER
+		depends on ELBOX_AP_WLAN_TELECOM_STATISTIC
+		bool "association counter of client info"
+		default n
+
+	config ELBOX_AP_WLAN_TELECOM_STATISTIC_CLIENT_TXRX_COUNTER
+			depends on ELBOX_AP_WLAN_TELECOM_STATISTIC
+			bool "client tx rx counter "
+			default n
+
+	config ELBOX_AP_WLAN_TELECOM_STATISTIC_TIME_TXRX_COUNTER
+			depends on ELBOX_AP_WLAN_TELECOM_STATISTIC
+			bool "tx rx counter by time "
+			default n		
+			
+	config ELBOX_AP_WLAN_TELECOM_STATISTIC_INF_UP_COUNTER
+			depends on ELBOX_AP_WLAN_TELECOM_STATISTIC
+			bool "up down time counter "
+			default n		
+			
+	config ELBOX_AP_WLAN_TELECOM_STATISTIC_SIGNAL_STRENGTH
+					depends on ELBOX_AP_WLAN_TELECOM_STATISTIC
+			bool "signal strength from driver"
+			default n
+
+
+	config ELBOX_AP_WLAN_TELECOM_STATISTIC_ETHERNET
+					depends on ELBOX_AP_WLAN_TELECOM_STATISTIC
+			bool "ethernet statistic from ethernet driver"
+			default n	
+			
+	config ELBOX_AP_WLAN_TELECOM_CTC2011_SPECIAL
+					depends on ELBOX_AP_WLAN_TELECOM_STATISTIC
+			bool "which just for 2011 ctc statistic,may be delete"
+			default n					
+
+	config ELBOX_AP_WLAN_TELECOM_APPLY_BY_TIME	
+			depends on ELBOX_AP_WLAN_TELECOM_STATISTIC
+			bool "set apply by time check"
+			default n
+
+
+

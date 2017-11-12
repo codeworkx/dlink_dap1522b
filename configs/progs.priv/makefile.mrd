@@ -1,0 +1,3 @@
+# mrd
+
+psubdir-$(ELBOX_PROGS_PRIV_MRD)	+= mrd

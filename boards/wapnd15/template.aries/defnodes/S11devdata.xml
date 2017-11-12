@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<SiGnAtUrE>
+	<runtime>
+		<devdata>
+			<flashspeed get="devdata get -e flashspeed" />
+			<pin get="devdata get -e pin" />
+			<psk get="devdata get -e psk" />
+			<hwrev get="devdata get -e hwrev" />
+			<countrycode get="devdata get -e countrycode" />
+			<wanmac get="devdata get -e wanmac" />
+			<lanmac get="devdata get -e lanmac" />
+			<wlanmac get="devdata get -e wlanmac" />
+			<wlanmac2 get="devdata get -e wlanmac2" />
+			<lanpack>/dev/mtdblock/5</lanpack>
+		</devdata>
+	</runtime>
+</SiGnAtUrE>

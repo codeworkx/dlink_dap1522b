@@ -1,0 +1,621 @@
+diff -uN lld2d.rc1/globals.h lld2d/globals.h
+--- lld2d.rc1/globals.h	2007-12-28 13:36:02.000000000 +0800
++++ lld2d/globals.h	2007-12-28 13:36:29.000000000 +0800
+@@ -90,6 +90,7 @@
+ GLOBAL  tlv_info_t	g_info;		/* useful info about the interface and machine (TLV data) */
+ GLOBAL  char           *g_icon_path;
+ GLOBAL  char           *g_jumbo_icon_path;
++GLOBAL  char           *g_machine_name;
+ GLOBAL  band_t		g_band;		/* BAND algorthm's state */
+ 
+ GLOBAL  osl_t	       *g_osl;		/* OS-Layer state */
+diff -uN lld2d.rc1/lld2d_types.h lld2d/lld2d_types.h
+--- lld2d.rc1/lld2d_types.h	2007-12-28 13:36:02.000000000 +0800
++++ lld2d/lld2d_types.h	2007-12-28 13:36:29.000000000 +0800
+@@ -31,6 +31,16 @@
+ /* our own (hopefully portable) 2-byte char type */
+ typedef uint16_t ucs2char_t;
+ 
++typedef struct
++{
++	uint8_t a[32];
++	size_t size;
++} __attribute__ ((packed)) ssid_t;
++
++typedef struct
++{
++	uint8_t a[16];
++} __attribute__ ((packed)) uuid_t;
+ 
+ /* Process-level event management structure for io & timers */
+ 
+diff -uN lld2d.rc1/main.c lld2d/main.c
+--- lld2d.rc1/main.c	2007-12-28 13:36:02.000000000 +0800
++++ lld2d/main.c	2007-12-28 13:36:29.000000000 +0800
+@@ -55,7 +55,7 @@
+ 
+ 
+ static void
+-init_from_conf_file()
++init_from_conf_file(const char * config)
+ {
+     FILE   *conf_file;
+     char   *line = NULL;
+@@ -65,15 +65,17 @@
+     size_t  len  = 0;
+     ssize_t numread;
+     int     assigns;
+-    char    default_icon_path[] = {"/etc/icon.ico"};
++    char    default_icon_path[] = {"/www/pic/lld2d.ico"};
+ 
+     /* Set default values for configuration options */
+     /* (avoid strdup() since it doesn't use xmalloc wrapper) */
++    g_machine_name=NULL;
+     g_icon_path = xmalloc(strlen(default_icon_path)+1);
+     strcpy(g_icon_path,default_icon_path);
+ 
+     /* Examine configuration file, if it exists */
+-    conf_file = fopen("/etc/lld2d.conf", "r");
++    if (config == NULL) config = "/var/lld2d.conf";
++    conf_file = fopen(config, "r");
+     if (conf_file == NULL)  return;
+     while ((numread = getline(&line, &len, conf_file)) != -1)
+     {
+@@ -117,6 +119,13 @@
+                 if (g_jumbo_icon_path) xfree(g_jumbo_icon_path);	// always use the most recent occurrence
+                 g_jumbo_icon_path = path;
+                 DEBUG({printf("configvar 'g_jumbo_icon_path' = %s\n", g_jumbo_icon_path);})
++            } else if (!strcmp(var,"machine-name")) {
++                char *name  = NULL;
++                name = xmalloc(strlen(val)+1);
++                strncpy(name, val, strlen(val)+1);
++                if (g_machine_name) xfree(g_machine_name);	// always use the most recent occurrence
++                g_machine_name = name;
++                DEBUG({printf("configvar 'g_machine_name' = %s\n", g_machine_name);})
+             } else {
+                 warn("line ignored - var does not match a known string\n");
+             }
+@@ -137,6 +146,7 @@
+     int    c;
+     bool_t opt_debug = FALSE;
+     int    opt_trace = 0;
++	char * opt_config = NULL;
+ 
+     /* set program name to last component of filename */
+     p = strrchr(argv[0], '/');
+@@ -149,7 +159,7 @@
+     isConfTest = (strstr(g_Progname,"conftest") != NULL ? TRUE : FALSE);
+ 
+     /* parse arguments */
+-    while ((c=getopt(argc, argv, "dt:")) != -1)
++    while ((c=getopt(argc, argv, "dt:c:")) != -1)
+     {
+ 	switch (c)
+ 	{
+@@ -167,6 +177,10 @@
+ 	    }
+ 	    break;
+ 
++	case 'c':
++		opt_config = optarg;
++		break;
++
+ 	default:
+ 	    if (isConfTest)
+             {
+@@ -263,7 +277,7 @@
+     /* initialize things from the parameter file, /etc/lld2d.conf
+      * currently, v1.0, this only involves LTLV pointers... */
+ 
+-    init_from_conf_file();
++    init_from_conf_file(opt_config);
+ 
+     event_init();
+     qos_init();
+@@ -275,6 +289,7 @@
+         printf("%s: listening at address: " ETHERADDR_FMT "\n",
+ 	    g_Progname, ETHERADDR_PRINT(&g_hwaddr));
+     END_DEBUG
++#if 0
+     if (!opt_debug)
+     {
+         DEBUG({printf("%s: Using syslog\n", g_Progname);})
+@@ -282,6 +297,7 @@
+         DEBUG({printf("%s: Daemonizing...\n", g_Progname);})
+         osl_become_daemon(g_osl);
+     }
++#endif
+     DEBUG({printf("%s: listening on interface %s\n", g_Progname, g_interface);})
+ 
+     osl_write_pidfile(g_osl);
+diff -uN lld2d.rc1/Makefile lld2d/Makefile
+--- lld2d.rc1/Makefile	2007-12-28 13:35:43.000000000 +0800
++++ lld2d/Makefile	2007-09-11 10:29:44.000000000 +0800
+@@ -1,3 +1,86 @@
+-.PHONY: all
+-all:
+-	@echo \*\*\* Do not "make" here.  make in a build directory such as ../native-linux
++#
++# Makefile for lld2d.
++#
++
++ifneq ($(strip $(I386)),y)
++-include ../arch.mk
++endif
++-include ../../path.mk
++
++###########################################################################
++OS_LAYER := osl-linux.c
++
++# Files for the Daemon and the Test-Tool
++DCFILES := $(OS_LAYER) main.c event.c util.c packetio.c band.c \
++	state.c sessionmgr.c enumeration.c mapping.c seeslist.c \
++	tlv.c qospktio.c
++
++TCFILES := $(OS_LAYER) ctmain.c event.c util.c ctpacketio.c ctstate.c
++
++DOBJFILES := $(patsubst %c,%o,$(DCFILES))
++TOBJFILES := $(patsubst %c,%o,$(TCFILES))
++
++###########################################################################
++
++ifeq ($(strip $(BUILD_TEST)),y)
++# Source for test
++APPLET		:= lld2test
++LOCAL_SRCS	:= $(TCFILES)
++CMLIB_SRCS	:= mem_helper.c dtrace.c libxmldbc.c
++else
++# Source for daemon
++APPLET		:= lld2d
++LOCAL_SRCS	:= $(DCFILES)
++CMLIB_SRCS	:= mem_helper.c dtrace.c libxmldbc.c
++endif
++
++###########################################################################
++
++ifeq ($(strip $(V)),y)
++Q :=
++else
++Q := @
++endif
++
++###########################################################################
++
++ifeq ($(strip $(DEBUG)),y)
++DDEBUG:=y
++DDEBUG_LEVEL:=0
++endif
++
++# dtarce debug
++ifeq ($(strip $(DDEBUG)),y)
++CFLAGS += -DDDEBUG -D__DEBUG__
++ifdef DDEBUG_LEVEL
++CFLAGS += -DDBG_DEFAULT=$(DDEBUG_LEVEL)
++endif
++endif
++
++ifeq ($(strip $(DEBUG_LIBXMLDBC)),y)
++CFLAGS += -DDEBUG_LIBXMLDBC
++endif
++
++ifeq ($(strip $(LOCAL_TEST)),y)
++CFLAGS += -DLOCAL_TEST=y
++endif
++
++###########################################################################
++
++-include $(TOPDIR)/Rules.mk
++
++showconfig:
++	@echo APPLET     = $(APPLET)
++	@echo LOCAL_SRCS = $(LOCAL_SRCS)
++	@echo CMLIB_SRCS = $(CMLIB_SRCS)
++
++clean:
++	rm -f -- .depend *~ lld2d lld2test conftest *.o
++
++install:
++	@echo -e "\033[32mInstalling APPLET: $(APPLET) ...\033[0m"
++	[ -d $(TARGET)/usr/sbin ] || mkdir -p $(TARGET)/usr/sbin
++	[ -z "$(STRIP)" ] || $(STRIP) $(APPLET)
++	cp $(APPLET) $(TARGET)/usr/sbin
++
++.PHONY: showconfig all clean install
+diff -uN lld2d.rc1/osl.h lld2d/osl.h
+--- lld2d.rc1/osl.h	2007-12-28 13:36:02.000000000 +0800
++++ lld2d/osl.h	2007-12-28 13:36:29.000000000 +0800
+@@ -41,8 +41,10 @@
+ /* Do any start-of-day initialistation, and return private state. */
+ extern osl_t *osl_init(void);
+ 
++#if 0
+ /* Do anything required to become a long-running background process. */
+ extern void osl_become_daemon(osl_t *osl);
++#endif
+ 
+ /* Open "interface", and add packetio_recv_handler(state) as the IO
+  * event handler for its packets (or die on failure).  If possible,
+diff -uN lld2d.rc1/osl-linux.c lld2d/osl-linux.c
+--- lld2d.rc1/osl-linux.c	2007-12-28 13:36:02.000000000 +0800
++++ lld2d/osl-linux.c	2007-12-28 13:36:29.000000000 +0800
+@@ -63,6 +63,8 @@
+ 
+ #include "packetio.h"
+ 
++#include <libxmldbc.h>
++
+ /* helper functions */
+ 
+ /* Convert from name "interface" to its index, or die on error. */
+@@ -403,7 +405,7 @@
+     return TRUE;
+ }
+ 
+-
++#if 0
+ /* Recipe from section 1.7 of the Unix Programming FAQ */
+ /* http://www.erlenstar.demon.co.uk/unix/faq_toc.html */
+ void
+@@ -451,7 +453,7 @@
+ 
+     /* 7) re-establish stdin/out/err to logfiles or /dev/console as needed */
+ }
+-
++#endif
+ 
+ /************************* E X T E R N A L S   f o r   T L V _ G E T _ F N s ***************************/
+ #define TLVDEF(_type, _name, _repeat, _number, _access, _inHello) \
+@@ -510,7 +512,7 @@
+     /* If your device has a management page at the url
+             http://<device-ip-address>/
+        then use the fMW flag, otherwise, remove it */
+-    nf = htonl(fFD | fMW);
++    nf = htonl(fFD | fMW | fNX);
+ 
+     memcpy(data,&nf,4);
+ 
+@@ -659,14 +661,21 @@
+ }
+ 
+ 
+-int
+-get_ssid(void *data)
++int get_ssid(void *data)
+ {
+-/*    TLVDEF( ssid_t,           ssid,                ,   6,  Access_unset ) */
++/*	TLVDEF( ssid_t,           ssid,                ,   6,  Access_unset ) */
++	ssid_t* ssid = (ssid_t*)data;
++	char buff[64];
+ 
+-//    ssid_t* ssid = (ssid_t*) data;
+-
+-    return TLV_GET_FAILED;
++	if (xmldbc_get_wb(NULL, 0, "/wireless/ssid", buff, sizeof(buff)-1)==0)
++	{
++		buff[63]='\0';
++		ssid->size = strlen(buff);
++		if (ssid->size > 32) ssid->size = 32;
++		memcpy(ssid->a, buff, ssid->size);
++		return TLV_GET_SUCCEEDED;
++	}
++	return TLV_GET_FAILED;
+ }
+ 
+ #endif /* HAVE_WIRELESS */
+@@ -725,7 +734,7 @@
+ {
+ /*    TLVDEF( ipv6addr_t,       ipv6addr,            ,   8,  Access_unset ) */
+ 
+-    ipv6addr_t* ipv6addr = (ipv6addr_t*) data;
++//    ipv6addr_t* ipv6addr = (ipv6addr_t*) data;
+ 
+     return TLV_GET_FAILED;
+ }
+@@ -851,46 +860,51 @@
+ }
+ 
+ 
+-int
+-get_machine_name(void *data)
++int get_machine_name(void *data)
+ {
+-/*    TLVDEF( ucs2char_t,       machine_name,    [16], 0xF,  Access_unset ) */
+-
+-    ucs2char_t* name = (ucs2char_t*) data;
+-
+-    int ret;
+-    struct utsname unamebuf;
+-
+-    /* use uname() to get the system's hostname */
+-    ret = uname(&unamebuf);
+-    if (ret != -1)
+-    {
+-        /* because I am a fool, and can't remember how to refer to the sizeof a structure
+-         * element directly, there is an unnecessary declaration here... */
+-        tlv_info_t* fool;
+-        size_t  namelen;
+-
+-	/* nuke any '.' in what should be a nodename, not a FQDN */
+-	char *p = strchr(unamebuf.nodename, '.');
+-	if (p)
+-	    *p = '\0';
+-
+-        namelen = strlen(unamebuf.nodename);
+-
+-	util_copy_ascii_to_ucs2(name, sizeof(fool->machine_name), unamebuf.nodename);
+-
+-        IF_TRACED(TRC_TLVINFO)
+-            dbgprintf("get_machine_name(): space=" FMT_SIZET ", len=" FMT_SIZET ", machine name = %s\n",
+-                       sizeof(fool->machine_name), namelen, unamebuf.nodename);
+-        END_TRACE
+-        return TLV_GET_SUCCEEDED;
+-    }
++	/* TLVDEF( ucs2char_t,       machine_name,    [16], 0xF,  Access_unset ) */
++	ucs2char_t* name = (ucs2char_t*)data;
++	int ret;
++	char buff[256];
+ 
+-    IF_TRACED(TRC_TLVINFO)
+-        dbgprintf("get_machine_name(): uname() FAILED, returning %d\n", ret);
+-    END_TRACE
++	if(g_machine_name)
++	{
++		tlv_info_t* fool;
++		size_t namelen;
++		namelen = strlen(g_machine_name);
++		util_copy_ascii_to_ucs2(name, sizeof(fool->machine_name), g_machine_name);
++		ret = TLV_GET_SUCCEEDED;
++
++		IF_TRACED(TRC_TLVINFO)
++			dbgprintf("get_machine_name(): space=" FMT_SIZET ", len=" FMT_SIZET ", machine name = %s\n",
++					sizeof(fool->machine_name), namelen, g_machine_name);
++		END_TRACE
++	}
++	else if (xmldbc_get_wb(NULL, 0, "/sys/hostname", buff, sizeof(buff))==0)
++	{
++		/* because I am a fool, and can't remember how to refer to the sizeof a structure
++		 * element directly, there is an unnecessary declaration here... */
++		tlv_info_t* fool;
++		size_t  namelen;
++
++		namelen = strlen(buff);
++		util_copy_ascii_to_ucs2(name, sizeof(fool->machine_name), buff);
++		ret = TLV_GET_SUCCEEDED;
++
++		IF_TRACED(TRC_TLVINFO)
++			dbgprintf("get_machine_name(): space=" FMT_SIZET ", len=" FMT_SIZET ", machine name = %s\n",
++					sizeof(fool->machine_name), namelen, buff);
++		END_TRACE
++	}
++	else
++	{
++		ret = TLV_GET_FAILED;
+ 
+-    return TLV_GET_FAILED;
++		IF_TRACED(TRC_TLVINFO)
++			dbgprintf("get_machine_name(): uname() FAILED, returning %d\n", ret);
++		END_TRACE
++	}
++	return ret;
+ }
+ 
+ 
+@@ -899,7 +913,7 @@
+ {
+ /*    TLVDEF( ucs2char_t,       support_info,    [32], 0x10, Access_unset ) // RLS: was "contact_info" */
+ 
+-    ucs2char_t * support = (ucs2char_t*) data;
++//    ucs2char_t * support = (ucs2char_t*) data;
+ 
+     return TLV_GET_FAILED;
+ }
+@@ -910,19 +924,48 @@
+ {
+ /*    TLVDEF( ucs2char_t,       friendly_name,   [32], 0x11, Access_unset ) */
+ 
+-    ucs2char_t * fname = (ucs2char_t*) data;
++//    ucs2char_t * fname = (ucs2char_t*) data;
+ 
+     return TLV_GET_FAILED;
+ }
+ 
+-
+-int
+-get_upnp_uuid(void *data)
++static inline int hexchar2int(char c)
+ {
+-/*    TLVDEF( uuid_t,           upnp_uuid,           , 0x12, Access_unset ) // 16 bytes long */
++	if (c >= '1' && c <= '9') return (int)(c - '0');
++	if (c >= 'a' && c <= 'f') return (int)(c - 'a' + 0xa);
++	if (c >= 'A' && c <= 'F') return (int)(c - 'A' + 0xa);
++	return -1;
++}
+ 
+-//    uuid_t* uuid = (uuid_t*) data;
++int get_upnp_uuid(void *data)
++{
++	/* TLVDEF( uuid_t,           upnp_uuid,           , 0x12, Access_unset ) // 16 bytes long */
++	uuid_t* uuid = (uuid_t*)data;
++	char buff[128];
++	char * ptr = buff;
++	int i=0, v;
+ 
++	if (xmldbc_get_wb(NULL, 0, "/runtime/upnpdev/root:1/uuid", buff, sizeof(buff)-1)==0)
++	{
++		buff[127] = '\0';
++		IF_TRACED(TRC_TLVINFO)
++			printf("%s: got uuid string [%s]\n",__FUNCTION__, buff);
++		END_TRACE
++
++		memset(data, 0, sizeof(uuid_t));
++		while (i < 32 && *ptr)
++		{
++			v = hexchar2int(*ptr);
++			if (v >= 0)
++			{
++				if (i%2)	uuid->a[i/2] += (uint8_t)v;
++				else		uuid->a[i/2] += (uint8_t)(v * 0x10);
++				i++;
++			}
++			ptr++;
++		}
++		return TLV_GET_SUCCEEDED;
++	}
+     return TLV_GET_FAILED;
+ }
+ 
+@@ -932,7 +975,7 @@
+ {
+ /*    TLVDEF( ucs2char_t,       hw_id,          [200], 0x13, Access_unset ) // 400 bytes long, max */
+ 
+-    ucs2char_t * hwid = (ucs2char_t*) data;
++//    ucs2char_t * hwid = (ucs2char_t*) data;
+ 
+     return TLV_GET_FAILED;
+ }
+@@ -960,11 +1003,18 @@
+ int
+ get_wl_physical_medium(void *data)
+ {
+-/*    TLVDEF( uint8_t,          wl_physical_medium,  , 0x15, Access_unset ) */
++/*	TLVDEF( uint8_t,          wl_physical_medium,  , 0x15, Access_unset ) */
+ 
+-    uint8_t* wpm = (uint8_t*) data;
++#define FHSS_24GHZ	0x01
++#define DSSS_24GHZ	0x02
++#define IR_BASEBAND	0x03
++#define OFDM_5GHZ	0x04
++#define HRDSSS		0x05
++#define ERP			0x06
+ 
+-    return TLV_GET_FAILED;
++	uint8_t* wpm = (uint8_t*) data;
++	*wpm = DSSS_24GHZ;
++    return TLV_GET_SUCCEEDED;
+ }
+ 
+ 
+diff -uN lld2d.rc1/tlv.c lld2d/tlv.c
+--- lld2d.rc1/tlv.c	2007-12-28 13:36:02.000000000 +0800
++++ lld2d/tlv.c	2007-12-28 13:36:29.000000000 +0800
+@@ -356,6 +356,34 @@
+ 
+ }
+ 
++static int write_uuid_t(int number, void * data, uint8_t * buf, int bytes_free, bool_t isHello, bool_t isLarge, size_t offset)
++{
++	if (bytes_free < (int)(2 + sizeof(uuid_t))) return 0;
++
++	if (isHello)
++	{
++		/* write hdr in Hello-tlv format */
++		*buf = (uint8_t)number;
++		if (isLarge)
++		{
++			*(buf+1) = 0;
++			return 2;
++		}
++		else
++		{
++			*(buf+1) = sizeof(uuid_t);
++		}
++	}
++	else
++	{
++		/* write in QueryLargeTlvResp LTLV format */
++		g_short_reorder_buffer = htons(sizeof(uuid_t));
++		memcpy(buf, &g_short_reorder_buffer, 2);
++	}
++	memcpy(buf+2, data, sizeof(uuid_t));
++	return sizeof(uuid_t) + 2;
++}
++
+ static int
+ write_ipv4addr_t(int number, void *data, uint8_t *buf, int bytes_free, bool_t isHello, bool_t isLarge, size_t offset)
+ {
+@@ -422,14 +450,13 @@
+     } else {
+         /* write in QueryLargeTlvResp LTLV format */
+         /* replace: *(uint16_t*)buf = htons(bytes_needed); with: */
+-        g_short_reorder_buffer = htons(sizeof(bytes_needed));
++        g_short_reorder_buffer = htons(bytes_needed);
+         memcpy(buf, &g_short_reorder_buffer, 2);
+     }
+     memcpy(buf+2, data, bytes_needed);
+     return bytes_needed + 2;
+ }
+ 
+-
+ static int
+ write_assns_t(int number, void *data, uint8_t *buf, int bytes_free, bool_t isHello, bool_t isLarge, size_t offset)
+ {
+diff -uN lld2d.rc1/tlvdef.h lld2d/tlvdef.h
+--- lld2d.rc1/tlvdef.h	2007-12-28 13:36:02.000000000 +0800
++++ lld2d/tlvdef.h	2007-12-28 13:36:29.000000000 +0800
+@@ -22,28 +22,28 @@
+ /* pre-processor magic is used to turn this into a struct tlv_info_t
+  * and the Tlvs_to_write data initialisers in tlv.c */
+ 
+-    /*      C-type,        name,         repeat, nmbr, access-type  inHello */
+-    TLVDEF( etheraddr_t,  hostid,              ,   1,  Access_unset, TRUE ) 
+-    TLVDEF( uint32_t,     net_flags,           ,   2,  Access_unset, TRUE )
+-    TLVDEF( uint32_t,     physical_medium,     ,   3,  Access_unset, TRUE )
+-    TLVDEF( uint8_t,      wireless_mode,       ,   4,  Access_unset, TRUE )
+-    TLVDEF( etheraddr_t,  bssid,               ,   5,  Access_unset, TRUE )
+-//    TLVDEF( ssid_t,       ssid,                ,   6,  Access_unset, TRUE )
+-    TLVDEF( ipv4addr_t,   ipv4addr,            ,   7,  Access_unset, TRUE )
+-    TLVDEF( ipv6addr_t,   ipv6addr,            ,   8,  Access_unset, TRUE )
+-    TLVDEF( uint16_t,     max_op_rate,         ,   9,  Access_unset, TRUE )
+-    TLVDEF( uint32_t,     link_speed,          , 0xC,  Access_unset, TRUE ) // 100bps increments
+-    TLVDEF( uint64_t,     tsc_ticks_per_sec,   , 0xA,  Access_unset, TRUE )
+-//(different for each client)    TLVDEF( uint32_t,     rssi,                , 0xD,  Access_unset, TRUE )
+-    TLVDEF( icon_file_t,  icon_image,          , 0xE,  Access_dynamic, TRUE ) // (Windows .ico file always LTLV)
+-    TLVDEF( ucs2char_t,   machine_name,    [16], 0xF,  Access_unset, TRUE )
+-    TLVDEF( ucs2char_t,   support_info,    [32], 0x10, Access_unset, FALSE )
+-    TLVDEF( ucs2char_t,   friendly_name,   [32], 0x11, Access_unset, TRUE )
+-//    TLVDEF( uuid_t,       upnp_uuid,           , 0x12, Access_unset, TRUE ) // 16 bytes long
+-    TLVDEF( ucs2char_t,   hw_id,          [200], 0x13, Access_unset, FALSE ) // 400 bytes long, max
+-    TLVDEF( uint32_t,     qos_flags,           , 0x14, Access_unset, TRUE )
+-    TLVDEF( uint8_t,      wl_physical_medium,  , 0x15, Access_unset, TRUE )
+-    TLVDEF( assns_t,      accesspt_assns,      , 0x16, Access_unset, FALSE ) // RLS: Large_TLV only
+-    TLVDEF( lg_icon_t,    jumbo_icon,          , 0x18, Access_dynamic, FALSE ) // RLS: Large_TLV only
+-    TLVDEF( uint16_t,     sees_max,            , 0x19, Access_unset, TRUE )
+-    TLVDEF( comptbl_t,    component_tbl,       , 0x1A, Access_unset, FALSE ) // RLS: Large_TLV only
++	/*      C-type,        name,         repeat, nmbr, access-type     inHello */
++	TLVDEF( etheraddr_t,  hostid,              ,   1,  Access_unset,   TRUE  )
++	TLVDEF( uint32_t,     net_flags,           ,   2,  Access_unset,   TRUE  )
++	TLVDEF( uint32_t,     physical_medium,     ,   3,  Access_unset,   TRUE  )
++//	TLVDEF( uint8_t,      wireless_mode,       ,   4,  Access_unset,   TRUE  )
++//	TLVDEF( etheraddr_t,  bssid,               ,   5,  Access_unset,   TRUE  )
++//	TLVDEF( ssid_t,       ssid,                ,   6,  Access_unset,   TRUE  )
++	TLVDEF( ipv4addr_t,   ipv4addr,            ,   7,  Access_unset,   TRUE  )
++	TLVDEF( ipv6addr_t,   ipv6addr,            ,   8,  Access_unset,   TRUE  )
++//	TLVDEF( uint16_t,     max_op_rate,         ,   9,  Access_unset,   TRUE  )
++	TLVDEF( uint64_t,     tsc_ticks_per_sec,   , 0xA,  Access_unset,   TRUE  )
++	TLVDEF( uint32_t,     link_speed,          , 0xC,  Access_unset,   TRUE  )	// 100bps increments
++//	TLVDEF( uint32_t,     rssi,                , 0xD,  Access_unset,   TRUE  )
++	TLVDEF( icon_file_t,  icon_image,          , 0xE,  Access_dynamic, TRUE  )	// (Windows .ico file always LTLV)
++	TLVDEF( ucs2char_t,   machine_name,    [16], 0xF,  Access_unset,   TRUE  )
++	TLVDEF( ucs2char_t,   support_info,    [32], 0x10, Access_unset,   FALSE )
++	TLVDEF( ucs2char_t,   friendly_name,   [32], 0x11, Access_unset,   TRUE  )
++	TLVDEF( uuid_t,       upnp_uuid,           , 0x12, Access_unset,   TRUE  )	// 16 bytes long
++	TLVDEF( ucs2char_t,   hw_id,          [200], 0x13, Access_unset,   FALSE )	// 400 bytes long, max
++	TLVDEF( uint32_t,     qos_flags,           , 0x14, Access_unset,   TRUE  )
++	TLVDEF( uint8_t,      wl_physical_medium,  , 0x15, Access_unset,   TRUE  )
++	TLVDEF( assns_t,      accesspt_assns,      , 0x16, Access_unset,   FALSE )	// RLS: Large_TLV only
++	TLVDEF( lg_icon_t,    jumbo_icon,          , 0x18, Access_dynamic, FALSE )	// RLS: Large_TLV only
++	TLVDEF( uint16_t,     sees_max,            , 0x19, Access_unset,   TRUE  )
++	TLVDEF( comptbl_t,    component_tbl,       , 0x1A, Access_unset,   FALSE )	// RLS: Large_TLV only
+Binary files lld2d.rc1/tux.ico and lld2d/tux.ico differ
+diff -uN lld2d.rc1/util.c lld2d/util.c
+--- lld2d.rc1/util.c	2007-12-28 13:36:02.000000000 +0800
++++ lld2d/util.c	2007-12-28 13:36:29.000000000 +0800
+@@ -30,7 +30,7 @@
+ void
+ cpy_hton64(void* destination, void* source)
+ {
+-#ifdef __LITTLE_ENDIAN
++#if __BYTE_ORDER == __LITTLE_ENDIAN
+     uint8_t*	src = ((uint8_t*) source) + 7;
+     uint8_t*	dst = (uint8_t*) destination;
+ 

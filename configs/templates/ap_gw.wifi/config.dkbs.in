@@ -1,0 +1,28 @@
+###########################################################
+#
+# dlwbr
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_AP_GW_WIFI
+	default ELBOX_MODEL_DAP1150
+
+	config ELBOX_MODEL_DAP1150
+		bool "DAP-1150"
+endchoice
+
+
+###########################################################
+#
+# Model name string definition
+#
+###########################################################
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_GW_WIFI
+	depends ELBOX_MODEL_DAP1150
+	string
+	default "dap1150"
+

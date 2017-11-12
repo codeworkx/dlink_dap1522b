@@ -1,0 +1,47 @@
+#
+# Hostapd_wps tools
+#
+
+config ELBOX_PROGS_PRIV_HOSTAPD_WPS
+	bool "hostapd_wps"
+	default n
+	help
+		hostapd version 0.5.9, have wps integrated in it.
+
+menu "Support Samsung Auto Provision"
+    depends ELBOX_PROGS_PRIV_HOSTAPD_WPS
+
+	config ELBOX_PROGS_PRIV_SUPPORT_AUTO_PROVISION
+		bool "samsung_auto_provision"
+		help
+			Support Samsung auto Privision
+endmenu
+
+menu "Support RealTek RT8198"
+    depends ELBOX_PROGS_PRIV_HOSTAPD_WPS
+
+	config ELBOX_PROGS_PRIV_REALTEK_RT8198
+		bool "RealTek RT8198"
+	    help
+			Support RealTek RT8198
+endmenu		
+
+menu "Support detail log for hostapd"
+	depends ELBOX_PROGS_PRIV_HOSTAPD_WPS
+
+	config ELBOX_PROGS_PRIV_AP_SYSLOG
+	bool "Detail log for hostapd"
+		help
+			Detail log for Hostapd
+endmenu			
+
+menu "Support WPS 2.0"
+    depends ELBOX_PROGS_PRIV_HOSTAPD_WPS
+
+    config ELBOX_PROGS_PRIV_WPS_2_0
+    bool "Support WPS 2.0 for hostapd"
+        help
+			Support WPS 2.0
+
+endmenu
+

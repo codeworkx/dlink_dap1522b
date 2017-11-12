@@ -1,0 +1,3 @@
+# sqlite
+
+gsubdir-$(ELBOX_PROGS_GPL_SQLITE_374)	+= sqlite-3.7.4

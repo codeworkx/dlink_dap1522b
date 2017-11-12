@@ -1,0 +1,83 @@
+
+config RAETH_NAPI
+        bool "Use Rx Polling (NAPI)" 
+		default n
+choice
+	prompt "Network BottomHalves"	
+	depends on !RAETH_NAPI 
+	default RA_NETWORK_TASKLET_BH
+
+	config RA_NETWORK_TASKLET_BH
+	bool "Tasklet"
+
+	config RA_NETWORK_WORKQUEUE_BH
+	bool "Work Queue"
+
+endchoice
+
+
+choice
+        prompt "GMAC is connected to"
+        default RT_3052_ESW
+
+config  GE1_MII_FORCE_100
+        bool "MII_FORCE_100 (10/100M Switch)"
+
+config  GE1_MII_AN
+        bool "MII_AN (100Phy)"
+
+config  GE1_RVMII_FORCE_100
+        bool "RvMII_FORCE_100 (CPU)"
+
+config  GE1_RGMII_FORCE_1000
+        bool "RGMII_FORCE_1000 (GigaSW, CPU)"
+		select RALINK_SPI
+
+config  GE1_RGMII_AN
+        bool "RGMII_AN (GigaPhy)"
+
+config  RT_3052_ESW
+        bool "Ralink Embedded Switch(10/100Mbps)"
+
+config  ICPLUS_PHY
+        bool "100PHY"
+
+config  MAC_TO_MAC_MODE
+        bool "VITESSE"
+		select RALINK_SPI
+
+config MAC_TO_RTL8367_MODE
+	bool "RTL8367 GbE switch"
+
+config MAC_TO_MAC_ICPLUS175D_MII_MODE
+	bool "IC+ 175D 10/100M MAC(MII mode)"
+
+config  GIGAPHY
+        bool "MARVELL"
+        
+endchoice
+
+
+
+config RAETH_HAS_PORT5
+        bool "Port 5 Support"
+choice
+    prompt "Target Mode"
+    depends on RAETH_HAS_PORT5
+	default P5_RGMII_TO_MAC_MODE
+
+	config P5_MAC_TO_PHY_MODE
+		bool "Giga_Phy (RGMII)"
+	config P5_RGMII_TO_MAC_MODE
+		bool "Giga_SW/iNIC (RGMII)"
+	config P5_MII_TO_MAC_MODE
+		bool "External_CPU (MII_RvMII)"
+	config P5_RMII_TO_MAC_MODE
+		bool "External_CPU (RvMII_MII)"
+endchoice
+
+config  MAC_TO_GIGAPHY_MODE_ADDR
+        hex "Port5 Phy Address"
+	default 0x1f
+    depends on GIGAPHY || P5_MAC_TO_PHY_MODE || GE1_MII_AN || GE1_RGMII_AN
+

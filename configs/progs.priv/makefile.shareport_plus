@@ -1,0 +1,3 @@
+# shareport_plus
+
+psubdir-$(ELBOX_PROGS_PRIV_SHAREPORT_PLUS)	+= silex_source

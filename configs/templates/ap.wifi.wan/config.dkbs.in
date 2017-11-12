@@ -1,0 +1,22 @@
+###########################################################
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends on ELBOX_TEMPLATE_AP_WIFI_WAN && ELBOX_BRAND_AP_DLINK_BUSINESS_WAN
+	default ELBOX_MODEL_DAP3520
+
+	config ELBOX_MODEL_DAP3520
+		bool "DAP-3520"
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends on ELBOX_TEMPLATE_AP_WIFI_WAN && ELBOX_BRAND_AP_DLINK_BUSINESS_WAN
+	depends ELBOX_MODEL_DAP3520
+	string
+	default "dap3520"

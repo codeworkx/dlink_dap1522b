@@ -1,0 +1,22 @@
+#
+# sqlite
+#
+
+config ELBOX_SQLITE
+	bool "SQLite"
+	default n
+
+choice
+	prompt "Selection Version"
+	depends ELBOX_SQLITE
+	default ELBOX_PROGS_GPL_SQLITE_374
+	help
+		Select the sqlite version for the platform
+
+	config ELBOX_PROGS_GPL_SQLITE_374
+		bool "SQLite 3.7.4"
+		help
+			SQLite.
+
+endchoice
+

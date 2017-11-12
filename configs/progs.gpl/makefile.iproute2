@@ -1,0 +1,4 @@
+# iproute2
+
+gsubdir-$(ELBOX_PROGS_GPL_IPROUTE2_2_6_8)	+= iproute2-2.6.8
+gsubdir-$(ELBOX_PROGS_GPL_IPROUTE2_2_6_33)	+= iproute2-2.6.33

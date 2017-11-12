@@ -1,0 +1,9 @@
+#
+# web file access
+#
+
+config ELBOX_PROGS_PRIV_WEB_FILE_ACCESS
+	bool "web file access"
+	default n
+	help
+		Support web file access (needs GPL zip, libid3tag and image_tools).

@@ -1,0 +1,23 @@
+#
+# MDNSRESPONDER
+#
+
+config ELBOX_MDNSRESPONDER
+	bool "MDNSRESPONDER"
+	default n
+
+choice
+	prompt "Selection Version"
+	depends ELBOX_MDNSRESPONDER
+	default ELBOX_PROGS_GPL_MDNSRESPONDER_320_5_1
+	help
+		Select the version for the implementation
+
+	config ELBOX_PROGS_GPL_MDNSRESPONDER_320_5_1
+		bool "mDNSResponder-320.5.1"
+		help
+			mDNSResponder-320.5.1
+endchoice
+
+		
+

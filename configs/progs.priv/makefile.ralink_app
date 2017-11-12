@@ -1,0 +1,5 @@
+# xmldb
+
+psubdir-$(ELBOX_PROGS_PRIV_RALINK_HW_NAT)          += ralink_app/hw_nat
+
+

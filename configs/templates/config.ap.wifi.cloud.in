@@ -1,0 +1,50 @@
+###########################################################
+# ap.wifi.wan
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends on ELBOX_TEMPLATE_AP_WIFI_CLOUD
+	string
+	default "ap.wifi.cloud"
+
+choice
+	prompt "Brand Selection"
+	depends ELBOX_TEMPLATE_AP_WIFI_CLOUD
+	default ELBOX_BRAND_AP_DLINK_BUSINESS_CLOUD
+	help
+		Select the GUI for this product
+
+	#######################################################
+	# Generic
+#	config ELBOX_BRAND_AP_GENERIC_CLOUD
+#		bool "generic"
+#		help
+#			Generic Version.
+
+	#######################################################
+	# D-Link Business series
+	config ELBOX_BRAND_AP_DLINK_BUSINESS_CLOUD
+		bool "dkbs"
+		help
+			D-Link Business DAP series.
+
+endchoice
+
+###########################################################
+# ELBOX_BRAND_NAME definition
+###########################################################
+#config ELBOX_BRAND_NAME
+#	depends on ELBOX_TEMPLATE_AP_WIFI_CLOUD && ELBOX_BRAND_AP_GENERIC_CLOUD
+#	string
+#	default "generic"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_AP_WIFI_CLOUD && ELBOX_BRAND_AP_DLINK_BUSINESS_CLOUD
+	string
+	default "dkbs"
+
+###########################################################
+# Model configuration
+###########################################################
+#source configs/templates/ap.wifi.cloud/config.generic.in
+source configs/templates/ap.wifi.cloud/config.dkbs.in

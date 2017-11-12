@@ -1,0 +1,22 @@
+#
+# udev
+#
+config ELBOX_PROGS_GPL_UPNPC
+	bool "mini_upnpc"
+	default n
+	help
+		enabling applications to access the services provided by an UPnP "Internet Gateway Device" present on the network. In UPnP terminology, it is a UPnP Control Point.	
+		
+menu "Support IGD forwarding function"
+	depends ELBOX_PROGS_GPL_UPNPC
+	
+	config ELBOX_PROGS_GPL_UPNPC_IGD_FORWARDER
+	bool "Support IGD forwarding function"
+	help
+		If our router is behind NAT, the IGD Port Mapping will not work as 
+		the IGD msg will not send to the gateway. 
+		After enable this function, when our router receive IGD messge 
+		from LAN, we then add a portmapping entry to our iptable 
+		rules and then send IGD message to WAN side gateway to fix 
+		double NAT IGD doesn't work issue.
+endmenu

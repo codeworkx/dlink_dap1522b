@@ -1,0 +1,37 @@
+#
+# BCM_WPS_PBC
+#
+
+config ELBOX_BCM_WPS_PBC
+	bool "Broadcom WPS push button controlled by s/w"
+	default n
+	help
+		In Project Seattle, we use it for WPS push button connection.
+		In original BRCM design, WPS PBC only works in one band(5G or 2.4G band) one time.
+		AP client has concurrent 5G and 2.4G bands, so original BRCM design can't work!
+		Now we create this prog.priv program to finish WPS PBC in concurrent A/G bands.
+		---->
+		1. Site survey in A and G bands.
+		2. If find a active-WPS-AP in A band, trgger event WLAN-2.WPSPBC (A band's AP first)
+		   else if find a active-WPS-AP in G band, trgger event WLAN-1.WPSPBC
+
+choice
+	prompt "Select vendor"
+	depends ELBOX_BCM_WPS_PBC
+	help
+		Select the vendor of wireless.
+
+	#
+	# Broadcom
+	#
+	config ELBOX_PROGS_PRIV_WPS_PBC_BROADCOM
+		bool "Broadcom"
+
+	#
+	# others
+	#
+
+endchoice
+
+# broadcom model
+

@@ -1,0 +1,83 @@
+config PROGS_PRIV_WAPI_SECURITY_VERSION
+	bool "WAPI_SECURITY_VERSION"
+	default n
+	help
+		Wapi version.
+
+menu "VERSION CONTROL"
+	depends PROGS_PRIV_WAPI_SECURITY_VERSION
+
+	config ELBOX_PROGS_PRIV_WAPI_1_3
+			bool "1_3"
+			default n
+			help
+				wapi version are 1.3
+config ELBOX_PROGS_PRIV_WAPI_STATS
+	depends on PROGS_PRIV_WAPI_SECURITY_VERSION
+	bool "Wapi stats"
+	default n
+	help
+		This function offers wapi stats stored in xmldb.
+
+config ELBOX_PROGS_PRIV_WAPI_EXTERNAL_CERTIFICATE
+	depends on PROGS_PRIV_WAPI_SECURITY_VERSION
+	bool "External certificate"
+	default n
+	help
+		This function offers an upload service that allows user to change certificate.
+
+config ELBOX_PROGS_PRIV_WAPI_EXTERNAL_MTDBLOCK
+	depends on ELBOX_PROGS_PRIV_WAPI_EXTERNAL_CERTIFICATE
+	string "mtdblock of external certificate"
+	default "/dev/mtdblock/5"
+	help
+		The dev file name of the MTD block for the storage of external certificate.
+
+config ELBOX_PROGS_PRIV_WAPI_EXTERNAL_OFFSET
+	depends on ELBOX_PROGS_PRIV_WAPI_EXTERNAL_CERTIFICATE
+	int "offset of mtdblock"
+	default 20480
+	help
+		The beginning of the external certificate in the MTD block.
+
+config ELBOX_PROGS_PRIV_WAPI_EXTERNAL_SIZE
+	depends on ELBOX_PROGS_PRIV_WAPI_EXTERNAL_CERTIFICATE
+	int "size of external certificate"
+	default 4096
+	help
+		The size of the external certificate. The unit is byte.
+		Not the size of MTD block and should be the smaller or equal to the MTD block.
+
+config ELBOX_PROGS_PRIV_WAPI_CPATH
+	depends on PROGS_PRIV_WAPI_SECURITY_VERSION
+	string "The location of certificate"
+	default "/var/etc/wapi"
+	help
+		The location of certificate in runtime mode.
+
+config ELBOX_PROGS_PRIV_WAPI_CERTNAME
+	depends PROGS_PRIV_WAPI_SECURITY_VERSION
+	string "The name of ap certificate"
+	default "ap.cer"
+	help
+		The file name of certificate. The default ap certificate's name is ap.cert.
+		If we wanted to use the filename that user uploads, just set the filename "none".
+
+config ELBOX_PROGS_PRIV_WAPI_ASUCERTNAME
+	depends on PROGS_PRIV_WAPI_SECURITY_VERSION
+	string "The name of asu cert name"
+	default "asu.cer"
+	help
+		The file name of asu cert. The default asu cert's name is asu.cert.
+		If we wanted to use the filename that user uploads, just set the filename "none".
+
+config ELBOX_PROGS_PRIV_WAPI_ASCERTNAME
+	depends on PROGS_PRIV_WAPI_SECURITY_VERSION
+	string "The name of as cert name"
+	default "as.cer"
+	help
+		The file name of as cert. The default as cert's name is as.cert.
+		If we wanted to use the filename that user uploads, just set the filename "none".
+
+endmenu
+

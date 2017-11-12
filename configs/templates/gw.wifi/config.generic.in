@@ -1,0 +1,100 @@
+#
+# generic
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	default ELBOX_MODEL_WL11G
+
+	config ELBOX_MODEL_WL11G
+		bool "WL11G"
+	config ELBOX_MODEL_WL11GS
+		bool "WL11GS"
+	config ELBOX_MODEL_SEIMENS
+		bool "SIEMENS W-041"
+	config ELBOX_MODEL_CHAINLEADER
+		bool "Chainleader"
+	config ELBOX_MODEL_WL11N
+		bool "WL11N"
+	config ELBOX_MODEL_WL11DN
+		bool "WL11DN"
+	config ELBOX_MODEL_WL11G_3G
+		bool "WL11G_3G"
+	config ELBOX_MODEL_WIMAX
+		bool "WIMAX"
+	config ELBOX_MODEL_DCWBR300
+		bool "DCWBR300"
+	config ELBOX_MODEL_WL11AGN
+		bool "WL11AGN"
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_WL11G
+	string
+	default "wl11g"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_WL11GS
+	string
+	default "wl11gs"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_SEIMENS
+	string
+	default "siemens"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_CHAINLEADER
+	string
+	default "chainleader"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_WL11N
+	string
+	default "wl11n"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_WL11DN
+	string
+	default "wl11dn"	
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_WL11G_3G
+	string
+	default "wl11g_3g"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_WIMAX
+	string
+	default "wimax"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_DCWBR300 
+	string
+	default "dcwbr300"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	depends ELBOX_MODEL_WL11AGN 
+	string
+	default "wl11agn"
+	

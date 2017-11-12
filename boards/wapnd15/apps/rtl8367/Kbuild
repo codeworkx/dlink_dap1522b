@@ -1,0 +1,39 @@
+##################################################################
+# The Kernel part
+-include ../../arch.mk
+-include ../../path.mk
+-include $(TOPDIR)/.config
+
+DVERSION = RTL8367RB_RTL8367MB_API_V1.2.5
+EXTRA_CFLAGS += -D_LITTLE_ENDIAN -I$(M)/$(DVERSION) -DCHIP_RTL8367RB
+
+# bouble-20101208- use kernel option to check enable/disable use realtek proprietary tag. 
+EXTRA_CFLAGS += -DALPHA_PORT_BASE_QOS_PATCH
+ifeq ($(strip $(CONFIG_RTL_TAG_SUPPORT)),y)
+EXTRA_CFLAGS += -DCONFIG_RTL_TAG_SUPPORT
+endif
+
+sdkobj += smi.o rtk_api.o
+sdkobj += rtl8367b_asicdrv.o
+sdkobj += rtl8367b_asicdrv_port.o
+sdkobj += rtl8367b_asicdrv_phy.o
+sdkobj += rtl8367b_asicdrv_led.o
+sdkobj += rtl8367b_asicdrv_vlan.o
+sdkobj += rtl8367b_asicdrv_dot1x.o
+sdkobj += rtl8367b_asicdrv_lut.o
+sdkobj += rtl8367b_asicdrv_green.o
+sdkobj += rtl8367b_asicdrv_acl.o
+sdkobj += rtl8367b_asicdrv_cputag.o
+sdkobj += rtl8367b_asicdrv_eee.o
+sdkobj += rtl8367b_asicdrv_hsb.o
+sdkobj += rtl8367b_asicdrv_svlan.o
+sdkobj += rtl8367b_asicdrv_misc.o
+# bouble-20101208- when enable ALPHA_PORT_BASE_QOS_PATCH, then need following two files.
+sdkobj += rtl8367b_asicdrv_qos.o
+sdkobj += rtl8367b_asicdrv_scheduling.o
+sdkobj += rtl8367b_asicdrv_fc.o
+# for igmp snooping
+sdkobj += alpha_igmp_snoop.o
+
+obj-m += rtldrv.o
+rtldrv-objs += rtl8367.o $(addprefix $(DVERSION)/,$(sdkobj))

@@ -1,0 +1,27 @@
+config ELBOX_PROGS_PRIV_MADWIFI_AR724X
+	bool "MADWIFI_AR724X"
+	default n
+	help
+		AP99/AP101 Wireless module.
+
+choice
+        prompt "Select Version"
+        depends ELBOX_PROGS_PRIV_MADWIFI_AR724X
+        default ELBOX_PROGS_PRIV_MADWIFI_AR724X_V7
+        help
+                Select the verison of AR7240(SoC) driver.
+
+        config ELBOX_PROGS_PRIV_MADWIFI_AR724X_V7
+                bool "LSDK-WLAN-ap997.3.1.47.gz"
+                help
+                        This version is for SDK7.3.1.47. 
+
+        config ELBOX_PROGS_PRIV_MADWIFI_AR724X_V9
+                bool "LSDK-WLAN-ap999.0.1.10.gz"
+                help
+                        This version is for SDK9.0.1.10. 
+endchoice
+
+source configs/progs.priv/config.enhanced_wireless_ar7240
+
+

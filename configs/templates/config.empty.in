@@ -1,0 +1,20 @@
+##########################################################
+#
+# Empty template
+#
+##########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends ELBOX_TEMPLATE_EMPTY
+	string
+	default "empty"
+
+config ELBOX_BRAND_NAME
+	depends ELBOX_TEMPLATE_EMPTY
+	string
+	default "dummy"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_EMPTY
+	string
+	default "dummy"

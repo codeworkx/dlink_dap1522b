@@ -1,0 +1,297 @@
+#!/bin/sh
+case "$1" in
+reboot)
+	reboot
+	;;
+	
+freset)
+	if [ "$2" == "" ]; then 
+		devconf del
+		echo "Factory reset successfully!" > /dev/console
+	else
+		case "$2" in
+		enable)
+			usockc /var/gpio_ctrl GPIO_FRESET_ENABLE
+			echo "Freset button disabled!" > /dev/console
+			;;
+		disable)
+			usockc /var/gpio_ctrl GPIO_FRESET_DISABLE
+			echo "Freset button enabled!" > /dev/console
+			;;
+		esac
+	fi
+	;;
+	
+isfreset)
+	SIZE=`devconf dump | scut -p "Data size :" -f 1`
+	if [ "$SIZE" == "0" ]; then
+		echo "YES"
+	else
+		echo "NO"
+	fi
+	;;
+	
+reset_switch)
+	case "$2" in
+	"high")
+		usockc /var/gpio_ctrl GPIO_RESET_GIGA_SWITCH_HIGH
+		echo "Reset high signal to giga switch done!" > /dev/console
+		;;
+	"low")
+		usockc /var/gpio_ctrl GPIO_RESET_GIGA_SWITCH_LOW
+		echo "Reset low signal to giga switch done!" > /dev/console
+		;;
+	esac
+	;;
+	
+init)
+	if [ $# -ne 6 ]; then
+		echo "Usage:"
+		echo "  mfc init <hwrev> <lanmac (Must Even)> <countrycode> <deviceip> <pin>"
+		exit 1
+	fi
+	echo "devdata clean" > /dev/console
+	devdata clean
+	HWREV="$2"
+	LANMAC=`echo -e $3 | tr [A-Z] [a-z]`
+	CCODE="$4"
+	IP="$5"
+	PIN="$6"
+	[ "$LANMAC" != "" ] && DEVDATA="$DEVDATA -e lanmac=$LANMAC -e wlanmac=$LANMAC"
+	[ "$HWREV" = "" ] && HWREV="A1"
+	[ "$CCODE" = "" ] && CCODE="US"
+	[ "$PIN" != "" ] && DEVDATA="$DEVDATA -e pin=$PIN"
+	echo "devdata set -e hwrev=$HWREV -e countrycode=$CCODE $DEVDATA -f" > /dev/console
+	devdata set -e hwrev=$HWREV -e countrycode=$CCODE $DEVDATA -f
+	# Save wireless MAC address to EEPROM
+	M1=`echo $LANMAC | cut -d: -f1`
+	M2=`echo $LANMAC | cut -d: -f2`
+	M3=`echo $LANMAC | cut -d: -f3`
+	M4=`echo $LANMAC | cut -d: -f4`
+	M5=`echo $LANMAC | cut -d: -f5`
+	M6=`echo $LANMAC | cut -d: -f6`
+	iwpriv ra0 e2p 04=$M2$M1
+	iwpriv ra0 e2p 06=$M4$M3
+	iwpriv ra0 e2p 08=$M6$M5
+	# Set MAC Address and IP Address into u-boot config.
+	[ "$LANMAC" != "" ] && UBCFG="$UBCFG ethaddr=$LANMAC"
+	[ "$IP" != "" ] && UBCFG="$UBCFG ipaddr=$IP"
+	echo "ubcfg set $UBCFG" > /dev/console
+	ubcfg set $UBCFG
+	# Show devdata and uboot data
+	echo "-------- devdata dump ----------------------" > /dev/console
+	devdata dump > /dev/console
+	echo "-------- ubcfg get ethaddr ipaddr-----------" > /dev/console
+	ubcfg get ethaddr ipaddr > /dev/console
+	echo "--------------------------------------------" > /dev/console
+	;;
+	
+evm)
+	if [ $# -ne 11 ]; then
+		echo "Usage:"
+		echo "  mfc evm <INF> <ATETXFREQOFFSET> <ATETXMODE> <ATETXMCS> <ATETXBW> <ATETXLEN> <ATECHANNEL> <ATETXANT> <ATETXPOW0> <ATETXPOW1>"
+		exit 1
+	fi
+	INF=$2
+
+	iwpriv $INF set ATE=ATESTART
+	iwpriv $INF set ATEDA=FF:FF:FF:FF:FF:FF
+	iwpriv $INF set ATETXGI=0
+	iwpriv $INF set ATETXLEN=$7
+	iwpriv $INF set ATETXCNT=1000000
+	iwpriv $INF set ATETXANT=$9
+	iwpriv $INF set ATECHANNEL=$8
+	iwpriv $INF set ATETXMODE=$4
+	iwpriv $INF set ATETXMCS=$5
+	iwpriv $INF set ATETXBW=$6
+	iwpriv $INF set ATETXPOW0=${10}
+	iwpriv $INF set ATETXPOW1=${11}
+	iwpriv $INF set ATETXFREQOFFSET=$3
+	iwpriv $INF set ATEIPG=200	
+	iwpriv $INF set ATE=TXFRAME
+	;;
+	
+wlan)
+	DATPATH="/var/run/RT2860.dat"
+	cp /etc/scripts/mfc/RT3662.dat $DATPATH
+	echo "" >> $DATPATH
+	case "$2" in
+	"5g")
+		echo "CountryRegionABand=7" >> $DATPATH
+		echo "WirelessMode=8" >> $DATPATH
+		;;
+	"2g")
+		echo "CountryRegion=0" >> $DATPATH
+		echo "WirelessMode=9" >> $DATPATH
+		;;
+	esac
+	case "$5" in
+	"HT20")
+		echo "HT_BW=0" >> $DATPATH
+		;;
+	"HT40")
+		echo "HT_BW=1" >> $DATPATH
+		echo "HT_EXTCHA=1" >> $DATPATH
+		;;
+	esac
+	echo "Channel=$4" >> $DATPATH
+	echo "SSID=$3" >> $DATPATH
+	killall hostapd
+	ifconfig ra1 down
+	ifconfig ra0 down
+	brctl delif br0 ra0
+	brctl delif br0 ra1
+	rmmod rt2860v2_ap
+	insmod /lib/modules/rt2860v2_ap.ko
+	ifconfig ra0 txqueuelen 1000
+	ifconfig ra0 up
+	brctl addif br0 ra0
+	brctl setbwctrl br0 ra0 900
+	echo 1 > /proc/net/br_forward_br0
+	;;
+
+setcountrycode)
+	CCODE="$2"
+	if [ "$CCODE" != "" ]; then 
+		echo "set countrycode: $CCODE" > /dev/console
+		devdata set -e countrycode=$CCODE -f
+	else
+		echo "No assign a countrycode parameter!" > /dev/console
+		exit 1
+	fi
+	;;
+	
+dump)
+	devdata dump
+	;;
+	
+ver)
+	echo Ver `cat /etc/config/buildver` Build `cat /etc/config/buildno`
+	;;
+
+gethwrev)
+	devdata get -e hwrev
+	;;
+	
+getcountrycode)
+	devdata get -e countrycode
+	;;
+
+getpin)
+	devdata get -e pin
+	;;
+	
+getlanmac)
+	devdata get -e lanmac
+	;;
+	
+debug)
+	case "$2" in
+	on)
+		usockc /var/gpio_ctrl DEBUG
+		echo "Enter into debug mode!" > /dev/console
+		;;
+	off)
+		usockc /var/gpio_ctrl NODEBUG
+		echo "Enter into normal mode!" > /dev/console
+		;;
+	esac
+	;;
+	
+button)
+	case "$2" in
+	reset)
+		usockc /var/gpio_ctrl GPIO_FRESET
+		cat /var/gpio_ctrl_result
+		;;
+	wps)
+		usockc /var/gpio_ctrl GPIO_WPSPBC
+		cat /var/gpio_ctrl_result
+		;;
+	switch)
+		usockc /var/gpio_ctrl GPIO_SWITCH
+		cat /var/gpio_ctrl_result
+		;;
+	esac
+	;;
+	
+led)
+	case "$2" in
+	wps_on)
+		usockc /var/gpio_ctrl WPS_BLUE
+		echo "Start LED test for WPS!" > /dev/console
+		;;
+	wps_off)
+		usockc /var/gpio_ctrl WPS_NONE
+		echo "Stop LED test for WPS!" > /dev/console
+		;;
+	bridge_on)
+		usockc /var/gpio_ctrl BRIDGE_LED_ON
+		echo "Start LED test for Bridge!" > /dev/console
+		;;
+	bridge_off)
+		usockc /var/gpio_ctrl BRIDGE_LED_OFF
+		echo "Stop LED test for Bridge!" > /dev/console
+		;;
+	power_status_on)
+		usockc /var/gpio_ctrl PS_LED_TEST
+		echo "Start LED test for Power/Status!" > /dev/console
+		;;
+	power_status_off)
+		usockc /var/gpio_ctrl PS_LED_OFF
+		usockc /var/gpio_ctrl PS_LED_DONE
+		echo "Stop LED test for Power/Status!" > /dev/console
+		;;
+	esac
+	;;
+	
+*)
+	echo "Usage: mfc {command} <params>"
+	echo "Commands:"
+	echo "  init <hwrev> <lanmac (Must Even)> <countrycode> <deviceip> <pin>"
+	echo "                           	 	Init flash."
+	echo ""
+	echo "  reboot 						 	Restart the system."
+	echo ""
+	echo "  wlan [5g | 2g] <ssid> <channel> <bandwidth>"
+	echo "                           	 	Config the wireless setting for testing."
+	echo "                           	 	Where the 'bandwidth' should be the value of 'HT20' or 'HT40'."
+	echo ""
+	echo "  setcountrycode <countrycode> 	Set countrycode."
+	echo ""
+	echo "  dump                     	 	Dump environment vairables."
+	echo ""
+	echo "  ver                      	 	Show firmware version."
+	echo ""
+	echo "  gethwrev                 	 	Get H/W revision"
+	echo ""
+	echo "  getlanmac                	 	Get current LAN mac address."
+	echo ""
+	echo "  getcountrycode           	 	Get current country code."
+	echo ""
+	echo "  getpin                   	 	Get default PIN number."
+	echo ""
+	echo "  freset                   	 	Factory reset"
+	echo ""
+	echo "  freset {enable | disable}	 	Enable/disable factory reset button."
+	echo ""
+	echo "  reset_switch {high | low}		Reset Signal for Giga Switch."
+	echo ""
+	echo "  isfreset                 	 	Check if the device is reset to factory default."
+	echo ""
+	echo "  debug on                  	 	turn on debug mode to trace command call."
+	echo "  debug off                 	 	turn off debug mode."
+	echo ""
+	echo "  button {reset | wps | switch}"
+	echo "  reset                	 	 	Get factory reset button status."
+	echo "  wps                  	 	 	Get WPS button status."
+	echo "  switch                  	 	Get switch status (AP5G,AP2G,APCLI)."
+	echo ""
+	echo "  led {wps_on / wps_off | bridge_on / bridge_off | power_status_on / power_status_off}"
+	echo "  						 	 	test led for wps, bridge or power status."
+	echo ""
+	echo "  evm <INF> <ATETXFREQOFFSET> <ATETXMODE> <ATETXMCS> <ATETXBW> <ATETXLEN>"
+	echo "      <ATECHANNEL> <ATETXANT> <ATETXPOW0> <ATETXPOW1>"
+	echo "                           	 	save ATE wireless parameters for 5GHz or 2.4GHz band."
+	;;
+esac

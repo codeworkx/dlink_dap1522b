@@ -1,0 +1,30 @@
+#
+# Netbios
+#
+
+config ELBOX_PROGS_PRIV_NETBIOS
+	bool "netbios"
+	default n
+	help
+		Netbios
+
+config ELBOX_PROGS_PRIV_NETBIOS_ARIES
+	bool "netbios new version(see help)"
+	depends on ELBOX_PROGS_PRIV_NETBIOS
+	default n
+	help
+		The old netbios got setting from rgdb.But the seatlle db node are different the gw.wifi.So we pass the db by program argument
+
+config ELBOX_PROGS_PRIV_NETBIOS_LINK_LOCAL_IP
+	bool "Link local IP"
+	depends on ELBOX_PROGS_PRIV_NETBIOS
+	default n
+	help
+		This function can support fixed IP and link local IP(169.254.x.x) for cloud management
+
+config ELBOX_PROGS_PRIV_NETBIOS_MULTI_NAME
+	bool "netbios support multi-name"
+	depends on ELBOX_PROGS_PRIV_NETBIOS
+	default n
+	help
+		This function can support multi-name

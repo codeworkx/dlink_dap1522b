@@ -1,0 +1,161 @@
+
+## ======== Modify auth_algs support==========
+## bit 0 = Open System Authentication
+## bit 1 = Shared Key Authentication (requires WEP)
+## bit 0 + bit 1 = Auto WEP mode
+## bit 2 = WEP + 802.1x
+## bit 3 = No Privacy
+auth_algs=8
+
+#country_code=US
+#ieee80211d=1
+#ieee80211h=1
+#hw_mode=g
+#channel=7
+#beacon_int=100
+#rts_threshold=2347
+#fragm_threshold=2346
+#send_probe_response
+#supported_rates=10 20 55 110 60 90 120 180 240 360 480 540
+#basic_rates=10 20 55 110
+#bridge_packets=1
+#passive_scan_interval=60
+#passive_scan_listen=10000
+#passive_scan_mode=1
+#ap_table_max_size=255
+#ap_table_expiration_time=3600
+interface=wlan0
+#bridge=br0
+#driver=realtek
+debug=4
+logger_syslog_level=2
+logger_stdout_level=2
+logger_syslog=-1
+logger_stdout=-1
+dump_file=/tmp/hostapd.dump
+#ignore_file_errors=
+ssid=RTK_HAPD_TestAP
+max_num_sta=32
+macaddr_acl=0
+#accept_mac_file=/etc/hostapd.accept
+#deny_mac_file=/etc/hostapd.deny
+#ap_max_inactivity=300
+#assoc_ap_addr=
+#wep_key_len_broadcast=5
+#wep_key_len_unicast=5
+#wep_rekey_period=300
+#wep_default_key=0
+#wep_key0="56789"
+#wep_key1="vwxyz"
+#wep_key2=0102030405060708090a0b0c0d
+#wep_key3=".2.4.6.8.0.23"
+wpa=0
+#wpa_group_rekey=86400
+#wpa_strict_rekey=1
+#wpa_gmk_rekey=86400
+#wpa_passphrase=1234567890
+#wpa_psk=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+#wpa_psk_file=/etc/hostapd.wpa_psk
+#wpa_key_mgmt=WPA-PSK
+#wpa_pairwise=TKIP CCMP
+#ieee8021x=1
+eapol_version=1
+#eap_authenticator=
+eap_server=0
+#eap_user_file=/tmp/hostapd.eap_user
+#ca_cert=/etc/hostapd.ca.pem
+#server_cert=/etc/hostapd.server.pem
+#private_key=/etc/hostapd.server.prv
+#private_key_passwd=secret passphrase
+#check_crl=1
+#eap_sim_db=unix:/tmp/hlr_auc_gw.sock
+#eap_message=hello
+#eap_reauth_period=3600
+eapol_key_index_workaround=0
+#iapp_interface=br0
+own_ip_addr=192.168.1.254
+#nas_identifier=ap.example.com
+#auth_server_addr=192.168.1.188
+#auth_server_port=1812
+#auth_server_shared_secret=realtek_123
+#acct_server_addr=192.168.1.188
+#acct_server_port=1813
+#acct_server_shared_secret=realtek_123
+#radius_retry_primary_interval=600
+#radius_acct_interim_interval=600
+#radius_server_clients=/etc/hostapd.radius_clients
+#radius_server_auth_port=1812
+#radius_server_ipv6=1
+#rsn_preauth=1
+#rsn_preauth_interfaces=
+#peerkey=1
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=0
+#test_socket=
+#use_pae_group_addr=1
+dtim_period=2
+ignore_broadcast_ssid=0
+#dynamic_vlan=0
+#vlan_file=/etc/hostapd.vlan
+#vlan_tagged_interface=eht0
+wme_enabled=1
+#bssid=
+#ieee80211w=0
+#wps_disable=0
+#wps_upnp_disable=1
+#wps_version=10
+#wps_uuid=6304125310192006122800D24C819881
+#wps_auth_type_flags=22
+#wps_encr_type_flags=C
+#wps_conn_type_flags=1
+#wps_config_methods=86
+#wps_configured=1
+#wps_rf_bands=1
+#wps_default_pin=33543208
+#wps_default_timeout=
+#wps_atheros_extension=1
+#wps_manufacturer=Realtek Semiconductor Corp.
+#wps_model_name=RTL8xxx
+#wps_model_number=EV-2009-02-06
+#wps_serial_number=123456789012347
+#wps_friendly_name=Realtek HAPD AP
+#wps_manufacturer_url=
+#wps_model_description=
+#wps_model_url=
+#wps_upc_string=
+#wps_dev_category=6
+#wps_dev_sub_category=1
+#wps_dev_oui=0050F204
+#wps_dev_name=Realtek Wireless AP......
+#wps_os_version=80000000
+#wps_upnp_root_dir=
+#wps_upnp_desc_url=
+#nfc=0
+#wps_helper=
+
+## ======== REALTEK WDS SUPPORT ==========
+## 0 = disable wds ; 1 = enable wds
+wds_enable=1
+
+##Config WDS AP List
+wds_num=2
+wds_mac1=00:e0:4c:81:96:39
+wds_mac2=11:22:33:44:55:66
+#wds_mac3=
+#wds_mac4=
+
+##choose one of these encryptions for wds_enc_type
+## 0 = No privacy
+## 1 = WEP 40
+## 2 = WPA TKIP
+## 4 = WPA2 CCMP
+## 5 = WEP 104
+wds_enc_type=4
+
+##wds_ssid & wds_passphrase are used for generating 
+##wpa key if encryption type is TKIP or CCMP
+wds_ssid=REALTEK
+wds_passphrase=123456789012345
+
+##Set WEP key if encryption type is WEP 40 or WEP 104
+wds_wepkey="12345"

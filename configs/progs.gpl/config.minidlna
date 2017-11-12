@@ -1,0 +1,22 @@
+#
+# minidlna
+#
+
+config ELBOX_MINIDLNA
+	bool "MiniDLNA"
+	default n
+
+choice
+	prompt "Selection Version"
+	depends ELBOX_MINIDLNA
+	default ELBOX_PROGS_GPL_MINIDLNA_1019
+	help
+		Select the minidlna version for the platform
+
+	config ELBOX_PROGS_GPL_MINIDLNA_1019
+		bool "MiniDLNA 1.0.19"
+		help
+			MiniDLNA.
+
+endchoice
+

@@ -1,0 +1,45 @@
+###########################################################
+#
+# gw.wifi
+#
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends ELBOX_TEMPLATE_AP_GW_WIFI
+	string
+	default "ap_gw.wifi"
+
+
+choice
+	prompt "Brand Selection"
+	depends ELBOX_TEMPLATE_AP_GW_WIFI
+	default ELBOX_BRAND_AP_DLINK_BUSINESS_AP_GW
+	help
+		Select the GUI for this product
+
+
+	#######################################################
+	# D-Link Business series
+	config ELBOX_BRAND_AP_DLINK_BUSINESS_AP_GW
+		bool "dkbs"
+		help
+			D-Link Business DAP series.
+endchoice
+
+###########################################################
+#
+# ELBOX_BRAND_NAME definition
+#
+###########################################################
+config ELBOX_BRAND_NAME
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS_AP_GW
+	string
+	default "dkbs"
+
+###########################################################
+#
+# Model configuration
+#
+###########################################################
+source configs/templates/ap_gw.wifi/config.dkbs.in
+

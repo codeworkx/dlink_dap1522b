@@ -1,0 +1,76 @@
+###########################################################
+#
+# airlink
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	default ELBOX_MODEL_AR430W
+
+	config ELBOX_MODEL_AR430W
+		bool "ar430w"
+	config ELBOX_MODEL_AR335W
+		bool "ar335w"
+	config ELBOX_MODEL_AR680W
+		bool "ar680w"
+	config ELBOX_MODEL_AR670W
+		bool "ar670w"
+	config ELBOX_MODEL_AR676W
+		bool "ar676w"
+	config ELBOX_MODEL_AR690W
+		bool "ar690w"
+	config ELBOX_MODEL_AR725W
+		bool "ar725w"
+
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+###########################################################
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	depends ELBOX_MODEL_AR430W
+	string
+	default "ar430w"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	depends ELBOX_MODEL_AR335W
+	string
+	default "ar335w"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	depends ELBOX_MODEL_AR680W
+	string
+	default "ar680w"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	depends ELBOX_MODEL_AR670W
+	string
+	default "ar670w"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	depends ELBOX_MODEL_AR676W
+	string
+	default "ar676w"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	depends ELBOX_MODEL_AR690W
+	string
+	default "ar690w"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	depends ELBOX_MODEL_AR725W
+	string
+	default "ar725w"

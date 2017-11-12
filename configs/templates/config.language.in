@@ -1,0 +1,252 @@
+# Language selection
+
+comment "Language Configuration"
+
+menu "Language options"
+
+	config ELBOX_CREATE_LANGUAGE_PACK
+		bool "Create Language Pack"
+
+	comment "Languages"
+
+	config ELBOX_LANGUAGE_EN
+		bool "English - en"
+	config ELBOX_LANGUAGE_JA
+		bool "Japanese - ja" 
+	config ELBOX_LANGUAGE_DE
+		bool "German - de"
+	config ELBOX_LANGUAGE_ZH_TW
+		bool "Traditional Chinese - zhtw"
+	config ELBOX_LANGUAGE_ZH_CN
+		bool "Simplified Chinese - zhcn"
+	config ELBOX_LANGUAGE_FR
+		bool "French - fr"
+	config ELBOX_LANGUAGE_ES
+		bool "Spanish - es"
+	config ELBOX_LANGUAGE_IT
+		bool "Italian - it"
+	config ELBOX_LANGUAGE_NL
+		bool "Dutch - nl"
+	config ELBOX_LANGUAGE_PT
+		bool "Portuguese - pt"
+	config ELBOX_LANGUAGE_FI
+		bool "Finnish - fi"
+	config ELBOX_LANGUAGE_SV
+		bool "Swedish - sv"
+	config ELBOX_LANGUAGE_NO
+		bool "Norwegian - no"
+	config ELBOX_LANGUAGE_DA
+		bool "Danish - da"
+	config ELBOX_LANGUAGE_KO
+		bool "Korean - ko"
+	config ELBOX_LANGUAGE_PL
+		bool "Polish - pl"
+	config ELBOX_LANGUAGE_RU
+		bool "Russian - ru"
+	config ELBOX_LANGUAGE_HE
+		bool "Hebrew - he"
+	config ELBOX_LANGUAGE_HU
+		bool "Hungarian - hu"
+	config ELBOX_LANGUAGE_EL
+		bool "Greek - el"
+	config ELBOX_LANGUAGE_TR
+		bool "Turkish - tr"
+	config ELBOX_LANGUAGE_CS
+		bool "Czech - cs"
+	config ELBOX_LANGUAGE_TH
+		bool "Thai - th"
+	config ELBOX_LANGUAGE_AR
+		bool "Arabic - ar"
+	config ELBOX_LANGUAGE_IS
+		bool "Icelandic - is"
+
+	comment "Default Language"
+
+	choice
+		prompt "Default Language"
+		default ELBOX_DEFAULT_LANGUAGE_NONE
+		depends on !ELBOX_CREATE_LANGUAGE_PACK
+
+		config ELBOX_DEFAULT_LANGUAGE_NONE
+			bool "Using default selection (usually en)"
+		config ELBOX_DEFAULT_LANGUAGE_EN
+			bool "English - en"		if ELBOX_LANGUAGE_EN
+		config ELBOX_DEFAULT_LANGUAGE_JA
+			bool "Japanese - ja"	if ELBOX_LANGUAGE_JA
+		config ELBOX_DEFAULT_LANGUAGE_DE
+			bool "German - de"		if ELBOX_LANGUAGE_DE
+		config ELBOX_DEFAULT_LANGUAGE_ZH_TW
+			bool "Traditional Chinese - zhtw" if ELBOX_LANGUAGE_ZH_TW
+		config ELBOX_DEFAULT_LANGUAGE_ZH_CN
+			bool "Simplified Chinese - zhcn" if ELBOX_LANGUAGE_ZH_CN
+		config ELBOX_DEFAULT_LANGUAGE_FR
+			bool "French - fr"		if ELBOX_LANGUAGE_FR
+		config ELBOX_DEFAULT_LANGUAGE_ES
+			bool "Spanish - es"		if ELBOX_LANGUAGE_ES
+		config ELBOX_DEFAULT_LANGUAGE_IT
+			bool "Italian - it"		if ELBOX_LANGUAGE_IT
+		config ELBOX_DEFAULT_LANGUAGE_NL
+			bool "Dutch - nl"		if ELBOX_LANGUAGE_NL
+		config ELBOX_DEFAULT_LANGUAGE_PT
+			bool "Portuguese - pt"	if ELBOX_LANGUAGE_PT
+		config ELBOX_DEFAULT_LANGUAGE_FI
+			bool "Finnish - fi"		if ELBOX_LANGUAGE_FI
+		config ELBOX_DEFAULT_LANGUAGE_SV
+			bool "Swedish - sv"		if ELBOX_LANGUAGE_SV
+		config ELBOX_DEFAULT_LANGUAGE_NO
+			bool "Norwegian - no"	if ELBOX_LANGUAGE_NO
+		config ELBOX_DEFAULT_LANGUAGE_DA
+			bool "Danish - da"		if ELBOX_LANGUAGE_DA
+		config ELBOX_DEFAULT_LANGUAGE_KO
+			bool "Korean - ko"		if ELBOX_LANGUAGE_KO
+		config ELBOX_DEFAULT_LANGUAGE_PL
+			bool "Polish - pl"		if ELBOX_LANGUAGE_PL
+		config ELBOX_DEFAULT_LANGUAGE_RU
+			bool "Russian - ru"		if ELBOX_LANGUAGE_RU
+		config ELBOX_DEFAULT_LANGUAGE_HE
+			bool "Hebrew - he"		if ELBOX_LANGUAGE_HE
+		config ELBOX_DEFAULT_LANGUAGE_HU
+			bool "Hungarian - hu"	if ELBOX_LANGUAGE_HU
+		config ELBOX_DEFAULT_LANGUAGE_EL
+			bool "Greek - el"		if ELBOX_LANGUAGE_EL
+		config ELBOX_DEFAULT_LANGUAGE_TR
+			bool "Turkish - tr"		if ELBOX_LANGUAGE_TR
+		config ELBOX_DEFAULT_LANGUAGE_CS
+			bool "Czech - cs"		if ELBOX_LANGUAGE_CS
+		config ELBOX_DEFAULT_LANGUAGE_TH
+			bool "Thai - th"		if ELBOX_LANGUAGE_TH
+		config ELBOX_DEFAULT_LANGUAGE_AR
+			bool "Arabic - ar"		if ELBOX_LANGUAGE_AR
+		config ELBOX_DEFAULT_LANGUAGE_IS
+			bool "Icelandic - is"	if ELBOX_LANGUAGE_IS
+	endchoice
+
+endmenu
+
+if !ELBOX_CREATE_LANGUAGE_PACK
+if ELBOX_DEFAULT_LANGUAGE_EN
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "en"
+endif
+if ELBOX_DEFAULT_LANGUAGE_JA
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "ja"
+endif
+if ELBOX_DEFAULT_LANGUAGE_DE
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "de"
+endif
+if ELBOX_DEFAULT_LANGUAGE_ZH_TW
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "zhtw"
+endif
+if ELBOX_DEFAULT_LANGUAGE_ZH_CN
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "zhcn"
+endif
+if ELBOX_DEFAULT_LANGUAGE_FR
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "fr"
+endif
+if ELBOX_DEFAULT_LANGUAGE_ES
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "es"
+endif
+if ELBOX_DEFAULT_LANGUAGE_IT
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "it"
+endif
+if ELBOX_DEFAULT_LANGUAGE_NL
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "nl"
+endif
+if ELBOX_DEFAULT_LANGUAGE_PT
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "pt"
+endif
+if ELBOX_DEFAULT_LANGUAGE_FI
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "fi"
+endif
+if ELBOX_DEFAULT_LANGUAGE_SV
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "sv"
+endif
+if ELBOX_DEFAULT_LANGUAGE_NO
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "no"
+endif
+if ELBOX_DEFAULT_LANGUAGE_DA
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "da"
+endif
+if ELBOX_DEFAULT_LANGUAGE_KO
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "ko"
+endif
+if ELBOX_DEFAULT_LANGUAGE_PL
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "pl"
+endif
+if ELBOX_DEFAULT_LANGUAGE_RU
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "ru"
+endif
+if ELBOX_DEFAULT_LANGUAGE_HE
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "he"
+endif
+if ELBOX_DEFAULT_LANGUAGE_HU
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "hu"
+endif
+if ELBOX_DEFAULT_LANGUAGE_EL
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "el"
+endif
+if ELBOX_DEFAULT_LANGUAGE_TR
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "tr"
+endif
+if ELBOX_DEFAULT_LANGUAGE_CS
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "cs"
+endif
+if ELBOX_DEFAULT_LANGUAGE_TH
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "th"
+endif
+if ELBOX_DEFAULT_LANGUAGE_AR
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "ar"
+endif
+if ELBOX_DEFAULT_LANGUAGE_IS
+config ELBOX_DEFAULT_LANGUAGE
+	string
+	default "is"
+endif
+endif

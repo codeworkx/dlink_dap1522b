@@ -1,0 +1,268 @@
+###########################################################
+#
+# dlwbr
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	default ELBOX_MODEL_DIR300
+
+	config ELBOX_MODEL_DIR300
+		bool "DIR-300"
+	config ELBOX_MODEL_DIR300B
+		bool "DIR-300B"		
+	config ELBOX_MODEL_DIR300B_ORANGE
+		bool "DIR-300bOrange"
+	config ELBOX_MODEL_DIR300B_SZT
+		bool "DIR-300bSZT"
+	config ELBOX_MODEL_DIR300SZT
+		bool "DIR-300szt"
+	config ELBOX_MODEL_DIR300ENTEL
+		bool "DIR-300Entel"
+	config ELBOX_MODEL_DIR300TELGUA
+		bool "DIR-300Telgua"
+	config ELBOX_MODEL_DIR320
+		bool "DIR-320"
+	config ELBOX_MODEL_DIR605
+		bool "DIR-605"
+	config ELBOX_MODEL_DIR605B
+		bool "DIR-605B"
+	config ELBOX_MODEL_DIR615
+		bool "DIR-615"
+	config ELBOX_MODEL_DIR320HP
+		bool "DIR-320HP"
+	config ELBOX_MODEL_DIR465
+		bool "DIR-465"
+	config ELBOX_MODEL_DIR815
+		bool "DIR-815"
+	config ELBOX_MODEL_DIR685
+		bool "DIR-685"
+	config ELBOX_MODEL_DIR605D1
+         bool "DIR-605D1"
+	config ELBOX_MODEL_DIR605D2
+         bool "DIR-605D2"
+	config ELBOX_MODEL_DIR600B
+		bool "DIR-600B"
+	config ELBOX_MODEL_DIR600B_Cablevision
+		bool "DIR-600bCablevision"
+	config ELBOX_MODEL_DIR600B_Axtel
+		bool "DIR-600bAxtel"
+	config ELBOX_MODEL_DIR600B_Megacable
+		bool "DIR-600bMegacable"
+	config ELBOX_MODEL_DIR600B_DNETelenet
+		bool "DIR-600bDNETelenet"
+	config ELBOX_MODEL_DIR600B_Indonesia
+		bool "DIR-600bIndonesia"
+	config ELBOX_MODEL_DIR615_DNETelenet
+		bool "DIR-615DNETelenet"
+	config ELBOX_MODEL_DIR617
+         bool "DIR-617"
+	config ELBOX_MODEL_DIR627
+         bool "DIR-627"
+	config ELBOX_MODEL_DIR600C
+		bool "DIR-600C"
+
+endchoice
+
+config ELBOX_MODEL_DIR300_ORANGE
+	depends ELBOX_MODEL_DIR300
+	default n
+	bool "Generate configuration file for DIR300 Orange"
+
+###########################################################
+#
+# Model name string definition
+#
+###########################################################
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR300
+	string
+	default "dir300"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR300B
+	string
+	default "dir300b"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR300SZT
+	string
+	default "dir300szt"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR300ENTEL
+	string
+	default "dir300Entel"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR300TELGUA
+	string
+	default "dir300Telgua"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR320
+	string
+	default "dir320"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR605
+	string
+	default "dir605"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR605B
+	string
+	default "dir605b"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR615
+	string
+	default "dir615"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR320HP
+	string
+	default "dir320hp"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR465
+	string
+	default "dir465"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR815
+	string
+	default "dir815"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR685
+	string
+	default "dir685"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR605D1
+	string
+	default "dir605d1"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR605D2
+	string
+	default "dir605d2"
+	
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR600B
+	string
+	default "dir600b"
+	
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR617
+	string
+	default "dir617"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR627
+	string
+	default "dir627"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR300B_ORANGE
+	string
+	default "dir300bOrange"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR600B_Cablevision
+	string
+	default "dir600bCablevision"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR600B_Axtel
+	string
+	default "dir600bAxtel"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR600B_Megacable
+	string
+	default "dir600bMegacable"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR600B_DNETelenet
+	string
+	default "dir600bDNETelenet"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR600B_Indonesia
+	string
+	default "dir600bIndonesia"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR615_DNETelenet
+	string
+	default "dir615DNETelenet"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR300B_SZT
+	string
+	default "dir300bSZT"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	depends ELBOX_MODEL_DIR600C
+	string
+	default "dir600c"
+

@@ -1,0 +1,21 @@
+#
+# usbmount
+#
+
+config ELBOX_PROGS_PRIV_USBMOUNT
+	bool "usbmount"
+	default n
+	help
+		USBMOUNT is an auto mount tool. It's triggered by udevd while usb storage is plug/unplug.
+
+config ELBOX_PROGS_PRIV_USBMOUNT_MNT_ROOT
+	depends ELBOX_PROGS_PRIV_USBMOUNT
+	string "The folder we want to mount on"
+	default "/var/tmp/storage"
+
+config ELBOX_PROGS_PRIV_USBMOUNT_HELPER
+	depends ELBOX_PROGS_PRIV_USBMOUNT
+	string "The helper script of USBMOUNT"
+	default "/etc/scripts/usbmount_helper.sh"
+	help
+		USBMOUNT helper script. USBMOUNT will execute this script to deliver the events.

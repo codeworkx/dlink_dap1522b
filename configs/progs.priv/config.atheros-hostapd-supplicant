@@ -1,0 +1,48 @@
+config PROGS_PRIV_ATHEROS_SECURITY_VERSION
+	bool "ATHEROS_SECURITY_VERSION"
+	default n
+	help
+		Atheros hostapd and supplicant version.
+
+config PROGS_PRIV_ATHEROS_SECURITY_ALPHA_WPS
+	depends PROGS_PRIV_ATHEROS_SECURITY_VERSION
+	bool "Alpha WPS support"
+	default n
+	help
+		If enable this, alpha wps will be supportted.
+
+menu "VERSION CONTROL"
+	depends PROGS_PRIV_ATHEROS_SECURITY_VERSION
+
+	config ELBOX_PROGS_PRIV_0_5_9
+			bool "0_5_9"
+			default n
+			help
+				hostapd and supplicant version are 0.5.9
+	config ELBOX_PROGS_PRIV_HOSTAPD_0_8_X
+			bool "0_8_X"
+			default n
+			help
+				hostapd and supplicant version are 0.8.x
+	config ELBOX_PROGS_ALPHA_BACKUP_RADIUS_SERVER
+		bool "Use the new backup radius server rule"
+		default n
+		help
+			The new rule is for radius packet and accounting packet.
+			If there is any radius packet waiting to send to radius server, we will try five times on the same radius.
+			If one radius server connection timeouts, we jump to another radius server, and continue connecting until
+			this new radius server connection timeouts.
+			The original rule counts per one packet not per overall packet in queue.
+	config ELBOX_PROGS_ALPHA_RADIUS_SERVER_ON_BOARD
+		bool "Enable Integrated EAP server"
+		default n
+		help
+			This functionality can be used both as a local authentication server for IEEE 802.1X/EAPOL
+			and as a RADIUS server for other devices.
+	config CONFIG_ALPHA_USE_SHARED_OPENSSL
+        bool "Use shared openssl library."
+        default n
+        help
+            If more daemons use openssl, we should use this option and select one openssl from progs.gpl.
+endmenu
+

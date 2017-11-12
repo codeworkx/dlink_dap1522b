@@ -1,0 +1,37 @@
+#
+# igmpproxy
+#
+
+config ELBOX_PROGS_PRIV_IGMPPROXY
+	bool "igmpproxy"
+	default n
+	help
+		IGMP proxy, created by alpha
+
+menu "igmpproxy configuration"
+	depends ELBOX_PROGS_PRIV_IGMPPROXY
+
+	config ELBOX_PROGS_PRIV_IGMPPROXY_IGMPV3
+		bool "Enable IGMPv3 support (experiment)"
+		default n
+		help
+			Support IGMPv3, but not quite up to standard(RFC 3376),
+			only receive/send IGMPv3 packet. Use IGMPv3 as default
+			also compatible with older version (IGMPv2).
+	
+	config ELBOX_PROGS_PRIV_IGMPSNOOPING_RT5350
+		bool "Enable IGMP Snooping support(Ralink RT5350)"
+		default n
+		help
+			This feature need Hardware support.We can support this 
+			for RT5350, RT3052 and RT3352. But we tested RT5350 only.
+
+	config ELBOX_PROGS_PRIV_IGMPPROXY_BUILDINHELPER
+		bool "Enable Build-in C language Helper"
+		default n
+		help
+			Use the helper implemented by C language instead of by
+			shell/php to accelerate helper execution.
+			
+		
+endmenu

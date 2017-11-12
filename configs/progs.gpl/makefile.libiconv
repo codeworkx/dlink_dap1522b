@@ -1,0 +1,1 @@
+gsubdir-$(ELBOX_PROGS_GPL_LIBICONV_1_9_1)    += libiconv

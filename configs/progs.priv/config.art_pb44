@@ -1,0 +1,12 @@
+config ELBOX_PROGS_PRIV_ART_PB44
+	bool "ART_PB44"
+	default n
+	help
+		PB44 Wireless ART from Atheros.
+
+config ELBOX_PROGS_PRIV_ART_PB44_MB91H
+	depends on ELBOX_PROGS_PRIV_ART_PB44
+	bool "v07b27 for mb91h module"
+	default n
+	help
+		In current, mb91h should use ARTv07b27, and v09b21 for mb92&mb82.

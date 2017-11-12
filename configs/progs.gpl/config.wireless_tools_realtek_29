@@ -1,0 +1,29 @@
+#
+# wireless_tools
+#
+
+config ELBOX_PROGS_GPL_WIRELESS_TOOLS_REALTEK_29
+	bool "Wireless Tools version 29 for Realtek"
+	default n
+	help
+		wireless tools version 29  for Realtek
+
+#menu "IWLIST configuration"
+#	depends ELBOX_PROGS_GPL_WIRELESS_TOOLS_REALTEK_25
+
+#	config CONFIG_IWLIST_APSCANN
+#		bool "Site Survey using iwlist"
+#		default n
+#		help
+#			Site Survey via iwlist scanning mechanism.
+#endmenu
+
+#menu "IWPRIV configuration"
+#	depends ELBOX_PROGS_GPL_WIRELESS_TOOLS_REALTEK_25
+
+#	config CONFIG_IWPRIV_APSCAN
+#		bool "Site Survey using iwpriv"
+#		default n
+#		help
+#			Use iwpriv to site survey result.
+#endmenu

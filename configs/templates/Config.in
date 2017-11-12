@@ -1,0 +1,115 @@
+# Config.in for templates
+
+###########################################################
+#
+# Template selection
+#
+###########################################################
+choice
+	prompt "Template Selection"
+	default ELBOX_TEMPLATE_GW_WIFI
+	help
+		Select the template for the platform.
+
+	config ELBOX_TEMPLATE_GW_WIFI
+		bool "Gateway with Wifi"
+		help
+			A internet gateway device with Wifi.
+
+	config ELBOX_TEMPLATE_GW_WIFI_2WAN
+		bool "Gateway with Wifi and 2 WAN ports"
+		help
+			A internet gateway device with Wifi and 2 WAN ports.
+
+	config ELBOX_TEMPLATE_AP_WIFI
+		bool "Access Point with Wi-Fi"
+		help
+			An Access Point device with Wi-Fi.
+        config ELBOX_TEMPLATE_AP_WIFI_CMCC
+                bool "Access Point with Wi-Fi for CMCC project"
+                help
+                        An Access Point device with Wi-Fi for CMCC(China Mobil Communication Company).
+	config ELBOX_TEMPLATE_AP_GW_WIFI
+		bool "Access Point with Gateway Wi-Fi"
+		help
+			An Access Point and Gateway device with Wi-Fi.
+
+	config ELBOX_TEMPLATE_AP_GAMING
+		bool "Access Point for gaming"
+		help
+			An Access Point device for gaming.
+
+	config ELBOX_TEMPLATE_AP_WIFI_CLOUD
+		bool "Access Point with Wi-Fi for Cloud Manager"
+		help
+			An Access Point device with Wi-Fi for Cloud Manager.
+
+	config ELBOX_TEMPLATE_AP_WIFI_WAN
+		bool "Access Point with Wi-Fi and WAN port"
+		help
+			An Access Point device with Wi-Fi and WAN port.
+
+	config ELBOX_TEMPLATE_TENDER
+		bool "template for tender based project"
+		help
+			A router template for tender based project.
+
+	config ELBOX_TEMPLATE_EMPTY
+		bool "A empty template for what ever you want to do."
+
+	config ELBOX_TEMPLATE_ARIES
+		bool "Aries - The 1st template of project Seattle"
+		help
+			Aries is the first template implementation of project Seattle.
+			There are several device implemented in Aries. 
+	config ELBOX_TEMPLATE_ARIES_BRIDGE_AP
+		bool "AriesAp - The template of project Seattle (PURE AP mode)"
+		help
+			ase on Seattle node formate to implement PURE AP functions.
+
+endchoice
+
+###########################################################
+# The templates of project seattle.
+config ELBOX_PROJECT_SEATTLE
+	depends ELBOX_TEMPLATE_ARIES
+	bool
+	default y
+
+###########################################################
+source configs/templates/config.empty.in
+source configs/templates/config.gw.wifi.in
+
+source configs/templates/config.gw.wifi.2wan.in
+source configs/templates/config.ap.wifi.in
+source configs/templates/config.ap.wifi.wan.in
+source configs/templates/config.ap.wifi.cloud.in
+source configs/templates/config.ap_gw.wifi.in
+source configs/templates/config.ap.gaming.in
+source configs/templates/config.aries.in
+source configs/templates/config.aries.ap.in
+source configs/templates/config.tender.in
+source configs/templates/config.ap.wifi.cmcc.in
+###########################################################
+comment "Features configuration"
+
+config LOGNUM
+	bool "LOGNUM - log number instead of readable string."
+	default n
+	help
+		This option is used to replace the 'LOGNUM' declaration in the old arck.mk.
+		We used to add '-DLOGNUM=1' to CFLAGS in arck.mk. This should be remove and
+		all the new model should use this option to declare 'LOGNUM'. This option
+		will define LOGNUM in elbox_config.h & .config files.
+
+config ELBOX_USE_IPV6
+	bool "Support IPv6"
+	default n
+
+###########################################################
+#
+# Language configuration
+#
+###########################################################
+source configs/templates/config.language.in
+

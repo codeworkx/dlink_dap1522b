@@ -1,0 +1,50 @@
+###########################################################
+# ap.wifi.wan
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends on ELBOX_TEMPLATE_AP_WIFI_WAN
+	string
+	default "ap.wifi.wan"
+
+choice
+	prompt "Brand Selection"
+	depends ELBOX_TEMPLATE_AP_WIFI_WAN
+	default ELBOX_BRAND_AP_GENERIC_WAN
+	help
+		Select the GUI for this product
+
+	#######################################################
+	# Generic
+	config ELBOX_BRAND_AP_GENERIC_WAN
+		bool "generic"
+		help
+			Generic Version.
+
+	#######################################################
+	# D-Link Business series
+	config ELBOX_BRAND_AP_DLINK_BUSINESS_WAN
+		bool "dkbs"
+		help
+			D-Link Business DAP series.
+
+endchoice
+
+###########################################################
+# ELBOX_BRAND_NAME definition
+###########################################################
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_AP_WIFI_WAN && ELBOX_BRAND_AP_GENERIC_WAN
+	string
+	default "generic"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_AP_WIFI_WAN && ELBOX_BRAND_AP_DLINK_BUSINESS_WAN
+	string
+	default "dkbs"
+
+###########################################################
+# Model configuration
+###########################################################
+source configs/templates/ap.wifi.wan/config.generic.in
+source configs/templates/ap.wifi.wan/config.dkbs.in

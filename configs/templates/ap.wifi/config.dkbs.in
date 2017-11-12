@@ -1,0 +1,139 @@
+###########################################################
+#
+# dlwbr
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	default ELBOX_MODEL_DAP2553
+
+	config ELBOX_MODEL_DAP2553
+		bool "DAP-2553"		
+
+	config ELBOX_MODEL_DAP2360
+		bool "DAP-2360"
+		
+	config ELBOX_MODEL_DWL2100
+		bool "DWL-2100"
+		
+	config ELBOX_MODEL_DAP2310
+		bool "DAP-2310"
+		
+	config ELBOX_MODEL_DWP2360
+		bool "DWP-2360"		
+				
+	config ELBOX_MODEL_DAP2590
+		bool "DAP-2590"		
+
+	config ELBOX_MODEL_DAP2690
+		bool "DAP-2690"
+
+	config ELBOX_MODEL_DAP2690B
+		bool "DAP-2690B"
+
+        config ELBOX_MODEL_DAP3690
+                bool "DAP-3690"
+
+	config ELBOX_MODEL_DAP1353B
+		bool "DAP-1353B"
+
+	config ELBOX_MODEL_DAP3520
+		bool "DAP-3520"
+
+	config ELBOX_MODEL_DAP3340
+		bool "DAP-3340"
+
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP2590
+	string
+	default "dap2590"	
+
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP2553
+	string
+	default "dap2553"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP2360
+	string  "Config Model Name"
+	default "dap2360"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DWL2100
+	string
+	default "dwl2100"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP2310
+	string
+	default "dap2310"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP3340
+	string
+	default "dap3340"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DWP2360
+	string
+	default "dwp2360"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP2690
+	string
+	default "dap2690"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP2690B
+	string
+	default "dap2690b"
+config ELBOX_MODEL_NAME
+        depends ELBOX_TEMPLATE_AP_WIFI
+        depends ELBOX_BRAND_AP_DLINK_BUSINESS
+        depends ELBOX_MODEL_DAP3690
+        string
+        default "dap3690"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP1353B
+	string
+	default "dap1353b"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS
+	depends ELBOX_MODEL_DAP3520
+	string
+	default "dap3520"
+
+

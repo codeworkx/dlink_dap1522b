@@ -1,0 +1,378 @@
+###########################################################
+#
+# Aries template.
+#
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	string
+	default "aries"
+
+
+menu "Aries Configuration"
+	depends ELBOX_TEMPLATE_ARIES
+
+	comment "HTTP/CGI kits"
+	config ELBOX_ARIES_SESSION_BASE
+		string "Base path for session data"
+		default "/runtime/session"
+		help
+			Specify the base path of XML for session data.
+		
+	comment "Features"
+	choice
+		prompt "Feature set"
+		default ELBOX_ARIES_FEATURE_ROUTER_GATEWAY
+		help
+			Select the feature set.
+
+		config ELBOX_ARIES_FEATURE_ROUTER_GATEWAY
+			bool "Router/Gateway implementation"
+			help
+				The default implementation, the super set of Aries.
+
+		config ELBOX_ARIES_FEATURE_BRIDGE_AP
+			bool "Bridge(AP/AP client) implementation"
+			help
+				The subset of bridge implementation.
+
+	endchoice
+
+	config ELBOX_ARIES_USE_DANIELS_CONE_NAT
+		bool "Use Daniel's cone NAT"
+		default n
+		depends ELBOX_ARIES_FEATURE_ROUTER_GATEWAY
+		help
+			The new cone NAT implementation created by Daniel You.
+			It is used to replace STUN module in progs.priv.
+
+	config ELBOX_ARIES_USE_UDEV
+		bool "Use udev"
+		default n
+		help
+			Select Y if you want to use udev for dynamic device management.
+
+	config ELBOX_ARIES_USE_UDEV_USB3G_SUPPORT
+		bool "Use udev USB 3G support"
+		default n
+		depends ELBOX_ARIES_USE_UDEV
+		help
+			Select Y if you want to support USB 3G adapter.
+
+	config ELBOX_ARIES_USE_UDEV_USB_STORAGE_SUPPORT
+		bool "Use usbmount for USB storage"
+		default n
+		depends ELBOX_ARIES_USE_UDEV
+		help
+			Select Y if you want to use usbmount to mount USB storage.
+			This feature require usbmount in progs.priv.
+	
+	config ELBOX_ARIES_USE_BACKUP_CONNECTION
+		bool "Backup wan port"
+		default n
+		help
+			Network traffic will switch to backup wan port when original wan fails.
+
+	config ELBOX_TEMPLATE_ARIES_NET_SNMP_5_5
+		bool "net-snmp-5.5"
+		default n
+		help
+			net-snmp-5.5 version for seattle
+
+	config ELBOX_TEMPLATE_ARIES_PHPCONTROL
+		bool "php control for user interface with seattle"
+		default n
+		help
+			Select if you cli and snmp want support seattle
+
+	config ELBOX_TEMPLATE_ARIES_ADVANCED_LAYOUT
+		bool "Advanced layout support"
+		default n
+		help
+			This feature is used for advanced VLAN layout configuration.
+			It is a experimental feature and available in Bravo.
+
+	config ELBOX_TEMPLATE_ARIES_NEW_WIFI_UID
+		bool "Use new style Wi-Fi UID"
+		default n
+		help
+			This option is to select the implementation of the UID of
+			the Wi-Fi physical interface. The old style is WLAN-# for
+			all the Wi-Fi interfaces. The new style has BAND24G-#.# for
+			2.4GHz radio, BAND5G-#.# for 5GHz radio. We also define
+			WDS24G-# and WDS5G-# for WDS interfaces.
+
+	config ELBOX_TEMPLATE_ARIES_UNIFIED_DNS
+		bool "Use the unified DNS services"
+		default n
+		help
+			The new unified DNS service will be used instead of DNS4.XXX and DNS6.XXX.
+			The new design should always used the unified DNS service, especially for
+			the dual stack router.
+
+	config ELBOX_TEMPLATE_ARIES_STORAGE_SUPPORT
+		bool "Storage (Disk) feature support"
+		default n
+		help
+			This option is to select the implementation for the storage features.
+
+	config ELBOX_TEMPLATE_ARIES_ENABLE_USER_MANAGEMENT
+		bool "Use the user management"
+		default n
+		help
+			Use the linux user management for the access control to the file system.
+			Enable this option will install the user management utilities. /etc/passwd,
+			/etc/group and /etc/shadow will be created for the user accounts.
+
+	config ELBOX_TEMPLATE_ARIES_MYDLINK_SUPPORT
+		bool "Support D-Link's MyDlink feature(Cloud Router)"
+		default n
+		help
+			Select this option to install mydlink engine provided by D-Link and related
+			components developed by Alpha.
+	config ELBOX_PROGS_PRIV_MYDLINK_DIR
+		depends ELBOX_TEMPLATE_ARIES_MYDLINK_SUPPORT
+		string "choose the direcory at prog.priv/mydlink/xxxxxx "
+		default "mydlinktest"
+		help
+			base on your toolchain and cpu to select correct directory in progs.priv/mydlink
+			
+	config ELBOX_PROGS_PRIV_MYDLINK_MTDBLOCK
+		depends ELBOX_TEMPLATE_ARIES_MYDLINK_SUPPORT
+		string "mydlink store in mtdblock"
+		default "/dev/mtdblock/8"
+		help
+			define the mydlink binary soter in mtdblock dev path.we can update mydlink file only.
+
+endmenu
+
+###########################################################
+#
+# Supported brand in Aries.
+#
+###########################################################
+choice
+	prompt "Supported brand of Aries"
+	depends ELBOX_TEMPLATE_ARIES
+	default ELBOX_BRAND_ARIES_ALPHA
+	help
+		Select the GUI for this product
+
+	#######################################################
+	# Generic/Alpha/Non-brand
+	config ELBOX_BRAND_ARIES_ALPHA
+		bool "Alpha"
+		help
+			Generic Version.
+
+	config ELBOX_BRAND_ARIES_ALPHAAC
+		bool "Alpha AP Converter"
+		help
+			Generic Version for AP converter (AP client).
+
+	config ELBOX_BRAND_ARIES_BRAVO
+		bool "Bravo"
+		help
+			The 2nd generic version.
+
+	#######################################################
+	# D-Link WBR series
+	config ELBOX_BRAND_ARIES_DLOB
+		bool "D-Link DLOB series (Orange & Black)"
+		help
+			D-Link DIR-XXX Orange and Black series.
+
+	#######################################################
+	# D-Link WBR series fallowing DIR655 series UI,following DLINK PP HANS require.
+	config ELBOX_BRAND_ARIES_DLOB_HANS
+		bool "D-Link DLOB series(like DIR655/855) (Orange & Black)"
+		help
+			D-Link DIR-XXX Orange and Black series.
+
+	
+	#######################################################
+	# D-Link Business series
+	config ELBOX_BRAND_ARIES_DKBS
+		bool "D-Link business access point series"
+		help
+			D-Link business series.
+
+	######################################################
+	# I-O DATA Wireless Broadband Router
+	config ELBOX_BRAND_ARIES_IOWBR
+		bool "I-O DATA Wireless Broadband Router"
+		help
+			I-O DATA Wireless Broadband Router.
+
+	######################################################
+	# I-O DATA Wireless Access Point
+	config ELBOX_BRAND_ARIES_IOWAP
+		bool "I-O DATA Wireless Access Point"
+		help
+			I-O DATA Wireless Access Point.
+
+	#######################################################
+	# TFNET(TaiFeng Network) series
+	config ELBOX_BRAND_ARIES_TFNET
+		bool "Taifeng Network"
+		help
+			TaiFeng Network Wireless 3G Router.
+
+	#########################################################
+	# Haier series
+	config ELBOX_BRAND_ARIES_HAIER
+		bool "Haier"
+		help
+			Haier Wireless 3G Router.
+
+	#########################################################
+	# Buffalo WHR (Wireless Home Router)
+	config ELBOX_BRAND_ARIES_BFLWHR
+		bool "Buffalo Wireless Home Router (WHR)"
+		help
+			Buffalo Wireless Home Router
+
+	#########################################################
+	# KEEBOX(TRENDnet) series
+	config ELBOX_BRAND_ARIES_KEEBOX
+		bool "KEEBOX Wireless Router"
+		help
+			KEEBOX Wireless Router.
+	##########################################################
+	#PCI series
+	config ELBOX_BRAND_ARIES_PCI
+		bool "PCI Wireless Router"
+		help
+			PCI Wireless Router.
+
+	#######################################################
+	# Bestbuy
+	config ELBOX_BRAND_ARIES_BESTBUY
+		bool "Bestbuy"
+		help
+			Bestbuy Version.
+	#######################################################
+	# Samsung
+	config ELBOX_BRAND_ARIES_SAMSUNG
+		bool "Samsung"
+		help
+			Samsung Version.
+	#######################################################			
+	# ets
+	config ELBOX_BRAND_ARIES_ETS
+		bool "ets"
+		help
+			Ets Version.
+	#######################################################			
+			
+
+endchoice
+
+###########################################################
+#
+# ELBOX_BRAND_NAME definition
+#
+###########################################################
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_ALPHA
+	string
+	default "alpha"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_ALPHAAC
+	string
+	default "alphaac"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_BRAVO
+	string
+	default "bravo"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_DLOB
+	string
+	default "dlob"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_DLOB_HANS
+	string
+	default "dlob.hans"
+
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_DKBS
+	string
+	default "dkbs"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_IOWBR
+	string
+	default "iowbr"
+
+config ELBOX_BRAND_NAME
+    depends on ELBOX_BRAND_ARIES_IOWAP
+    string
+    default "iowap"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_TFNET
+	string
+	default "tfnet"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_HAIER
+	string
+	default "haier"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_BFLWHR
+	string
+	default "bflwhr"
+
+config ELBOX_BRAND_NAME
+        depends on ELBOX_BRAND_ARIES_KEEBOX
+        string
+        default "keebox"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_PCI
+	string
+	default "pci"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_BESTBUY
+	string
+	default "bestbuy"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_SAMSUNG
+	string
+	default "samsung"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIES_ETS
+	string
+	default "ets"
+
+###########################################################
+#
+# Model configuration
+#
+###########################################################
+source configs/templates/aries/config.alpha.in
+source configs/templates/aries/config.alphaac.in
+source configs/templates/aries/config.bravo.in
+source configs/templates/aries/config.dlob.in
+source configs/templates/aries/config.dlob.hans.in
+source configs/templates/aries/config.dkbs.in
+source configs/templates/aries/config.iowbr.in
+source configs/templates/aries/config.iowap.in
+source configs/templates/aries/config.tfnet.in
+source configs/templates/aries/config.haier.in
+source configs/templates/aries/config.bflwhr.in
+source configs/templates/aries/config.keebox.in
+source configs/templates/aries/config.pci.in
+source configs/templates/aries/config.bestbuy.in
+source configs/templates/aries/config.samsung.in
+source configs/templates/aries/config.ets.in

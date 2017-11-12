@@ -1,0 +1,21 @@
+
+choice
+       prompt "Flash Type"
+       default MTD_NOR_RALINK
+
+config MTD_NOR_RALINK
+       bool "NOR"
+       depends on  !RALINK_RT3352 && !RALINK_RT5350
+
+config MTD_SPI_RALINK
+       bool "SPI"
+       depends on  !RALINK_RT2880
+
+config MTD_NAND_RALINK
+       bool "NAND"
+       depends on  !RALINK_RT3352 && !RALINK_RT2880 && !RALINK_RT5350
+
+config MTD_ANY_RALINK
+       bool "ANY (NOR/SPI/NAND)"
+
+endchoice

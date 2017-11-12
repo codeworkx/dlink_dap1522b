@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<SiGnAtUrE>
+	<runtime>
+		<device>
+			<wlandriver>AP:RT3662 v2.4.3.4-20110317-SA-Beta, STA:RT3662 v2.3.3.3</wlandriver>
+			<modelname>DAP-1522</modelname>
+			<producturl>http://www.dlink.com.tw</producturl>
+			<description>D-Link Xtreme N Dual Band Wireless AP/Bridge</description>
+		</device>
+	</runtime>
+</SiGnAtUrE>

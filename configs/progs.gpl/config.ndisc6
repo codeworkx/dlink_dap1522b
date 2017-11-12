@@ -1,0 +1,9 @@
+#
+# ndisc6
+#
+
+config ELBOX_PROGS_GPL_NDISC6_0_9_9
+	bool "Linux IPv6 Router Solicitation (ndisc6) v0.9.9"
+	default n
+	help
+		Linux IPv6 Router Solicitation (ndisc6)	

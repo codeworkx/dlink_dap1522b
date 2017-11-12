@@ -1,0 +1,4 @@
+# quagga
+
+gsubdir-$(ELBOX_PROGS_GPL_QUAGGA_0_99_17)	+= quagga-0.99.17
+

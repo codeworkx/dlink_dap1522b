@@ -1,0 +1,28 @@
+#
+# Neap Server of Aries
+#
+
+config ELBOX_PROGS_PRIV_NEAPS_ARIES 
+	bool "Neap Server of Aries"
+	default n
+
+menu "Neap Server Class Configuration of Aries"
+	depends ELBOX_PROGS_PRIV_NEAPS_ARIES
+	config CONFIG_NEAPS_ARIES_INTERNET
+		bool "wireless"
+		default n
+		help
+			The internet function.
+
+	config CONFIG_NEAPS_ARIES_WIRELESS
+		bool "wireless"
+		default n
+		help
+			The wirelsee function.
+
+	config CONFIG_NEAPS_ARIES_RESIDENTIAL_GATEWAY 
+		bool "residential gateway"
+		default n
+		help
+			The residential gateway function.
+endmenu

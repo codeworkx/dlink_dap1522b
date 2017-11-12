@@ -1,0 +1,126 @@
+#
+# ralink driver
+#
+
+config ELBOX_PROGS_PRIV_RALINK_DRIVER
+	bool "Ralink Wireless Driver"
+	default n
+
+menu "Select Driver"
+	depends ELBOX_PROGS_PRIV_RALINK_DRIVER
+
+
+	config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA
+		bool "3883_3663_smart_antenna"
+		default n
+		help
+			Ralink wireless driver for RT3662 supoort smart antenna
+
+		menu "Select AP/STA driver"
+		depends ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA
+		config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_AP
+			bool "BUILD AP DRIVER"
+			help
+				Ralink wireless AP driver for RT3662 
+		config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_AP_CONFIG_FILE
+			depends ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_AP
+			string "config file for the Kbuild"
+			default "config.alpha.mk"
+			help
+				The config file for this driver(AP)
+
+		config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_AP_SW_PORT_BASE_QOS
+			depends ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_AP
+			bool "Switch Port Base QoS"
+			default n
+			help
+				WMM QoS base on switch port priority.
+		
+		
+		
+		config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_STA
+			bool "BUILD STA DRIVER"
+			help
+				Ralink wireless STA driver for RT3662
+		
+		config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_STA_CONFIG_FILE
+			depends ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_STA
+			string "config file for the Kbuild"
+			default "config.alpha.sta.mk"
+			help
+				The config file for this driver(STATION)
+				
+		config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_STA_DHCP_UDPCHECKSUM_REBUILD
+			depends ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA_STA
+			bool "DHCP's UDP Header Checksum Re-Build For MAT Table"
+			default n
+			help
+				DHCP's UDP Header Checksum Re-Build For MAT Table, Replace The Method of Replacing It As Zero.
+
+		endmenu	
+	
+	config ELBOX_PROGS_PRIV_WLAN_W_PARTITION
+		bool "WLAN_WIRELESS_PARTITION"
+		default n
+		help
+			This feature can include the Wlan Wireless Partition System .
+
+
+	config ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_2_5_0_4
+		bool "3352_wifi_driver_2_5_0_4"
+		default n
+		help
+			Ralink wireless driver for RT3352
+
+		menu "Select AP/STA driver"
+		depends ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_2_5_0_4
+		
+		config ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_AP_2_5_0_4
+			bool "BUILD AP DRIVER"
+			default n
+			help
+				Ralink wireless AP driver for RT3352 
+				
+		config ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_AP_CONFIG_FILE_2_5_0_4
+			depends ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_AP_2_5_0_4
+			string "config file for the Kbuild"
+			default "config.alpha.mk"
+			help
+				The config file for this driver(AP)
+
+		config ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_STA_2_5_0_4
+			bool "BUILD STA DRIVER"
+			default n
+			help
+				Ralink wireless STA driver for RT3352
+		
+		config ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_STA_CONFIG_FILE_2_5_0_4
+			depends ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_STA_2_5_0_4
+			string "config file for the Kbuild"
+			default "config.alpha.sta.mk"
+			help
+				The config file for this driver(STATION)
+
+		endmenu	
+
+
+	config ELBOX_PROGS_PRIV_RALINK_RT3572_AP_DRIVER_2_5_0_2
+		bool "3572_ap_driver_2_5_0_2"
+		default n
+		help
+			Ralink wireless driver(version 2.5.0.2) for RT3572
+				
+	config ELBOX_PROGS_PRIV_RALINK_RT3572_AP_DRIVER_CONFIG_FILE_2_5_0_2
+		depends ELBOX_PROGS_PRIV_RALINK_RT3572_AP_DRIVER_2_5_0_2
+		string "config file for the Kbuild"
+		default "config.alpha.mk"
+		help
+			The config file for this driver(AP)
+
+	config ELBOX_PROGS_PRIV_RALINK_RT5592_V2700
+		bool "5592_V_2700"
+		default n
+		help
+			 Ralink wireless driver(version 2700) for RT5592
+endmenu
+

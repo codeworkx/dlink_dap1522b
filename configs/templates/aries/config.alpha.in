@@ -1,0 +1,77 @@
+#
+# Generic model
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_ALPHA
+	default ELBOX_MODEL_ARIES_RG4200
+
+	config ELBOX_MODEL_ARIES_RG1100
+		bool "RG1100"
+	config ELBOX_MODEL_ARIES_RG3100
+		bool "RG3100"
+	config ELBOX_MODEL_ARIES_RG4100
+		bool "RG4100"
+	config ELBOX_MODEL_ARIES_RG4200
+		bool "RG4200"
+	config ELBOX_MODEL_ARIES_RG6200
+		bool "RG6200"
+	config ELBOX_MODEL_ARIES_3GROUTER
+		bool "3grouter"
+    config ELBOX_MODEL_ARIES_NAS
+        bool "nas"
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_ALPHA
+	depends ELBOX_MODEL_ARIES_RG1100
+	string
+	default "rg1100"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_ALPHA
+     depends ELBOX_MODEL_ARIES_RG3100
+     string
+     default "rg3100"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_ALPHA
+	depends ELBOX_MODEL_ARIES_RG4100
+	string
+	default "rg4100"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_ALPHA
+	depends ELBOX_MODEL_ARIES_RG4200
+	string
+	default "rg4200"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_ALPHA
+	depends ELBOX_MODEL_ARIES_RG6200
+	string
+	default "rg6200"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_ALPHA
+	depends ELBOX_MODEL_ARIES_3GROUTER
+	string
+	default "3grouter"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_ALPHA
+	depends ELBOX_MODEL_ARIES_NAS
+	string
+	default "nas"

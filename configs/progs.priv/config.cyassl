@@ -1,0 +1,40 @@
+#
+# cyassl
+#
+
+config ELBOX_PROGS_PRIV_CYASSL
+	bool "CyaSSL Library"
+	default n
+
+choice
+	prompt "cyassl library Selection"
+	depends ELBOX_PROGS_PRIV_CYASSL
+	default ELBOX_PROGS_PRIV_CYASSL_RC3B_1_0_0
+	help
+		cyassl library Selection
+
+	config ELBOX_PROGS_PRIV_CYASSL_RC3B_1_0_0
+		select ELBOX_PROGS_GPL_CYASSL
+		bool "cyassl-rc3b-1.0.0"
+		help
+			Using cyassl-rc3b-1.0.0
+	
+endchoice
+
+
+menu "CyaSSL configuration"
+	depends ELBOX_PROGS_PRIV_CYASSL
+	config ELBOX_PROGS_PRIV_CYASSL_BIG_ENDIAN
+		bool "Generate Big Endian Code"
+		default n
+		help
+			This is used by the program of SSL for telling the endian.
+endmenu
+
+
+config ELBOX_PROGS_PRIV_CYASSL_COMPILE_PATH
+	depends ELBOX_PROGS_PRIV_CYASSL
+	string
+	default cyassl/cyassl-rc3b-1.0.0	if ELBOX_PROGS_PRIV_CYASSL_RC3B_1_0_0
+	help
+		"To compile cyassl/cyassl-rc3b-1.0.0, it reference the Makefile in /cyassl folder"

@@ -1,0 +1,64 @@
+#
+# xmldb
+#
+
+config ELBOX_PROGS_PRIV_RALINK_RT3883_3662
+	bool "RALINK 3883 or 3662 wireless"
+	default n
+
+menu "Select version"
+	depends ELBOX_PROGS_PRIV_RALINK_RT3883_3662
+	
+
+	#
+	# Ralink wireless for EWC(RT2860)
+	#
+	config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_v2_4_xx_20100212
+		bool "rt2860v2_wifi24_all_dpa_20100212.tar.bz2"
+		help
+			Ralink wireless driver for RT3662, version 2.4.x.x
+	
+	config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_v2_wifi2412_beta_all_dpa
+		bool "rt2860v2_wifi2412_beta_all_dpa.tar.bz2"
+		help
+			Ralink wireless driver for RT3662, support Samsung AutoProvision
+
+	config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_v2_wifi2420
+		bool "rt2860v2_wifi2420_all_dpa_20100506.tar.bz2"
+		help
+			Ralink's 2420  wireless driver for RT3883 	
+	choice
+    	prompt "Select support function"
+		depends ELBOX_PROGS_PRIV_RALINK_RT3883_3662_v2_wifi2412_beta_all_dpa
+		default  ELBOX_PROGS_PRIV_RALINK_RT3883_3662_v2_wifi2412_beta_all_dpa_normal
+		help
+			Select if you want to support Samsung AutoProvision or not
+	
+		config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_v2_wifi2412_beta_all_dpa_normal
+			bool "Not support Samsung Autoprovision"
+			help
+				Ralink wireless driver for RT3662 without Samsung AutoProvision
+
+		config ELBOX_PROGS_PRIV_RALINK_RT3883_3662_v2_wifi2412_beta_all_dpa_samsung
+			bool "Support Autoprovision"
+			help
+				Ralink wireless driver for RT3662, support Samsung AutoProvision
+		
+	endchoice			
+	choice
+				prompt "Select wireless chip"
+				default ELBOX_PROGS_PRIV_RALINK_RT3662
+				help	
+					Select wireless chip
+				config ELBOX_PROGS_PRIV_RALINK_RT3662
+					bool "support 3662"
+					help
+						Used RT3662
+				config ELBOX_PROGS_PRIV_RALINK_RT3883
+					bool "support 3883"
+					help
+						Used RT3883
+	endchoice
+
+endmenu
+

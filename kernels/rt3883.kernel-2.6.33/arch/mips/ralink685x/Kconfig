@@ -1,0 +1,31 @@
+if RALINK_RT6855A
+
+choice
+        prompt "Soc Hardware Type"
+	default RT6855A_ASIC
+
+config  RT6855A_FPGA 
+	bool "RT6855A/RT6856A-FPGA"
+
+config  RT6855A_ASIC 
+	bool "RT6855A/RT6856A-ASIC"
+
+endchoice
+
+endif
+
+config  KERNEL_NVRAM
+	bool 'Kernel NVRAM' 
+	default n
+
+choice
+	prompt "PCIe Setting"
+	default RT6855A_PCIE_PORT0_ENABLE
+
+config  RT6855A_PCIE_PORT0_ENABLE
+        bool "Port0 ENABLE Port1 DISABLE(RT6855)"
+
+config  RT6855A_PCIE_PORT01_ENABLE
+        bool "Port0&1 ENABLE(RT6856)"
+endchoice
+

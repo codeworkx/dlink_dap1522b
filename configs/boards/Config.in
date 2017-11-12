@@ -1,0 +1,677 @@
+#
+# Config.in for boards
+#
+
+choice
+	prompt "Board/Hardware Selection"
+	default ELBOX_BOARD_DEFAULT
+	help
+		Select the H/W platform.
+
+	config ELBOX_BOARD_DEFAULT
+		bool "default"
+		help
+			A dummy platform, DO NOT choice me !!!
+
+	###################################################################################################
+	# comment "WiMAX router"
+	###################################################################################################
+	# WMX-RG01E: WiMAX 802.16e Router with VoIP, Realtek 8651B-VD + Sequans MAX/BB SQN1130 + Maxin RF
+	config ELBOX_BOARD_WMXRG01E
+		bool "WMX-RG01E"
+		help
+			WiMAX 802.16e Router with VoIP, Realtek 8651B-VD + Sequans MAX/BB SQN1130 + Maxin RF
+	# WMX-RG02E: realtek 8651c+voip
+	config ELBOX_BOARD_WMXRG02E
+		bool "WMX-RG02E"
+		help
+			realtek 8651c+voip + Wimax + wireless router
+	# WMX-CO021: WiMax 
+	config ELBOX_BOARD_WMXCO02E
+		bool "WMX-CO02E"
+		help
+			Wimax project 
+
+	###################################################################################################
+	# comment "11g Access Point"
+	###################################################################################################
+	# WAP-G14: AR2316
+	config ELBOX_BOARD_WAPG14
+		bool "WAP-G14"
+		help
+			Atheros ar2316 wireless Access Point.
+	# WAP-G18: AR2317
+	config ELBOX_BOARD_WAPG18
+		bool "WAP-G18"
+		help
+			Atheros ar2317 wireless Access Point.  
+
+	###################################################################################################
+	# comment "11n Access Point"
+	###################################################################################################
+	# WAP-N03: IXP42X
+	config ELBOX_BOARD_WAPN03
+		bool "WAP-N03"
+		help
+			Xscale IXP420 wireless Access Point.
+			With 1 mini-PCI wireless module(Atheros ar5416).
+	# WAP-N06: Ralink RT2880
+	config ELBOX_BOARD_WAPN06
+		bool "WAP-N06"
+		help
+			Ralink RT2880 wireless Access Point.
+			Ralink RT2880 (SOC) Access Point.
+    # WAP-N07: Ralink RT3052
+    config ELBOX_BOARD_WAPN07
+        bool "WAP-N07"
+        help
+            Ralink RT3052 wireless access point.
+            4M flash, 32M RAM, 11n router with 10/100 fast ethernet ports.
+	# WAP-N09: Ralink RT3050
+	config ELBOX_BOARD_WAPN09
+		bool "WAP-N09"
+		help
+			Ralink RT2880 wireless Access Point.
+			Ralink RT2880 (SOC) Access Point.
+	
+	# WAP-N10: Ralink RT3662
+	config ELBOX_BOARD_WAPN10
+		bool "WAP-N10"
+		help
+			Ralink RT3662 dual band wireless Access Point.
+			Ralink RT3662 dual band (SOC) Access Point.
+
+	# AP-1525: Ralink RT3662
+	config ELBOX_BOARD_AP1525
+		bool "AP-1525"
+		help
+			Ralink RT3662 dual band wireless Access Point with smart antenna.
+			Ralink RT3662 dual band (SOC) Access Point.
+
+	###################################################################################################
+	# comment "11n Dual Band Wireless Access Point"
+	###################################################################################################
+	# WAP-ND01: Ralink RT2880
+	config ELBOX_BOARD_WAPND01
+		bool "WAP-ND01"
+		help
+			Ralink RT2880 wireless Access Point.
+			Ralink RT2880 (SOC) Access Point.			
+	# WAP-ND02: Cavium CN30XX
+	config ELBOX_BOARD_WAPND02
+		bool "WAP-ND02"
+		help
+			Cavium CN30XX wireless Access Point.
+	# WAP-ND03
+	config ELBOX_BOARD_WAPND03
+		bool "WAP-ND03"
+		help
+			Atheros AP83 wireless Access Point.
+			Atheros AR9132 (SOC) Access Point.
+	# WAP-ND03CM
+	config ELBOX_BOARD_WAPND03CM
+		bool "WAP-ND03CM"
+		help
+			Atheros AP83 wireless Access Point for Cloud Manager.
+			Atheros AR9132 (SOC) Access Point.
+	# WAP-N08
+	config ELBOX_BOARD_WAPN08
+		bool "WAP-N08"
+		help
+			Atheros AP101 wireless Access Point.
+			Atheros AR7240 (SOC) Access Point.
+	# WAP-N11
+	config ELBOX_BOARD_WAPN11
+		bool "WAP-N11"
+		help
+			Atheros AP101 wireless Access Point.
+			Atheros AR7240 (SOC) Access Point.
+			separate from WAPN08 for CUC(China Unicom Company) case.
+	# WAP-N11H
+	config ELBOX_BOARD_WAPN11H
+		bool "WAP-N11H"
+		help
+			Atheros AP101 wireless Access Point.
+			Atheros AR7240 (SOC) Access Point.
+			separate from WAPN08 for CUC(China Unicom Company) case.
+			hardware:high power
+	# WAP-N18
+	config ELBOX_BOARD_WAPN18
+		bool "WAP-N18"
+		help
+			Atheros AP101 wireless Access Point.
+			Atheros AR7240 (SOC) Access Point.
+			separate from WAPN08H for high power.
+			hardware:high power
+	# WAP-N12
+	config ELBOX_BOARD_WAPN12
+		bool "WAP-N12"
+		help
+			Atheros AP101 wireless Access Point.
+			Atheros AR7240 (SOC) Access Point.
+	# WAP-ND04
+	config ELBOX_BOARD_WAPND04
+		bool "WAP-ND04"
+		help
+			Atheros AP83 wireless Access Point.
+			Atheros AR9132 (SOC) Access Point.
+	# WAP-ND04CM
+	config ELBOX_BOARD_WAPND04CM
+		bool "WAP-ND04CM"
+		help
+			Atheros AP83 wireless Access Point for Cloud Manager.
+			Atheros AR9132 (SOC) Access Point.			
+	# WAP-ND06: Cavium CN50XX
+	config ELBOX_BOARD_WAPND06
+		bool "WAP-ND06"
+		help
+			Cavium CN50XX wireless Access Point.
+	# WAP-ND09: Cavium CN50XX
+	config ELBOX_BOARD_WAPND09
+		bool "WAP-ND09"
+		help
+			Cavium CN50XX wireless Access Point.
+			
+	# WAP-ND14: Broadcom 5357
+	config ELBOX_BOARD_WAPND14
+		bool "WAP-ND14"
+		help
+		Broadcom 5357
+		Wireless 11n Dual band converter(AP client) with 10/100/1000M giga ethernet ports.
+	
+	# WAP-ND15: Ralink RT3662 + RTL8367RB
+	config ELBOX_BOARD_WAPND15
+		bool "WAP-ND15"
+		help
+			Ralink RT3662 dual band wireless Access Point.
+			Ralink RT3662 dual band (SOC) Access Point.
+
+	# WAP-ND16: Atheros DB120
+	config ELBOX_BOARD_WAPND16
+ 		bool "WAP-ND16"
+ 		help
+  			Atheros DB120 wireless Access Point.
+  			Atheros AR9344 (SOC) Access Point.
+  			RAM 128M FLASH 32M
+			
+	# WAP-ND17: Atheros DB12x
+	config ELBOX_BOARD_WAPND17
+ 		bool "WAP-ND17"
+ 		help
+  			Atheros DB12x wireless Access Point.
+  			Atheros AR9344 (SOC) + AR9382 dual band concurrent Access Point.
+  			RAM 128M FLASH 16M
+
+	###################################################################################################
+	# comment "wired router"
+	###################################################################################################
+	# RG-12: RT3052 + IC PLUS 175D 
+	config ELBOX_BOARD_RG12
+		bool "RG-12"
+		help
+			Ralink RT3052 1WAN+8LAN wired router.
+			4M flash, 16M RAM,  wired router with 10/100 fast ethernet ports.
+
+	###################################################################################################
+	# comment "11g wireless router"
+	###################################################################################################
+	# WRG-G14: RTL8186
+	config ELBOX_BOARD_WRGG14
+		bool "WRG-G14"
+		help
+			Realtek rtl8186 4-port wireless router.
+	# WRG-G14C: RTL8186 for Corega
+	config ELBOX_BOARD_WRGG14C
+		bool "WRG-G14C"
+		help
+			Realtek rtl8186 4-port wireless router.
+			With JumpStart button/LED
+	# WRG-G15C: AR2316 for Corega
+	config ELBOX_BOARD_WRGG15C
+		bool "WRG-G15C"
+		help
+			Atheros ar2316 4-port wireless router.
+			With JumpStart button/LED
+	# WRG-G16: AR2316
+	config ELBOX_BOARD_WRGG16
+		bool "WRG-G16"
+		help
+			Atheros ar2316 4-port wireless router.
+	# WRG-G19: AR2317
+	config ELBOX_BOARD_WRGG19
+		bool "WRG-G19"
+		help
+			Atheros ar2317 4-port wireless router.
+	# WRG-G19 rev 0Cx
+	config ELBOX_BOARD_WRGG19_C
+		bool "WRG-G19 Rev 0C1"
+		help
+			Atheros ar2317 4-port wireless router.
+			With WSC buttom and led.
+	# WRG-G19 rev 0Cx
+	config ELBOX_BOARD_WRGG19_C_ART
+		bool "WRG-G19 Rev 0C1 (for ART image)"
+		help
+			Atheros ar2317 4-port wireless router.
+			With WSC buttom and led.
+			Special board config for ART image.
+	# WRG-G19 rev 0Cx with HOTSPOT (CHILLISPOT)
+	config ELBOX_BOARD_WRGG19_C_HSPOT
+		bool "WRG-G19 Rev 0C1 with chilliSpot"
+		help
+			Atheros ar2317 4-port wireless router.
+			With WSC buttom and led.
+	# WRG-G22 : Realtek 8651C 4 port wireless (11g) router
+	config ELBOX_BOARD_WRGG22
+		bool "WRG-G22"
+		help
+			Realtek 8651c + rtl8185 4-port wireless router.
+	# WRG-G23: AR2318
+	config ELBOX_BOARD_WRGG23
+		bool "WRG-G23"
+		help
+			Atheros ar2318 4-port wireless router.
+	# WRG-G24: AR2315 (ART)
+	config ELBOX_BOARD_WRGG24
+		bool "WRG-G24 (SONOS)"
+		help
+			ART implementation for AR2315 on SONOS' board. This board is simplified for
+			ART implementation only, not for router application.
+	# WRG-G27: BCM5354
+	config ELBOX_BOARD_WRGG27
+		bool "WRG-G27"
+		help
+			Broadcom 5354 4-port wireless router.
+	# WRG-G27HP: BCM5354
+	config ELBOX_BOARD_WRGG27HP
+		bool "WRG-G27HP"
+		help
+			Broadcom 5354 4-port wireless router with home portal.
+	# WRG-G27-3G: BCM5354
+	config ELBOX_BOARD_WRGG27_3G
+		bool "WRG-G27-3G"
+		help
+			Broadcom 5354 4-port wireless router with third generation CDMA USB WAN support.
+	# RT3052: Ralink RT3052 Demo board
+	config ELBOX_BOARD_RT3052
+		bool "RT3052"
+		help
+			Ralink RT3052 demo board. 4M flash (MX29LV320), 32MB SDRAM, 10/100 fast ethernet ports.
+
+	###################################################################################################
+	# comment "11n wireless router"
+	###################################################################################################
+	# WRG-N06 : EWC for Generic
+	config ELBOX_BOARD_WRGN06
+		bool "WRG-N06"
+		help
+			Xscale IXP420 4-port wireless router.
+			With 1 mini-PCI 11n wireless module.
+	# WRG-N06C : EWC for Corega
+	config ELBOX_BOARD_WRGN06C
+		bool "WRG-N06C"
+		help
+			Xscale IXP420 4-port wireless router.
+			With 1 mini-PCI 11n wireless module.
+	# WRG-N09 : EWC for Generic
+	config ELBOX_BOARD_WRGN09
+		bool "WRG-N09"
+		help
+			5vt 5VT1310 4-port wireless router.
+			With 1 mini-PCI(Atheros AR5416)11n wireless module.
+	# WRG-N10 : EWC for Generic
+	config ELBOX_BOARD_WRGN10
+		bool "WRG-N10"
+		help
+			5vt 5VT1308 4-port wireless router.
+			With 1 mini-PCI(Ralink RT2860)11n wireless module.
+	# WRG-N13: AR7100
+	config ELBOX_BOARD_WRGN13
+		bool "WRG-N13"
+		help
+			Atheros AR7100 wireless Access Point.
+			With 1 mini-PCI wireless module(Atheros ar5416).
+	# WRG-N15 : EWC for Generic
+	config ELBOX_BOARD_WRGN15
+		bool "WRG-N15"
+		help
+			5vt 5VT1310 + Ralink RT2860 11n 4-port wireless router.
+    # WRG-N15C : EWC for Corega
+    config ELBOX_BOARD_WRGN15C
+        bool "WRG-N15C"
+        help
+            5vt 5VT1310 + Ralink RT2860 11n 4-port wireless router.
+	# WRG-N16: Ralink RT2880 + IP175C
+	config ELBOX_BOARD_WRGN16
+		bool "WRG-N16"
+		help
+			Ralink RT2880 + IP175C.
+			Wireless 11n router with 10/100 fast ethernet ports.
+	# WRG-N16A: Ralink RT2880 + IP175C
+	config ELBOX_BOARD_WRGN16A
+		bool "WRG-N16A"
+		help
+			Ralink RT2880 + IP175C.
+			Wireless 11n router with 10/100 fast ethernet ports.
+	# WRG-N18: Ralink RT2880 + IP175C + 256Mbits(32MB RAM)
+	config ELBOX_BOARD_WRGN18
+		bool "WRG-N18"
+		help
+			Ralink RT2880 + IP175C + 256Mbits(32MB RAM).
+			Wireless 11n router with 10/100 fast ethernet ports.
+	# WRG-N18N: Ralink RT2880 + IP175C + 256Mbits(32MB RAM)
+	config ELBOX_BOARD_WRGN18N
+		bool "WRG-N18N"
+		help
+			Same as WRG-N18,only LED behavior is different.
+	# WRG-N18: For Seattle Project.
+	config ELBOX_BOARD_SWRGN18
+		bool "WRG-N18 of Project Seattle"
+		help
+			Same as WRG-N18, but for project seattle.
+	# WRG-N19: Ralink RT2880 + RTL8366SR + 32MB RAM
+	config ELBOX_BOARD_WRGN19
+		bool "WRG-N19"
+		help
+			Ralink RT2880 + RTL8366SR + 32MB RAM.
+			Wireless 11n router with 10/100/1000M fast ethernet ports.
+			This board support A band via MiniPCI.
+	# WRG-N20: Ralink RT2880 + RTL8366SR + 32MB RAM
+	config ELBOX_BOARD_WRGN20
+		bool "WRG-N20"
+		help
+			Ralink RT2880 + RTL8366SR + 32MB RAM.
+			Wireless 11n router with 10/100/1000M fast ethernet ports.
+	# WRG-N22: Ralink RT3052
+	config ELBOX_BOARD_WRGN22
+		bool "WRG-N22"
+		help
+			Ralink RT3052 wireless router.
+			4M flash, 32M RAM, 11n (2x2) router with 10/100 fast ethernet ports.
+	# WRG-N22S: Ralink RT3052
+	config ELBOX_BOARD_WRGN22S
+		bool "WRG-N22 for Samsung sample delivery only"
+		help
+			The H/W PCB is also using WRG-N22. It is created for Samsung sample delivery only.
+			Ralink RT3052 wireless router.
+			4M flash, 32M RAM, 11n (2x2) router with 10/100 fast ethernet ports.
+			The wireless driver supports Auto-Provision, and it is not Ralink's normal release.
+			The wireless driver is newer than 2.4.0.0, and I put it in boards/apps/.
+	# WRG-N23: Ralink RT3050
+	config ELBOX_BOARD_WRGN23
+		bool "WRG-N23"
+		help
+			Ralink RT3050 wireless router.
+			4M flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+	# WRG-N23I: Ralink RT3050
+	config ELBOX_BOARD_WRGN23I
+		bool "WRG-N23I"
+		help
+			Ralink RT3050 wireless router.
+			4M flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+	# WRG-N23TD: Ralink RT3050
+	config ELBOX_BOARD_WRGN23TD
+		bool "WRG-N23TD"
+		help
+			Ralink RT3050 3G wireless router.
+			4M flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+	# WRG-N23HA: Ralink RT3050
+	config ELBOX_BOARD_WRGN23HA
+		bool "WRG-N23HA"
+		help
+			Ralink RT3050 3G wireless router.
+			16M flash, 32m RAM, 1 USB port,11n (1x1) router with 10/100 fast ethernet ports.
+	# WRG-N27: Broadcom 4716
+	config ELBOX_BOARD_WRGN27
+		bool "WRGN27"
+		help
+			Broadcom 4716 4-port wireless router.
+	# WRG-N27U: Broadcom 4718
+	config ELBOX_BOARD_WRGN27U
+		bool "WRGN27U"
+		help
+			Broadcom 4718 4-port wireless router.
+			16M flash, 64m RAM, 1 USB port, 1 RS-485 Port, with 10/100 fast ethernet ports.
+	# WRG-N28: Ralink RT3050
+	config ELBOX_BOARD_WRGN28
+		bool "WRG-N28"
+		help
+			Ralink RT3050 3G wireless router.
+			4M flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+    # WRG-N45P: Realtek RTL8198
+	config ELBOX_BOARD_WRGN45P
+		bool "WRG-N45P"
+		help
+			Realtek RTL8198  wireless router.
+			16M flash, 128m RAM, 11n (2x2) router.
+
+	# WRG-N29: Broadcom 4716
+	config ELBOX_BOARD_WRGN29
+		bool "WRGN29"
+		help
+			Broadcom 4716 4-port wireless router.
+
+	# WRG-N34: Ralink RT3350
+	config ELBOX_BOARD_WRGN34
+		bool "WRG-N34"
+		help
+			Ralink RT3350 wireless router.
+			4M flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+
+#Cavium CNS-3420
+	 config ELBOX_BOARD_WRGN37
+		bool "WRG-N37"
+		help
+			Cavium CNS-3420 with atheros switch.
+			
+	# WRG-N38: Broadcom 5357
+	config ELBOX_BOARD_WRGN38
+		bool "WRG-N38"
+		help
+			Broadcom 5357 4-port wireless router.
+
+	# WRG-N39: Ralink 3662 + RTL8367RB
+	config ELBOX_BOARD_WRGN39
+		bool "WRG-N39"
+		help 
+			Ralink RT3883 + RTL8367
+			Wireless 11n 2.4G band router with 10/100/1000M giga ethernet ports.
+			Smart Antenna.
+
+	# WRG-N49: Ralink RT5350
+	config ELBOX_BOARD_WRGN49
+		bool "WRG-N49"
+		help
+			Ralink RT5350 wireless router.
+			4M SPI flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+
+	# WRG-N50: Atheros AP123
+	config ELBOX_BOARD_WRGN50
+ 		bool "WRG-N50"
+ 		help
+  			Atheros AP123 wireless router.
+  			Atheros AR9341 (SOC) wireless router.
+  			RAM 64M FLASH 4M			
+
+	# WRG-N51: Ralink RT5350
+	config ELBOX_BOARD_WRGN51
+		bool "WRG-N51"
+		help
+			Ralink RT5350 wireless router.
+			4M SPI flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+
+	# WRG-N59: Ralink RT5350
+	config ELBOX_BOARD_WRGN59
+		bool "WRG-N59"
+		help
+			Ralink RT5350 wireless router.
+			4M SPI flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+
+	# WRG-N62: Ralink RT5350
+	config ELBOX_BOARD_WRGN62
+		bool "WRG-N62"
+		help
+			Ralink RT5350 wireless router.
+			8M SPI flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+
+	###################################################################################################
+	# comment "11n Dual Band Wireless Router"
+	###################################################################################################
+	# WRG-ND02
+	config ELBOX_BOARD_WRGND02
+		bool "WRG-ND02 (Atheros ar7100)"
+		help
+			Atheros ar7100 dual band 11 a/b/n router ,wan vsc 8601 lan vsc 7395
+	# WRG-ND03: Ralink RT2880
+	config ELBOX_BOARD_WRGND03
+		bool "WRG-ND03"
+		help
+			Ralink RT2880 wireless Access Point.
+			Ralink RT2880 (SOC) Access Point.
+	# WRG-ND04: Ralink RT2880 + RTL8366SR + 32MB RAM
+	config ELBOX_BOARD_WRGND04
+		bool "WRG-ND04"
+		help
+			Ralink RT2880 + RTL8366SR + 32MB RAM.
+			Wireless 11n router with 10/100/1000M fast ethernet ports.
+			This board support A band via MiniPCI.
+	# WRG-ND06: Ralink RT3883 + RT3092 + RTL8367 
+	config ELBOX_BOARD_WRGND06
+		bool "WRG-ND06"
+		help
+			Ralink RT3883 + RT3092 + RTL8367
+			Wireless 11n Dual band router with 10/100/1000M giga ethernet ports.
+	# WRG-ND12: Ralink 3662 + RTL8367RB
+	config ELBOX_BOARD_WRGND12
+		bool "WRG-ND12"
+		help 
+			Ralink RT3352 + RT3572
+			Wireless 11n dual band (2.4G+5G) router with 10/100M ethernet ports.
+	config ELBOX_BOARD_WRGND21
+		bool "WRG-ND21"
+		help
+			Ralink Smart Antenna with giga ethernet ports.
+	# WRG-D07: Ralink RT3662 + RT3092 + RTL8367
+	config ELBOX_BOARD_WRGND07
+		bool "WRG-ND07"
+		help
+			Ralink RT3883 + RT3092 + RTL8367
+			Wireless 11n Dual band router with 10/100/1000M giga ethernet ports. (for Buffalo).
+    # WRG-N42P: Ralink RT3662 + RTL8367
+	config ELBOX_BOARD_WRGN42P
+		bool "WRG-N42P"
+		help
+			Ralink RT3883 + RTL8367
+			Wireless 11n 2.4G band router with 10/100/1000M giga ethernet ports.
+
+	#WRG-N42: Ralink RT3662 + RTL8367
+	config ELBOX_BOARD_WRGN42
+		bool "WRG-N42"
+		help
+			Ralink RT3883 + RTL8367
+			Wireless 11n 2.4G band router with 10/100/1000M giga ethernet ports for bravo.
+
+	# WRG-ND08: Ralink RT3883 + RT3092 + RTL8367 
+	config ELBOX_BOARD_WRGND08
+		bool "WRG-ND08"
+		help
+			Ralink RT3883 + RT3092 + RTL8367
+			Wireless 11n Dual band router with 10/100/1000M giga ethernet ports.
+
+	# WRG-ND09: Broadcom 5357
+	config ELBOX_BOARD_WRGND09
+		bool "WRG-ND09"
+		help
+			Broadcom 5357 
+			Wireless 11n Dual band router with 10/100/1000M giga ethernet ports.
+
+	# WRG-ND10: Ralink RT3883 + RT3092
+	config ELBOX_BOARD_WRGND10
+		bool "WRG-ND10"
+		help
+			Ralink RT3883 + RT3092 
+			Wireless 11n Dual band router with 10/100/1000M giga ethernet ports. (for SAMSUNG)
+
+	# IP8KEVAL: UBICOM IP8K evaluation board
+	config ELBOX_BOARD_IP8KEVAL
+		bool "IP8KEVAL"
+		help
+			UBICOM IP8K Evaluation Board.
+
+	# WRG-ND11
+	config ELBOX_BOARD_WRGND11
+		bool "WRG-ND11"
+		help
+			UBICOM IP8K
+
+	# WRG-ND14
+	config ELBOX_BOARD_WRGND14
+		bool "WRG-ND14"
+		help
+			UBICOM IP8K
+
+	###################################################################################################
+	# comment "11n Wireless Storage Router"
+	###################################################################################################
+	# WRG-NS01:
+	config ELBOX_BOARD_WRGNS01
+		bool "WRGNS01 for NAS router"
+		help
+			Storm 3516,rt2860 WIFI,NAS router
+	
+	###################################################################################################
+	# TD router
+	###################################################################################################
+	# WTD-RG01: Ralink RT3050 + 16M flash - PCM
+	config ELBOX_BOARD_WTDRG01
+		bool "WTD-RG01"
+		help
+			Ralink RT3050 3G wireless router.
+			16M flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+
+	# WTD-RV01: Ralink RT3050 + 16M flash - PCM
+	config ELBOX_BOARD_WTDRV01
+		bool "WTD-RV01"
+		help
+			Ralink RT3050 3G wireless router.
+			16M flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+		
+	###################################################################################################
+	# Others
+	###################################################################################################
+	# WTD-RV01: Ralink RT3050 + 4M flash - PCM
+	config ELBOX_BOARD_WHDRV01
+		bool "WHD-RV01"
+		help
+			Ralink RT3050 3G wireless router.
+			4M flash, 32m RAM, 11n (1x1) router with 10/100 fast ethernet ports.
+
+	# WRG-N33: Atheros AP99
+	config ELBOX_BOARD_WRGN33
+		bool "WRG-N33"
+		help
+			Atheros AP99 wireless router.
+			4M flash, 16M RAM, 11n (2x2) router with 10/100 fast ethernet ports.
+
+	# HPW310AV: Broadcom 5358
+	config ELBOX_BOARD_HPW310AV
+		bool "HPW310AV"
+		help
+			Broadcom 5358 plc wireless AP.
+	# HPW310AV: Broadcom 5358
+	config ELBOX_BOARD_HPW310AV_ATHEROS
+		bool "HPW310AV_ATH"
+		help
+			ar9341 plc wireless AP.
+	# WRGAC01: broadcom 4706 + bcm53125s(giga switch) + bcm4331 (2.4g) + bcm4360(5g)
+	config ELBOX_BOARD_WRGAC01
+		bool "WRGAC01"
+		help
+			broadcom 4706 + bcm53125s(giga switch) + bcm4331 (2.4g) + bcm4360(5g) wireless router
+endchoice
+
+#
+# ELBOX_BOARD_NAME/ELBOX_BSP_NAME definition
+#
+source configs/boards/boards.config
+source configs/boards/bsps.config

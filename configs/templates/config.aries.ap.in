@@ -1,0 +1,73 @@
+###########################################################
+#
+# Aries template.
+#
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends ELBOX_TEMPLATE_ARIES_BRIDGE_AP
+	string
+	default "aries.ap"
+
+
+menu "Aries Configuration"
+	depends ELBOX_TEMPLATE_ARIES_BRIDGE_AP
+
+	comment "HTTP/CGI kits"
+	config ELBOX_ARIES_SESSION_BASE
+		string "Base path for session data"
+		default "/runtime/session"
+		help
+			Specify the base path of XML for session data.
+	config ELBOX_ARIES_USE_UDEV
+		bool "Use udev"
+		default n
+		help
+			Select Y if you want to use udev for dynamic device management.
+			
+	config ELBOX_TEMPLATE_ARIES_ENABLE_USER_MANAGEMENT
+		bool "Use the user management"
+		default n
+		help
+			Use the linux user management for the access control to the file system.
+			Enable this option will install the user management utilities. /etc/passwd,
+			/etc/group and /etc/shadow will be created for the user accounts. 
+
+endmenu
+###########################################################
+#
+# Supported brand in Aries.
+#
+###########################################################
+choice
+	prompt "Supported brand of Aries AP"
+	depends ELBOX_TEMPLATE_ARIES_BRIDGE_AP
+	default ELBOX_BRAND_ARIESAP_DLOB
+	help
+		Select the GUI for this product
+
+	#######################################################
+	# D-Link WBR series
+	config ELBOX_BRAND_ARIESAP_DLOB
+		bool "D-Link DLOB series (Orange & Black)"
+		help
+			D-Link DIR-XXX Orange and Black series.
+endchoice
+
+###########################################################
+#
+# ELBOX_BRAND_NAME definition
+#
+###########################################################
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_BRAND_ARIESAP_DLOB
+	string
+	default "dlob"
+
+###########################################################
+#
+# Model configuration
+#
+###########################################################
+source configs/templates/aries.ap/config.dlob.in

@@ -1,0 +1,9 @@
+# xmldb
+
+#psubdir-$(ELBOX_PROGS_PRIV_RALINK_DRIVER)          += ralink_driver
+psubdir-$(ELBOX_PROGS_PRIV_RALINK_RT3883_3662_SMART_ANTENNA)          += ralink_driver/3662_smart_antenna
+psubdir-$(ELBOX_PROGS_PRIV_RALINK_RT3352_WIFI_DRIVER_2_5_0_4)          += ralink_driver/3352_wifi_driver_2.5.0.4
+psubdir-$(ELBOX_PROGS_PRIV_RALINK_RT3572_AP_DRIVER_2_5_0_2)          += ralink_driver/3572_ap_driver_2.5.0.2_rev2_dfs
+psubdir-$(ELBOX_PROGS_PRIV_RALINK_RT5592_V2700)			+= ralink_driver/RT5592_ap_v2700_Beta_dpa_20120410
+
+

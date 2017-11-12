@@ -1,0 +1,3 @@
+# ctorrent
+
+gsubdir-$(ELBOX_PROGS_GPL_CTORRENT) += ctorrent

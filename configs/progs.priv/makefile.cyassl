@@ -1,0 +1,3 @@
+# cyassl
+
+psubdir-$(ELBOX_PROGS_PRIV_CYASSL_RC3B_1_0_0)	+= $(shell echo $(ELBOX_PROGS_PRIV_CYASSL_COMPILE_PATH))

@@ -1,0 +1,3 @@
+# wlxmlpatchv2
+
+psubdir-$(ELBOX_PROGS_PRIV_UPDATESITESURVEY_BROADCOM)	+= updatesitesurvey

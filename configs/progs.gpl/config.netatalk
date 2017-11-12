@@ -1,0 +1,12 @@
+config ELBOX_PROGS_GPL_NETATALK
+    bool "NetaTalk"
+    depends on ELBOX_PROGS_GPL_BDB
+    default n 
+    help
+        Netatalk is a freely-available Open Source AFP fileserver. 
+        It also provides a kernel level implementation of the AppleTalk 
+        Protocol Suite. A *NIX/*BSD system running Netatalk is capable of 
+        serving many Macintosh clients simultaneously as an AppleShare file 
+        server (AFP), AppleTalk router, *NIX/*BSD print server, and for 
+        accessing AppleTalk printers via Printer Access Protocol (PAP). 
+        Included are a number of minor printing and debugging utilities.

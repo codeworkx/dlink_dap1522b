@@ -1,0 +1,17 @@
+# ctorrent
+
+config ELBOX_PROGS_GPL_CTORRENT
+	bool "ctorrent"
+	default n
+	help
+		ctorrent is a very tiny BT utility.
+		If you are interest in BT, some guy written detail tarce document, your can refer to below WEB page.
+		http://sites.google.com/site/yaoxuchen/Home/ctorrent
+
+config ELBOX_PROGS_GPL_CTORRENT_FFXIV_ONLY
+	bool "Only support FFXIV torrent"
+	depends ELBOX_PROGS_GPL_CTORRENT
+	default n
+	help
+		This will modify ctorrent to download FFXIV torrent only.
+

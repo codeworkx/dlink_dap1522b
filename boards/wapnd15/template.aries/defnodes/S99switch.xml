@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<SiGnAtUrE>
+	<runtime>
+		<device>
+			<rtlsts get="rtlioc status > /var/rtlstatus; cat /var/rtlstatus" />
+		</device>
+	</runtime>
+</SiGnAtUrE>
+

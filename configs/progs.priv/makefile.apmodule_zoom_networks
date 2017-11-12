@@ -1,0 +1,16 @@
+# rgbin
+
+ifeq ($(strip $(ELBOX_PROGS_PRIV_APMODULE_FOR_WINHAP)),y)
+        psubdir-y += apmodule
+else
+
+ifeq ($(strip $(ELBOX_PROGS_PRIV_APMODULE_V1)),y)
+	psubdir-y += apmodule
+endif
+ifeq ($(strip $(ELBOX_PROGS_PRIV_APMODULE_V2)),y)
+        psubdir-y += apmodule_v2
+endif
+ifeq ($(strip $(ELBOX_PROGS_PRIV_APMODULE_CMCC_CAPWAP)),y)
+        psubdir-y += apmodule_cmcc_capwap
+endif
+endif

@@ -1,0 +1,101 @@
+#
+# quagga
+#
+
+config ELBOX_PROGS_GPL_QUAGGA
+	bool "Quagga is a daemon suite for routing protocols."
+	default n
+	help
+		GNU Quagga is free software which manages TCP/IP based routing protocols. 
+
+config ELBOX_PROGS_GPL_QUAGGA_UNIFIED
+    depends ELBOX_PROGS_GPL_QUAGGA
+	bool "Unified dynamic routing"
+	default n
+	help
+		Unified the dynamic routing of IPv4 and IPv6.
+
+config ELBOX_PROGS_GPL_QUAGGA_SUPPORT_HELPER
+    depends ELBOX_PROGS_GPL_QUAGGA
+	bool "Enable helper"
+	default n
+	help
+
+config ELBOX_PROGS_GPL_QUAGGA_HELPER
+    depends ELBOX_PROGS_GPL_QUAGGA && ELBOX_PROGS_GPL_QUAGGA_SUPPORT_HELPER
+	   string "The helper script of dynamic route"
+		    default "/etc/scripts/route_dynamic_helper.sh"
+	          help
+	             Dynamic route helper script. The helper will process a php file,
+	             even store the routing rule to runtime nodes and add rule to dynamic routing table.
+
+config ELBOX_PROGS_GPL_QUAGGA_PRIVILEGE_HOOK
+    depends ELBOX_PROGS_GPL_QUAGGA
+	    bool "privilege hook"
+		    default y
+			    help 
+			      this use fork user right to pass privilege check.
+
+choice
+	prompt "Selection Version"
+	depends ELBOX_PROGS_GPL_QUAGGA
+	default ELBOX_PROGS_GPL_QUAGGA_0_99_17
+	help
+		Select the quagga version for the platform
+
+config ELBOX_PROGS_GPL_QUAGGA_0_99_17
+	bool "quagga 0.99.17"
+	help
+		GNU Quagga is free software which manages TCP/IP based routing protocols.
+		It supports BGP4, BGP4+, OSPFv2, OSPFv3, IS-IS, RIPv1, RIPv2, and RIPng 
+		as well as the IPv6 versions of these. 
+
+endchoice
+
+menu "Quagga configuration"
+	depends ELBOX_PROGS_GPL_QUAGGA
+
+	config ELBOX_PROGS_GPL_QUAGGA_ENABLE_BGPD
+		bool "Enable BGP"
+		default n
+		help
+			Enable BGP protocol.
+
+	config ELBOX_PROGS_GPL_QUAGGA_ENABLE_BGP_ANNOUNCE
+		bool "Enable BGP announce"
+		default n
+		help
+			Enable BGP announce.
+
+	config ELBOX_PROGS_GPL_QUAGGA_ENABLE_OSPFD
+		bool "Enable OSPFv2"
+		default n
+		help
+			Enable OSPFv2 protocol.
+
+	config ELBOX_PROGS_GPL_QUAGGA_ENABLE_OSPF_API
+		bool "Enable OSPF API"
+		default n
+		help
+			Enable OSPF API.
+
+	config ELBOX_PROGS_GPL_QUAGGA_ENABLE_OSPF6D
+		bool "Enable OSPFv3"
+		default n
+		help
+			Enable OSPFv3 protocol.
+
+	config ELBOX_PROGS_GPL_QUAGGA_ENABLE_RIPD
+    	bool "Eable RIP"
+        default n
+        help
+			Enable RIP protocol.
+
+	config ELBOX_PROGS_GPL_QUAGGA_ENABLE_RIPNGD
+    	bool "Enable RIPng"
+    	default y
+    	help
+			Enable RIPng protocol.	
+
+endmenu
+

@@ -1,0 +1,3 @@
+# ndisc6
+
+gsubdir-$(ELBOX_PROGS_GPL_NDISC6_0_9_9)	+= ndisc6-0.9.9

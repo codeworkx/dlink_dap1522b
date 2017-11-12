@@ -1,0 +1,636 @@
+#
+# 3G dongles
+#
+
+config CONFIG_RGBIN_USB3G_3GDONGLE
+	bool "3G dongles"
+	depends CONFIG_RGBIN_USB3G_KIT
+	default y
+
+menu "Select supported 3G devices"
+	depends CONFIG_RGBIN_USB3G_3GDONGLE
+
+	config CONFIG_RGBIN_USB3G_DEV_NB
+		bool "Non Brand"
+		default n
+		help
+			"Select the 3G devices supported by Non-brand models."
+
+	config CONFIG_RGBIN_USB3G_DEV_DL
+		bool "DL customer"
+		default n
+		help
+			"Select the 3G devices supported by DL series models."
+
+comment "D-link 3G dongles"
+
+	config CONFIG_3GDONGLE_GUANTA_GLEA
+		bool "GUANTA GLEA"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_GUANTA_GKEA
+		bool "GUANTA GKEA"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_QUALCOMM_Q110
+		bool "Qualcomm Q110"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_AC581_EVDO
+		bool "ZTE AC581(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MF192
+		bool "ZTE MF192(HSPA)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+		choice
+			prompt "Select different version for different area"
+			depends CONFIG_3GDONGLE_ZTE_MF192
+			default CONFIG_3GDONGLE_ZTE_MF192_UNLOCK
+
+			config CONFIG_3GDONGLE_ZTE_MF192_LOCK
+			bool "HSPA FW:MF192-T-1.0.0,locked version"
+#			help
+#				generic for canada/austria usb306,not support at&t lighting
+
+			config CONFIG_3GDONGLE_ZTE_MF192_UNLOCK
+			bool "HSPA FW:MF192-T-1.0.0,unlocked version"
+#			help
+
+		endchoice
+
+	config CONFIG_3GDONGLE_ZTE_MF628
+		bool "ZTE MF628"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MF210
+		bool "ZTE MF210"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MC2716
+		bool "ZTE MC2716"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MF637U_WCDMA
+		bool "ZTE MF637U(WCDMA),ZTE MF626(HSDPA),ZTE MF636,ZTE MF100"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MF622_CDMA
+		bool "ZTE MF622(CDMA)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MF668_WCDMA
+		bool "ZTE MF668(WCDMA)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_K3805Z_HSPA
+		bool "ZTE K-3805-Z(HSPA)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_NOVATEL_MC950D
+		bool "Novatel MC950D"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_AISATEL_EVDO
+		bool "AISATEL(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MF220_HSDPA
+		bool "ZTE MF220(HSDPA)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_NOKIA_CS10
+		bool "NOKIA CS-10"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_NOKIA_CS15
+		bool "NOKIA CS-15"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_NOKIA_CS18_HSDPA
+		bool "NOKIA CS-18(HSDPA)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+		choice
+			prompt "Select different version for different area"
+			depends CONFIG_3GDONGLE_NOKIA_CS18_HSDPA
+			default CONFIG_3GDONGLE_NOKIA_CS18_HSDPA_FORWW
+
+			config CONFIG_3GDONGLE_NOKIA_CS18_HSDPA_FORCA
+			bool "Canada"
+#			help
+#				generic for canada/austria usb306,not support at&t lighting
+
+			config CONFIG_3GDONGLE_NOKIA_CS18_HSDPA_FORWW
+			bool "WW"
+#			help
+
+		endchoice
+
+	config CONFIG_3GDONGLE_SONY_MD300
+		bool "Sony MD300"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_SONY_MD400G
+		bool "Sony MD400G"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_BELL_MC998D
+		bool "BELL MC998D"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+		choice
+			prompt "Select different version for different area"
+			depends CONFIG_3GDONGLE_BELL_MC998D
+			default CONFIG_3GDONGLE_BELL_MC998D_FORWW
+
+			config CONFIG_3GDONGLE_BELL_MC998D_FORUSA
+			bool "Usa"
+#			help
+#				generic for canada/austria usb306,not support at&t lighting
+
+			config CONFIG_3GDONGLE_BELL_MC998D_FORWW
+			bool "WW"
+#			help
+
+		endchoice
+
+	config CONFIG_3GDONGLE_ATT_MERCURY
+		bool "At&t usbconnect mercury"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_SIERRA_USB306
+		bool "Sierra USB306"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+		choice
+			prompt "Select different version for different area"
+			depends CONFIG_3GDONGLE_SIERRA_USB306
+			default CONFIG_3GDONGLE_SIERRA_USB306_FORWW
+
+			config CONFIG_3GDONGLE_SIERRA_USB306_FORUSA
+			bool "USA"
+			help
+				support USA at&t lighting,not for generic include canada and austria.
+
+			config CONFIG_3GDONGLE_SIERRA_USB306_FORCA
+			bool "Canada"
+#			help
+#				generic for canada/austria usb306,not support at&t lighting
+
+			config CONFIG_3GDONGLE_SIERRA_USB306_FORWW
+			bool "WW"
+#			help
+
+		endchoice
+
+	config CONFIG_3GDONGLE_SIERRA_TM597
+		bool "Sierra TM 597"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_VERIZON_UM175
+		bool "Verizon UM175"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_VERIZON_UMW190VM
+		bool "Verizon UMW190VM"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+		choice
+			prompt "Select different version for different area"
+			depends CONFIG_3GDONGLE_VERIZON_UMW190VM
+			default CONFIG_3GDONGLE_VERIZON_UMW190VM_FORWW
+
+			config CONFIG_3GDONGLE_VERIZON_UMW190VM_FORUSACA
+			bool "USA & Canada"
+			help
+				support USA at&t lighting,not for generic include canada and austria.
+
+			config CONFIG_3GDONGLE_VERIZON_UMW190VM_FORWW
+			bool "WW"
+#			help
+
+		endchoice
+
+	config CONFIG_3GDONGLE_VERIZON_USB760_EVDO
+		bool "Verizon usb760(EVDO),sprint usb760(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_SPRINT_USB598
+		bool "Sprint usb598"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_SPRINT_U300
+		bool "Sprint U300"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_SPRINT_U720
+		bool "Sprint U720"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_TMOBILE_UMG181
+		bool "T-mobile UMG181"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_TMOBILE_UMG1691
+		bool "T-mobile UMG1691"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E510
+		bool "Huawei E510"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_AWEI_E510
+		bool "Huawei E510"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_ALLTEL_UM150_EVDO
+		bool "alltel UM150(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_AXESS_MV242
+		bool "D-link AXESS.TEL MV242"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM155_WCDMA
+		bool "D-link DWM-155(WCDMA)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM158_OLD_WCDMA
+		bool "D-link DWM-158(old wcdma), DWM-156 A3(zte special)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+		choice
+			prompt "Select different version for different area"
+			depends CONFIG_3GDONGLE_DLINK_DWM158_OLD_WCDMA
+			default CONFIG_3GDONGLE_DLINK_DWM158_OLD_WCDMA_FORWW
+
+			config CONFIG_3GDONGLE_DLINK_DWM158_OLD_WCDMA_FORCA
+			bool "Canada"
+			help
+				support USA at&t lighting,not for generic include canada and austria.
+
+			config CONFIG_3GDONGLE_DLINK_DWM158_OLD_WCDMA_FORWW
+			bool "WW"
+#			help
+
+		endchoice
+
+	config CONFIG_3GDONGLE_DLINK_DWM158_B1
+		bool "D-link DWM-158 B1,DWM-152 A3,DWM-156 A3"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+		choice
+			prompt "Select different version for different area"
+			depends CONFIG_3GDONGLE_DLINK_DWM158_B1
+			default CONFIG_3GDONGLE_DLINK_DWM158_B1_FORWW
+
+			config CONFIG_3GDONGLE_DLINK_DWM158_B1_FORUSACA
+			bool "USA & Canada"
+			help
+				support USA at&t lighting,not for generic include canada and austria.
+
+			config CONFIG_3GDONGLE_DLINK_DWM158_B1_FORWW
+			bool "WW"
+#			help
+
+		endchoice
+
+	config CONFIG_3GDONGLE_DLINK_DWM163_EVDO
+		bool "D-link DWM-163(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM168_EVDO
+		bool "D-link DWM-168(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM163_NEW_EVDO
+		bool "D-link DWM-163(NEW EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM168_NEW_EVDO
+		bool "D-link DWM-168(NEW EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_DL
+		default y 
+
+	
+
+comment "Non-brand 3G dongles"
+
+	config CONFIG_3GDONGLE_DLINK_WM6691_HSPDA
+		bool "D-Link WM6691 HSPDA 3G card"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM151
+		bool "D-Link DWM-151"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM151_NEW
+		bool "D-Link DWM-151(new vid/pid)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM152
+		bool "D-Link DWM-152"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM156
+		bool "D-Link DWM-156"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM156_A2
+		bool "D-Link DWM-156 A2"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y
+
+	config CONFIG_3GDONGLE_DLINK_DWM156_A5
+		bool "D-Link DWM-156 A5"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM162_EVDO
+		bool "D-Link DWM-162(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM162_C1_EVDO
+		bool "D-Link DWM-162 C1(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM162U5_B1_EVDO
+		bool "D-Link DWM-162-U5 B1(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM162U5_EVDO
+		bool "D-Link DWM-162-U5(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_DLINK_DWM652
+		bool "D-Link DWM-652"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_BANDLUXE_C170_HSDPA
+		bool "BandLuxe C170 HSDPA USB Modem"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_BANDLUXE_C180_HSDPA
+		bool "BandLuxe C170 HSDPA USB Modem"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_MYLESS_733_EDGE
+		bool "MYLESS 733 Edge modem which shipped to HOJY"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E156
+		bool "Huawei E156,E160,E172,E220,E270,E510,E156B,E160G,E176,E180"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E156_NEW
+		bool "Huawei E156(NEW)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E173_HSPA
+		bool "Huawei E173(HSPA)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y
+
+	config CONFIG_3GDONGLE_HUAWEI_MOVISTAR_E173S_6
+                bool "HUAWEI Movistar E173S-6"
+                depends CONFIG_RGBIN_USB3G_DEV_NB
+                default y
+
+	config CONFIG_3GDONGLE_HUAWEI_E1756_OLD
+		bool "Huawei E1756(OLD)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E1756_NEW
+		bool "Huawei E1756(NEW)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_EC169
+		bool "Huawei EC169,EC1260,E161 HSDPA"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_EC1261_HSIA
+		bool "Huawei EC1261(HSIA)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_EC1260_HSD
+		bool "Huawei EC1260(HSD)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_K3765
+		bool "Huawei K3765"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_K4505
+		bool "Huawei K4505"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E630
+		bool "Huawei E630"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_NOVATEL_MC990D
+		bool "Novatel MC990D"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_CMOTECH_D50
+		bool "C-motech D-50 (aka CDU-680)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HOJY_TD688
+		bool "Hojy TD-HSPDA(TD-SCDMA), TD688 v2&v3"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_ZHANTANG_JJH168
+		bool "Zhantang JJH168,CG303,Datang Aircard901(TD-SCDMA)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y
+
+	config CONFIG_3GDONGLE_ZHANTANG_DTW802_TDSCDMA
+		bool "CG-Mobile DTW802(TD-SCDMA)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y
+
+	config CONFIG_3GDONGLE_SIMCOM_4220_TDSCDMA
+		bool "SIMCOM 4220(TD-SCDMA)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_SIMCOM_EM600_EVDO
+		bool "SIMCOM EM600(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_QISDA_H20
+		bool "Qisda H20"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_QISDA_H21
+		bool "Qisda H21"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_AC2726
+		bool "ZTE AC2726,ZTE AC2736,ZTE AC8710(EVDO),AC2766"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_AC560_EVDO
+		bool "ZTE AC560, ZTE AC580(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_K3765Z_EVDO
+		bool "ZTE K3765-Z(EVDO)"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E169U
+		bool "Huawei E169u,Huawei EC1260(NEW),Huawei EC1261(NEW),Huawei E1550,Huawei E1552"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E1820
+		bool "Huawei E1820,Huawei E182E"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E1831
+		bool "Huawei E1831"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E1750
+		bool "Huawei E1750"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_E17502
+		bool "Huawei E1750-2"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_HUAWEI_ET128
+		bool "Huawei ET128"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MU330
+		bool "ZTE MU330"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_ZTE_MU350
+		bool "ZTE MU350"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_QUALCOMM_Q101
+		bool "Qualcomm Q101"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_BAND_LUXE_M250
+		bool "Band Luxe M250"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_COS_U210
+		bool "Cos U210"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_SAMSUNG_SCHU209
+		bool "Samsung SCH-U209"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y 
+
+	config CONFIG_3GDONGLE_ALCATEL_X060A
+		bool "ALCATEL X060A"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y
+
+	config CONFIG_3GDONGLE_ZTE_MF190
+		bool "ZTE MF190"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y
+
+	config CONFIG_3GDONGLE_BANDLUXE_C339
+		bool "BandLuxe C339"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y
+
+	config CONFIG_3GDONGLE_NOKIA_21M_02
+		bool "Nokia 21M-02"
+		depends CONFIG_RGBIN_USB3G_DEV_NB
+		default y
+
+endmenu
+

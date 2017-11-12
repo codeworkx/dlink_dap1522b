@@ -1,0 +1,4 @@
+#cli
+
+psubdir-$(ELBOX_PROGS_PRIV_CLI_SEATTLE) += cli_aries
+

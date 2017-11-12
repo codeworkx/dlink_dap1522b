@@ -1,0 +1,23 @@
+#
+# alpha_xgi
+#
+
+config ELBOX_PROGS_PRIV_ALPHA_HOTPLUG
+	bool "AlphaNetwors hotplug for printer or usb drive."
+	default n
+
+config ELBOX_PROGS_PRIV_WCN_UFD
+	bool "Windows Connect Now - UFD(Usb Flash Disk)"
+	default n
+	
+menu "Select version"
+depends ELBOX_PROGS_PRIV_WCN_UFD
+#
+# WCN-UFD 2.0
+#
+	config ELBOX_PROGS_PRIV_WCN_UFD_v_2_0
+	bool "WCN-UFD 2.0"
+	help
+		Support WCN-UFD2.0, if you want to support WCN-UFD 2.0, please select this. Otherwise, we only support 1.0
+endmenu		
+

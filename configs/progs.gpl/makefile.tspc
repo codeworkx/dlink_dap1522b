@@ -1,0 +1,4 @@
+# tunnel broker with TSP client
+
+gsubdir-$(ELBOX_PROGS_GPL_TSPC_2_1_1)	+= tspc-2.1.1
+

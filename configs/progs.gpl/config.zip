@@ -1,0 +1,9 @@
+#
+# zip compress tool
+#
+
+config ELBOX_PROGS_GPL_ZIP
+	bool "zip compress tool"
+	default n
+	help
+		zip compress tool (needs libiconv)

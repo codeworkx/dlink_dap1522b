@@ -1,0 +1,3 @@
+# art
+
+psubdir-$(ELBOX_PROGS_PRIV_ART_AP101)	+= art_ap101

@@ -1,0 +1,17 @@
+# cat /var/topology.conf 
+# Auto generated topology file by hostapdcfg.php
+bridge br0
+{ 
+  interface wlan0
+} 
+radio 8192cd
+{ 
+	ap 
+	{
+		bss wlan0 
+			{
+				config /tmp/hostapd.test_conf
+			}
+	}
+}
+

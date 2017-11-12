@@ -1,0 +1,214 @@
+###########################################################
+#
+# D-Link DIR series
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	default ELBOX_MODEL_ARIES_DIR300B
+
+	config ELBOX_MODEL_ARIES_DIR110
+		bool "DIR-110"
+	config ELBOX_MODEL_ARIES_DIR300B
+		bool "DIR-300B"
+	config ELBOX_MODEL_ARIES_DIR300B5
+		bool "DIR-300B5"
+	config ELBOX_MODEL_ARIES_DIR300B5_ORANGE
+		bool "DIR-300B5_ORANGE"
+	config ELBOX_MODEL_ARIES_DIR320
+		bool "DIR-320"
+	config ELBOX_MODEL_ARIES_DIR605
+		bool "DIR-605"
+	config ELBOX_MODEL_ARIES_DIR605D2
+		bool "DIR-605D2"
+	config ELBOX_MODEL_ARIES_DIR605E1
+		bool "DIR-605E1"
+	config ELBOX_MODEL_ARIES_DIR412
+		bool "DIR-412"
+	config ELBOX_MODEL_ARIES_DIR412_ORANGE
+		bool "DIR-412_ORANGE"
+	config ELBOX_MODEL_ARIES_DIR456
+		bool "DIR-456"
+	config ELBOX_MODEL_ARIES_DIR456U
+		bool "DIR-456U"
+	config ELBOX_MODEL_ARIES_DIR456U_ORANGE
+		bool "DIR-456U_ORANGE"
+	config ELBOX_MODEL_ARIES_DIR456MTC
+		bool "DIR-456MTC"
+	config ELBOX_MODEL_ARIES_DIR600B
+		bool "DIR-600B"
+	config ELBOX_MODEL_ARIES_DIR600B_KS
+		bool "DIR-600B_KS"
+	config ELBOX_MODEL_ARIES_DIR600B_DME
+		bool "DIR-600B_DME"
+	config ELBOX_MODEL_ARIES_DIR600B_SV
+		bool "DIR-600B_SV"
+	config ELBOX_MODEL_ARIES_DIR815
+		bool "DIR-815"		
+	config ELBOX_MODEL_ARIES_DIR815SS
+		bool "DIR-815SS"
+	config ELBOX_MODEL_ARIES_DIR627
+		bool "DIR-627"
+	config ELBOX_MODEL_ARIES_DIR645
+		bool "DIR-645"
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+###########################################################
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR110
+	string
+	default "dir110"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR300B
+	string
+	default "dir300b"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR300B5
+	string
+	default "dir300b5"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR300B5_ORANGE
+	string
+	default "dir300b5_ORANGE"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_AREIS_DIR320
+	string
+	default "dir320"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR605
+	string
+	default "dir605"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR605D2
+	string
+	default "dir605d2"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR605E1
+	string
+	default "dir605e1"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR412
+	string
+	default "dir412"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR412_ORANGE
+	string
+	default "dir412_ORANGE"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR456
+	string
+	default "dir456"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR456U
+	string
+	default "dir456U"
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR456U_ORANGE
+	string
+	default "dir456U_ORANGE"
+config ELBOX_MODEL_NAME
+        depends ELBOX_TEMPLATE_ARIES
+        depends ELBOX_BRAND_ARIES_DLOB
+        depends ELBOX_MODEL_ARIES_DIR456MTC
+        string
+        default "dir456MTC"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR600B
+	string
+	default "dir600b"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR600B_KS
+	string
+	default "dir600b_KS"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR600B_DME
+	string
+	default "dir600b_DME"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR600B_SV
+	string
+	default "dir600b_SV"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR815
+	string
+	default "dir815"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR815SS
+	string
+	default "dir815ss"
+
+config ELBOX_MODEL_NAME
+    depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR627
+	string
+	default "dir627"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB
+	depends ELBOX_MODEL_ARIES_DIR645
+	string
+	default "dir645"

@@ -1,0 +1,90 @@
+#
+# Generic model
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_BRAND_ARIES_BRAVO
+	default ELBOX_MODEL_ARIES_BMG01
+
+	config ELBOX_MODEL_ARIES_BMG1
+		bool "BMG/1"
+		help
+			Bravo Media Gateway number 1.
+
+#	config ELBOX_MODEL_ARIES_BWG3200
+#		bool "BWG3200"
+#		help
+#			Bravo Broadband Wireless Gateway 3200. It's not maintained any more.
+
+	config ELBOX_MODEL_ARIES_BWG4100
+		bool "BWG4100"
+		help
+			Bravo Broadband Wireless Gateway 4100.
+
+	config ELBOX_MODEL_ARIES_BWG4200
+		bool "BWG4200"
+		help
+			Bravo Broadband Wireless Gateway 4200.
+
+	config ELBOX_MODEL_ARIES_BWG6100
+		bool "BWG6100"
+		help
+			Bravo Broadband Wireless Gateway 6100.
+
+	config ELBOX_MODEL_ARIES_BWG6110
+		bool "BWG6110"
+		help
+			Bravo Broadband Wireless Storage Gateway 6110.
+
+	config ELBOX_MODEL_ARIES_BWG6200
+		bool "BWG6200"
+		help
+			Bravo Broadband Wireless Gateway 6200.
+
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_BRAND_ARIES_BRAVO
+	depends ELBOX_MODEL_ARIES_BMG1
+	string
+	default "bmg1"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_BRAND_ARIES_BRAVO
+	depends ELBOX_MODEL_ARIES_BWG3200
+	string
+	default	"bwg3200"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_BRAND_ARIES_BRAVO
+	depends ELBOX_MODEL_ARIES_BWG4100
+	string
+	default "bwg4100"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_BRAND_ARIES_BRAVO
+	depends ELBOX_MODEL_ARIES_BWG4200
+	string
+	default "bwg4200"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_BRAND_ARIES_BRAVO
+	depends ELBOX_MODEL_ARIES_BWG6100
+	string
+	default "bwg6100"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_BRAND_ARIES_BRAVO
+	depends ELBOX_MODEL_ARIES_BWG6110
+	string
+	default	"bwg6110"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_BRAND_ARIES_BRAVO
+	depends ELBOX_MODEL_ARIES_BWG6200
+	string
+	default "bwg6200"

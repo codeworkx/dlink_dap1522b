@@ -1,0 +1,106 @@
+###########################################################
+#
+# gw.wifi
+#
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends ELBOX_TEMPLATE_GW_WIFI
+	string
+	default "gw.wifi"
+
+config ELBOX_TEMPLATE_GW_WIFI_GZONE
+	depends ELBOX_TEMPLATE_GW_WIFI
+	bool "Guest Zone Support"
+	help
+		This feature is implemented for DIR-320 in WRG-G27 (Broadcom 5354).
+		This is a muliple LAN implementation, and i don't want to let it grow.
+		I'm planing to build up a multiply LAN/WAN support in project 'Seattle'.
+
+choice
+	prompt "Brand Selection"
+	depends ELBOX_TEMPLATE_GW_WIFI
+	default ELBOX_BRAND_SEATTLE
+	help
+		Select the GUI for this product
+
+	#######################################################
+	# Generic
+	config ELBOX_BRAND_GENERIC
+		bool "generic"
+		help
+			Generic Version.
+
+	#######################################################
+	# WT108 series
+	config ELBOX_BRAND_SEATTLE
+		bool "seattle"
+		help
+			WT108 Version.
+
+	#######################################################
+	# D-Link WBR series
+	config ELBOX_BRAND_DLWBR
+		bool "dlwbr"
+		help
+			D-Link WBR series.
+
+	#######################################################
+	# Airlink
+	config ELBOX_BRAND_AIRLINK
+		bool "airlink"
+		help
+			Airlink Version.
+
+	#######################################################
+	# Conceptronic
+	config ELBOX_BRAND_CONCEPTRONIC
+		bool "conceptronic"
+		help
+			Conceptronic Version.
+endchoice
+
+###########################################################
+#
+# ELBOX_BRAND_NAME definition
+#
+###########################################################
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_GENERIC
+	string
+	default "generic"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_SEATTLE
+	string
+	default "seattle"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_DLWBR
+	string
+	default "dlwbr"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_AIRLINK
+	string
+	default "airlink"
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_GW_WIFI
+	depends ELBOX_BRAND_CONCEPTRONIC
+	string
+	default "conceptronic"
+###########################################################
+#
+# Model configuration
+#
+###########################################################
+source configs/templates/gw.wifi/config.dlwbr.in
+source configs/templates/gw.wifi/config.generic.in
+source configs/templates/gw.wifi/config.seattle.in
+source configs/templates/gw.wifi/config.airlink.in
+source configs/templates/gw.wifi/config.conceptronic.in

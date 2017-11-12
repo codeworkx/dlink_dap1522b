@@ -1,0 +1,10 @@
+#
+# email
+#
+
+config ELBOX_PROGS_GPL_EBTABLES
+	bool "ebtables-v2.0.8-2"
+	default n
+	help
+		ebtables-v2.0.8-2
+

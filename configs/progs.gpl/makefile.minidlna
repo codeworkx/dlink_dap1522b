@@ -1,0 +1,3 @@
+# minidlna
+
+gsubdir-$(ELBOX_PROGS_GPL_MINIDLNA_1019)	+= minidlna-1.0.19

@@ -1,0 +1,27 @@
+config ELBOX_PROGS_PRIV_MADWIFI_FUSION_CAVIUM
+	bool "MADWIFI_FUSION_CAVIUM"
+	default n
+	help
+		CAVIUM Wireless module.
+choice
+        prompt "Select Version"
+        depends ELBOX_PROGS_PRIV_MADWIFI_FUSION_CAVIUM
+        default ELBOX_PROGS_PRIV_MADWIFI_FUSION_CAVIUM_V7
+        help
+                Select the verison of CAVIUM Wireless driver.
+
+        config ELBOX_PROGS_PRIV_MADWIFI_FUSION_CAVIUM_V7
+                bool "LSDK-WLAN-CaviumFus7.3.0.385.tar"
+                help
+                        This version is for SDK7.3.0.385
+
+        config ELBOX_PROGS_PRIV_MADWIFI_FUSION_CAVIUM_V9
+                bool "LSDK-WLAN-CaviumFus9.0.1.10.tgz"
+                help
+                        This version is for SDK9.0.1.10.
+endchoice
+
+source configs/progs.priv/config.enhanced_wireless_cavium_fusion
+
+
+

@@ -1,0 +1,12 @@
+#
+# NTFS-3G
+#
+
+config ELBOX_PROGS_GPL_NTFS_3G
+	bool "NTFS-3G"
+	default n
+	help
+		Third Generation Read/Wrige NTFS Driver.
+
+
+

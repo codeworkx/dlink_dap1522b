@@ -1,0 +1,45 @@
+#
+# generic
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_GENERIC
+	default ELBOX_MODEL_AP11G
+
+	config ELBOX_MODEL_AP11G
+		bool "AP11G"
+
+	config ELBOX_MODEL_NBAPND01
+		bool "NBAP_ND01"
+	
+	config ELBOX_MODEL_NBAPND02
+		bool "NBAP_ND02"
+				
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_GENERIC
+	depends ELBOX_MODEL_AP11G
+	string
+	default "ap11g"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_GENERIC
+	depends ELBOX_MODEL_NBAPND01
+	string
+	default "nbapnd01"
+	
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI
+	depends ELBOX_BRAND_AP_GENERIC
+	depends ELBOX_MODEL_NBAPND02
+	string
+	default "nbapnd02"	
+

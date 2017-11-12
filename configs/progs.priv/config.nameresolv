@@ -1,0 +1,10 @@
+#
+# nameresolv
+#
+
+config ELBOX_PROGS_PRIV_NAMERESOLV
+	bool "NameResolv: Netbios plus llmnresp"
+	default n
+	help
+		Integrade Netbios and llmnresp as one program.
+

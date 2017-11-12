@@ -1,0 +1,10 @@
+#
+# mrd
+#
+
+config ELBOX_PROGS_PRIV_MRD
+	bool "mrd"
+	default n
+	help
+		 Multicast routing daemon (support MLD v1/v2 and igmpproxy)
+

@@ -1,0 +1,23 @@
+#
+# Buffalo WHR series
+#
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_BRAND_ARIES_BFLWHR
+	default ELBOX_MODEL_ARIES_WHRAGS300H
+
+	config ELBOX_MODEL_ARIES_WHRAGS300H
+		bool "WHR-AGS300H"
+		help
+			Buffalo WHR-AGS300H, for Samsung TV.
+endchoice
+
+#
+# Model name string definition
+#
+config ELBOX_MODEL_NAME
+	depends ELBOX_BRAND_ARIES_BFLWHR
+	depends ELBOX_MODEL_ARIES_WHRAGS300H
+	string
+	default "whrags300h"

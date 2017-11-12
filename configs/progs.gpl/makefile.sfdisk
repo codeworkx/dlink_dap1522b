@@ -1,0 +1,3 @@
+# sfdisk
+
+gsubdir-$(ELBOX_PROGS_GPL_SFDISK) += sfdisk

@@ -1,0 +1,3 @@
+# ebtables
+
+gsubdir-$(ELBOX_PROGS_GPL_EBTABLES)	+= ebtables-v2.0.8-2

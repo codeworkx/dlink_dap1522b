@@ -1,0 +1,57 @@
+#
+# main Config.in file for ELBOX configuration
+#
+
+mainmenu "ELBOX Configuration"
+
+config ELBOX_HAVE_DOT_CONFIG
+	bool
+	default y
+
+config ELBOX_FIRMWARE_VERSION
+	string "Customized F/W version"
+	default "N/A"
+
+config ELBOX_FIRMWARE_REVISION
+	string "Customized F/W revision"
+	default "N/A"
+
+comment "Device Configuration"
+config ELBOX_FIRMWARE_SIGNATURE
+	string 'Customized F/W signature'
+	default "N/A"
+
+config ELBOX_XMLDB_VERSION_CONTROL
+	depends ELBOX_TEMPLATE_ARIES
+	depends ELBOX_BRAND_ARIES_DLOB_HANS
+	bool "enable config file version control"
+	default n
+	
+config ELBOX_XMLDB_CONFIGFILES_VERSION
+	depends ELBOX_XMLDB_VERSION_CONTROL
+	string 'Set Config file version '
+	default "V1"
+	help
+		You can assigned the config version to avoid the old config cause new F/W abnormally.
+		If the config file Version is not match, the dbload.sh will destroy the old config to let the system as default setting.
+		This value will append to ELBOX_SIGNATURE as Config file signature.
+		And if you board want to support it.
+		Please Change "sed -e 's|SiGnAtUrE|$(ELBOX_SIGNATURE)|' ..." to "sed -e 's|SiGnAtUrE|$(ELBOX_CONFIG_SIGNATURE)|' ..." in model/defnodes/Makefile
+
+
+source configs/boards/Config.in
+source configs/templates/Config.in
+
+comment "Programs Configuration"
+source configs/progs.gpl/Config.in
+source configs/progs.priv/Config.in
+
+menu "Common library configuration"
+config ELBOX_COMLIB_MEM_HELPER_DISABLE
+	bool "Disable mem_helper"
+	default y
+	help
+		The main purpose of the mem_helper module is for debuggin.
+		Recommanded to disable mem_helper in the release version.
+endmenu
+

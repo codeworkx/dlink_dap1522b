@@ -1,0 +1,25 @@
+#
+# Silex Shareport Plus 
+#
+
+config ELBOX_PROGS_PRIV_SHAREPORT_PLUS 
+	bool "Shareport Plus from Silex"
+	default n
+
+choice
+	prompt "Select function"
+	depends ELBOX_PROGS_PRIV_SHAREPORT_PLUS
+	default CONFIG_SHAREPORT_NO_SAMBA
+	help 
+		Select the shareport function 
+	
+	config CONFIG_SHAREPORT_NO_SAMBA
+		bool "Single User Access Concurrently"
+		help
+			Just allow single user to access remote device concurrently.
+
+	config CONFIG_SHAREPORT_WITH_SAMBA
+		bool "Multi Users Access Concurrently(With Samba)"
+		help
+			Allow multi users to access remote device concurrently. 	
+endchoice

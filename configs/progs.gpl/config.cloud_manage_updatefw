@@ -1,0 +1,10 @@
+#
+# updatefw
+#
+
+config ELBOX_PROGS_GPL_CLOUD_MANAGE_UPDATEFW
+	bool "cloud_manage_updatefw"
+	default n
+	help
+		This function is update F/W by enable networks cloud manage
+

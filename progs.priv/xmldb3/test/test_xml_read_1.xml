@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<testxml>
+	<interface>
+		<name>WAN</name>
+		<phyif>eth0</phyif>
+		<test>add one node</test>
+	</interface>
+	<interface>
+		<name>LAN</name>
+		<phyif>eth1</phyif>
+	</interface>
+	<interface>
+		<name>WLAN</name>
+		<phyif>eth2</phyif>
+	</interface>
+</testxml>

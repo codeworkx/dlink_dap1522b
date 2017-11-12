@@ -1,0 +1,51 @@
+###########################################################
+#
+# ap.wifi
+#
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI_CMCC
+	string
+	default "ap.wifi.cmcc"
+
+choice
+	prompt "Brand Selection"
+	depends ELBOX_TEMPLATE_AP_WIFI_CMCC
+	default ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+	help
+		Select the GUI for this product
+
+
+	#######################################################
+	# D-Link WBR series
+	config ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+	bool "dkbs"
+	help
+		D-Link Business DAP series.
+
+endchoice
+
+###########################################################
+#
+# ELBOX_BRAND_NAME definition
+#
+###########################################################
+
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_AP_WIFI_CMCC
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+	string
+	default "dkbs"
+
+###########################################################
+#
+
+###########################################################
+#
+# Model configuration
+#
+###########################################################
+
+source configs/templates/ap.wifi.cmcc/config.dkbs.in
+

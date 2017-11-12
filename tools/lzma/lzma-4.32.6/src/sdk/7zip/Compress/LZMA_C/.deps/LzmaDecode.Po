@@ -1,0 +1,6 @@
+LzmaDecode.o: LzmaDecode.c LzmaDecode.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h
+
+LzmaDecode.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h:

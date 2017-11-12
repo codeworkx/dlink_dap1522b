@@ -1,0 +1,44 @@
+###########################################################
+#
+# Aries
+#
+###########################################################
+
+config ELBOX_TEMPLATE_NAME
+	depends ELBOX_TEMPLATE_TENDER
+	string
+	default "tender"
+
+choice
+	prompt "Brand Selection"
+	depends ELBOX_TEMPLATE_TENDER
+	default ELBOX_BRAND_TENDER_DLWBR
+	help
+		Select the GUI for this product
+
+	#######################################################
+	# D-Link WBR series
+	config ELBOX_BRAND_TENDER_DLWBR
+		bool "dlbwr"
+		help
+			D-Link WBR series.
+
+endchoice
+
+###########################################################
+#
+# ELBOX_BRAND_NAME definition
+#
+###########################################################
+config ELBOX_BRAND_NAME
+	depends on ELBOX_TEMPLATE_TENDER
+	depends ELBOX_BRAND_TENDER_DLWBR
+	string
+	default "dlwbr"
+
+###########################################################
+#
+# Model configuration
+#
+###########################################################
+source configs/templates/tender/config.dlwbr.in

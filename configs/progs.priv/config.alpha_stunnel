@@ -1,0 +1,9 @@
+#
+# stunnel by Alpha
+#
+config ELBOX_PROGS_PRIV_ALPHA_STUNNEL
+	bool "stunnel(developped by ALPHA)"
+	default n
+	help
+		stunnel created by Alpha
+

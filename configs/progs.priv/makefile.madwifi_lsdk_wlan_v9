@@ -1,0 +1,3 @@
+# madwifi LSDK-WLAN_V9
+
+psubdir-$(ELBOX_PROGS_PRIV_MADWIFI_LSDK_WLAN_V9)	+= madwifi_LSDK-WLAN-9.x

@@ -1,0 +1,10 @@
+#
+# ddnsd
+#
+
+config ELBOX_PROGS_PRIV_DDPD
+	bool "ddpd"
+	default n
+	help
+		The Dlink Discover Protocol.
+

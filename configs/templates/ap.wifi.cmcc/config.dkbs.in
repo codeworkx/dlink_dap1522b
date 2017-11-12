@@ -1,0 +1,69 @@
+###########################################################
+#
+# dlwbr
+#
+###########################################################
+
+choice
+	prompt "Model Selection"
+	depends ELBOX_TEMPLATE_AP_WIFI_CMCC
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+	default ELBOX_MODEL_DAP2360_CMCC
+
+
+	config ELBOX_MODEL_DAP2360_CMCC
+		bool "DAP-2360-CMCC"		
+		
+	
+	config ELBOX_MODEL_DAP1360
+		bool "DAP-1360"	
+
+	config ELBOX_MODEL_DAP1360H
+		bool "DAP-1360H"	
+	config ELBOX_MODEL_DAP1353_CUC
+		bool "DAP-1353-CUC"	
+	config ELBOX_MODEL_WAPN18
+		bool "WAPN18"	
+endchoice
+
+###########################################################
+#
+# Model name string definition
+#
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI_CMCC
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+	depends ELBOX_MODEL_DAP2360_CMCC
+	string
+	default "dap2360"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI_CMCC
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+	depends ELBOX_MODEL_DAP1360
+	string
+	default "dap1360"
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI_CMCC
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+	depends ELBOX_MODEL_DAP1360H
+	string
+	default "dap1360h"
+
+config ELBOX_MODEL_NAME
+        depends ELBOX_TEMPLATE_AP_WIFI_CMCC
+        depends ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+        depends ELBOX_MODEL_WAPN18
+        string
+        default "wapn18"	
+
+config ELBOX_MODEL_NAME
+	depends ELBOX_TEMPLATE_AP_WIFI_CMCC
+	depends ELBOX_BRAND_AP_DLINK_BUSINESS_CMCC
+	depends ELBOX_MODEL_DAP1353_CUC
+	string
+	default "dap1353cuc"
+
+

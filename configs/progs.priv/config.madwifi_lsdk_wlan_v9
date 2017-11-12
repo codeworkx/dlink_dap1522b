@@ -1,0 +1,10 @@
+config ELBOX_PROGS_PRIV_MADWIFI_LSDK_WLAN_V9
+	bool "MADWIFI_LSDK_WLAN_V9"
+	default n
+	help
+		Atheros Wireless module,sdk9.x.
+
+source configs/progs.priv/config.enhanced_wireless_lsdk_wlan_v9
+
+
+
